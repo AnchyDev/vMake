@@ -13,9 +13,11 @@
     <div class="vmake-form-item">
         <button class="vmake-button-primary" type="submit">Create</button>
     </div>
-</form>
 
-@if(this.Model.Error is not null)
-{
-    <span class="alert-danger">@this.Model.Error</span>
-}
+    @if (this.Model.Error is not null)
+    {
+    <div class="vmake-form-item">
+        <span class="vmake-alert-error">@this.Model.Error</span>
+    </div>
+    }
+</form>

@@ -113,6 +113,13 @@
         <div class="vmake-form-item">
             <button class="vmake-button-primary" type="submit">Edit</button>
         </div>
+
+        @if (this.Model.Error is not null)
+        {
+            <div class="vmake-form-item">
+                <span class="vmake-alert-error">@this.Model.Error</span>
+            </div>
+        }
     </form>
 }
 else
@@ -382,6 +389,13 @@ else
             <div class="vmake-form-item">
                 <button class="vmake-button-primary" type="submit">Update</button>
             </div>
+
+            @if (this.Model.Error is not null)
+            {
+                <div class="vmake-form-item">
+                    <span class="vmake-alert-error">@this.Model.Error</span>
+                </div>
+            }
         </form>
 
         <div style="flex: 2;">
@@ -416,9 +430,4 @@ else
             </div>
         </div>
     </div>
-}
-
-@if (this.Model.Error is not null)
-{
-    <span class="alert-danger">@this.Model.Error</span>
 }
