@@ -18,10 +18,27 @@
             });
 
             $('#form-description').on('input', function () {
-                $('#tooltip-description').text(`"${$(this).val()}"`);
+                let value = $(this).val();
+                if (!value) {
+                    $(`#tooltip-description`).hide();
+                }
+                else {
+                    $(`#tooltip-description`).show();
+                }
+
+                $('#tooltip-description').text(`"${value}"`);
             });
 
             $('#form-bonding').on('input', function () {
+                let value = $(this).val();
+
+                if (value === "None") {
+                    $(`#tooltip-bonding`).hide();
+                }
+                else {
+                    $(`#tooltip-bonding`).show();
+                }
+
                 $('#tooltip-bonding').text(`${$(this).find('option:selected').text()}`);
             });
 
@@ -30,18 +47,33 @@
             });
 
             $('#form-reqlevel').on('input', function () {
-                $('#tooltip-reqlevel').text(`Requires Level ${$(this).val()}`);
+                let value = $(this).val();
+                console.log(value);
+                if (!value || value === '0') {
+                    $(`#tooltip-reqlevel`).hide();
+                }
+                else {
+                    $(`#tooltip-reqlevel`).show();
+                }
+
+                $('#tooltip-reqlevel').text(`Requires Level ${value}`);
             });
 
             $('#form-armor').on('input', function () {
-                $('#tooltip-armor').text(`Requires Level ${$(this).val()}`);
+                let value = $(this).val();
+                if (!value) {
+                    $(`#tooltip-armor`).hide();
+                }
+                else {
+                    $(`#tooltip-armor`).show();
+                }
+
+                $('#tooltip-armor').text(`${value} Armor`);
             });
 
             for (let i = 1; i < 11; i++) {
                 $(`#form-stat-type-${i}`).on('input', function () {
                     let type = parseInt($(this).val());
-                    console.log(type);
-                    console.log(`#tooltip-stat-${i}`);
                     if (type == 0) {
                         $(`#tooltip-stat-${i}`).hide();
                     }
@@ -348,16 +380,10 @@ else
                 <span id="tooltip-name" style="color: #@(itemTemplate.Quality.GetHexColor())">@itemTemplate.Name</span>
                 
                 <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @itemTemplate.ItemLevel</span>
-                
-                @if (itemTemplate.Bonding != MangosItemBonding.None)
-                {
-                    <span id="tooltip-bonding">@itemTemplate.Bonding.GetBondingText()</span>
-                }
 
-                @if(itemTemplate.Armor > 0)
-                {
-                    <span id="tooltip-armor">@itemTemplate.Armor Armor</span>
-                }
+                <span id="tooltip-bonding" class="@(itemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">@itemTemplate.Bonding.GetBondingText()</span>
+
+                <span id="tooltip-armor" class="@(itemTemplate.Armor < 1 ? "hide" : "")">@itemTemplate.Armor Armor</span>
 
                 @{ 
                     var stats = itemTemplate.GetStats();
@@ -365,21 +391,18 @@ else
                     var index = 1;
                     foreach (var stat in stats)
                     {
-                        <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
-                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
-                            <span id="tooltip-stat-type-@(index)">@stat.Type</span>
-                        </div>
+                            <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
+                                <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
+                                <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                            </div>
 
                         index++;
                     }
                 }
 
-                <span id="tooltip-reqlevel">Requires level @itemTemplate.RequiredLevel</span>
+                <span id="tooltip-reqlevel" class="@(itemTemplate.RequiredLevel < 1 ? "hide" : "")">Requires Level @itemTemplate.RequiredLevel</span>
 
-                @if (!string.IsNullOrWhiteSpace(itemTemplate.Description))
-                {
-                    <span id="tooltip-description" style="color: #E1D474">"@itemTemplate.Description"</span>
-                }
+                <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(itemTemplate.Description) ? "hide" : "")">"@itemTemplate.Description"</span>
             </div>
         </div>
     </div>
