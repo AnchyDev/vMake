@@ -359,11 +359,11 @@ else
                     <span id="tooltip-armor">@itemTemplate.Armor Armor</span>
                 }
 
-                @{ var stats = itemTemplate.GetStats(); }
-                @if(stats.Count > 0)
-                {
+                @{ 
+                    var stats = itemTemplate.GetStats();
+
                     var index = 1;
-                    foreach(var stat in stats)
+                    foreach (var stat in stats)
                     {
                         <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
                             <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
