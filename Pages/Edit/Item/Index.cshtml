@@ -32,6 +32,10 @@
             $('#form-reqlevel').on('input', function () {
                 $('#tooltip-reqlevel').text(`Requires Level ${$(this).val()}`);
             });
+
+            $('#form-armor').on('input', function () {
+                $('#tooltip-armor').text(`Requires Level ${$(this).val()}`);
+            });
         });
     </script>
 }
@@ -101,6 +105,11 @@ else
             </div>
 
             <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.Armor">Armor (0-65535)</label>
+                <input id="form-armor" asp-for="ItemTemplate!.Armor" type="text" value="@itemTemplate.Armor" pattern="[0-9]{1,5}" />
+            </div>
+
+            <div class="vmake-form-item">
                 <button type="submit">Update</button>
             </div>
         </form>
@@ -114,7 +123,11 @@ else
                 {
                     <span id="tooltip-bonding">@itemTemplate.Bonding.GetBondingText()</span>
                 }
-                                <span id="tooltip-reqlevel">Requires level @itemTemplate.RequiredLevel</span>
+                @if(itemTemplate.Armor > 0)
+                {
+                    <span id="tooltip-armor">@itemTemplate.Armor Armor</span>
+                }
+                <span id="tooltip-reqlevel">Requires level @itemTemplate.RequiredLevel</span>
                 @if (!string.IsNullOrWhiteSpace(itemTemplate.Description))
                 {
                     <span id="tooltip-description" style="color: #E1D474">"@itemTemplate.Description"</span>
