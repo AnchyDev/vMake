@@ -1,4 +1,5 @@
-﻿using vMake.Database.Types;
+﻿using vMake.Database.Mangos;
+using vMake.Database.Types;
 
 namespace vMake.Extensions;
 
@@ -54,5 +55,22 @@ public static class MangosExtensions
         }
 
         return "";
+    }
+
+    public static List<MangosItemStat> GetStats(this MangosItemTemplate item)
+    {
+        return new List<MangosItemStat>()
+        {
+            new() { Type = (MangosItemStatType)item.StatType1, Value = item.StatValue1 },
+            new() { Type = (MangosItemStatType)item.StatType2, Value = item.StatValue2 },
+            new() { Type = (MangosItemStatType)item.StatType3, Value = item.StatValue3 },
+            new() { Type = (MangosItemStatType)item.StatType4, Value = item.StatValue4 },
+            new() { Type = (MangosItemStatType)item.StatType5, Value = item.StatValue5 },
+            new() { Type = (MangosItemStatType)item.StatType6, Value = item.StatValue6 },
+            new() { Type = (MangosItemStatType)item.StatType7, Value = item.StatValue7 },
+            new() { Type = (MangosItemStatType)item.StatType8, Value = item.StatValue8 },
+            new() { Type = (MangosItemStatType)item.StatType9, Value = item.StatValue9 },
+            new() { Type = (MangosItemStatType)item.StatType10, Value = item.StatValue10 }
+        };
     }
 }

@@ -35,5 +35,8 @@ public class MangosDbContext : DbContext
         }
 
         builder.UseMySql(mySqlConn, mySqlVersion);
+
+        // TODO: Hackfix for query tracking blocking the item updates.
+        builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     }
 }

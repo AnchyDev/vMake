@@ -36,6 +36,34 @@
             $('#form-armor').on('input', function () {
                 $('#tooltip-armor').text(`Requires Level ${$(this).val()}`);
             });
+
+            for (let i = 1; i < 10; i++) {
+                $(`#form-stat-type-${i}`).on('input', function () {
+                    let type = parseInt($(this).val());
+                    console.log(type);
+                    console.log(`#tooltip-stat-${i}`);
+                    if (type == 0) {
+                        $(`#tooltip-stat-${i}`).attr('hidden', '');
+                    }
+                    else {
+                        $(`#tooltip-stat-${i}`).removeAttr('hidden');
+                    }
+
+                    $(`#tooltip-stat-type-${i}`).text(`${$(this).find('option:selected').text()}`);
+                });
+            }
+
+            for (let i = 1; i < 10; i++) {
+                $(`#form-stat-value-${i}`).on('input', function () {
+                    let value = parseInt($(this).val());
+                    let sign = value > 0 ? '+' : '';
+
+                    console.log(value);
+                    console.log(sign);
+
+                    $(`#tooltip-stat-value-${i}`).text(`${sign}${value}`);
+                });
+            }
         });
     </script>
 }
@@ -82,7 +110,7 @@ else
                 <select id="form-bonding" asp-for="ItemTemplate!.Bonding" >
                     @foreach(MangosItemBonding bonding in Enum.GetValues(typeof(MangosItemBonding)))
                     {
-                        if(bonding == itemTemplate.Bonding)
+                        if(itemTemplate.Bonding == bonding)
                         {
                             <option value="@bonding" selected>@bonding.GetBondingText()</option>
                         }
@@ -110,6 +138,25 @@ else
             </div>
 
             <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.StatType1">Stat Type 1</label>
+                <select id="form-stat-type-1" asp-for="ItemTemplate!.StatType1">
+                    @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                    {
+                        if (itemTemplate.StatType1 == (int)statType)
+                        {
+                            <option value="@((int)statType)" selected>@statType</option>
+                        }
+                        else
+                        {
+                            <option value="@((int)statType)">@statType</option>
+                        }
+                    }
+                </select>
+                <label asp-for="ItemTemplate!.StatValue1">Stat Value 1 (0-65535)</label>
+                <input id="form-stat-value-1" asp-for="ItemTemplate!.StatValue1" type="text" pattern="[0-9]{1,5}" />
+            </div>
+
+            <div class="vmake-form-item">
                 <button type="submit">Update</button>
             </div>
         </form>
@@ -118,16 +165,46 @@ else
             <h3>Tooltip</h3>
             <div class="vmake-tooltip" style="flex: 2">
                 <span id="tooltip-name" style="color: #@(itemTemplate.Quality.GetHexColor())">@itemTemplate.Name</span>
+                
                 <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @itemTemplate.ItemLevel</span>
+                
                 @if (itemTemplate.Bonding != MangosItemBonding.None)
                 {
                     <span id="tooltip-bonding">@itemTemplate.Bonding.GetBondingText()</span>
                 }
+
                 @if(itemTemplate.Armor > 0)
                 {
                     <span id="tooltip-armor">@itemTemplate.Armor Armor</span>
                 }
+
+                @{ var stats = itemTemplate.GetStats(); }
+                @if(stats.Count > 0)
+                {
+                    var index = 1;
+                    foreach(var stat in stats)
+                    {
+                        if(stat.Type == MangosItemStatType.None)
+                        {
+                            <div id="tooltip-stat-@(index)" hidden>
+                                <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
+                                <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="tooltip-stat-@(index)">
+                                <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
+                                <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                            </div>
+                        }
+
+                        index++;
+                    }
+                }
+
                 <span id="tooltip-reqlevel">Requires level @itemTemplate.RequiredLevel</span>
+
                 @if (!string.IsNullOrWhiteSpace(itemTemplate.Description))
                 {
                     <span id="tooltip-description" style="color: #E1D474">"@itemTemplate.Description"</span>

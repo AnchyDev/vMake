@@ -23,10 +23,10 @@ public class MangosItemTemplate
     public int ItemSubclass { get; set; }
 
     [Column("name")]
-    public string? Name { get; set; }
+    public string? Name { get; set; } = "";
 
     [Column("description")]
-    public string? Description { get; set; }
+    public string? Description { get; set; } = "";
 
     [Column("display_id")]
     public int DisplayId { get; set; }
