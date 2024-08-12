@@ -143,7 +143,7 @@ else
                 <div class="vmake-form-item-label">Stats</div>
                 <div class="vmake-form-item-group">
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType1">Stat Type 1</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType1">Stat Type 1</label>
                         <select id="form-stat-type-1" asp-for="ItemTemplate!.StatType1">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -157,12 +157,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 1 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue1">Stat Value 1 (0-65535)</label>
                         <input id="form-stat-value-1" asp-for="ItemTemplate!.StatValue1" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType2">Stat Type 2</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType2">Stat Type 2</label>
                         <select id="form-stat-type-2" asp-for="ItemTemplate!.StatType2">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -176,12 +176,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue2">Stat Value 2 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue2">Stat Value 2 (0-65535)</label>
                         <input id="form-stat-value-2" asp-for="ItemTemplate!.StatValue2" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType3">Stat Type 3</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType3">Stat Type 3</label>
                         <select id="form-stat-type-3" asp-for="ItemTemplate!.StatType3">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -195,12 +195,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue3">Stat Value 3 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue3">Stat Value 3 (0-65535)</label>
                         <input id="form-stat-value-3" asp-for="ItemTemplate!.StatValue3" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType4">Stat Type 4</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType4">Stat Type 4</label>
                         <select id="form-stat-type-4" asp-for="ItemTemplate!.StatType4">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -214,12 +214,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue4">Stat Value 4 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue4">Stat Value 4 (0-65535)</label>
                         <input id="form-stat-value-4" asp-for="ItemTemplate!.StatValue4" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType1">Stat Type 5</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType1">Stat Type 5</label>
                         <select id="form-stat-type-5" asp-for="ItemTemplate!.StatType5">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -233,12 +233,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue5">Stat Value 5 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue5">Stat Value 5 (0-65535)</label>
                         <input id="form-stat-value-5" asp-for="ItemTemplate!.StatValue5" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType6">Stat Type 6</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType6">Stat Type 6</label>
                         <select id="form-stat-type-6" asp-for="ItemTemplate!.StatType6">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -252,12 +252,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 6 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue1">Stat Value 6 (0-65535)</label>
                         <input id="form-stat-value-6" asp-for="ItemTemplate!.StatValue6" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType7">Stat Type 7</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType7">Stat Type 7</label>
                         <select id="form-stat-type-7" asp-for="ItemTemplate!.StatType7">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -271,12 +271,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue7">Stat Value 7 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue7">Stat Value 7 (0-65535)</label>
                         <input id="form-stat-value-7" asp-for="ItemTemplate!.StatValue7" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType8">Stat Type 8</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType8">Stat Type 8</label>
                         <select id="form-stat-type-8" asp-for="ItemTemplate!.StatType8">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -290,12 +290,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 8 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue1">Stat Value 8 (0-65535)</label>
                         <input id="form-stat-value-8" asp-for="ItemTemplate!.StatValue8" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType9">Stat Type 9</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType9">Stat Type 9</label>
                         <select id="form-stat-type-9" asp-for="ItemTemplate!.StatType9">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -309,12 +309,12 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 9 (0-65535)</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatValue1">Stat Value 9 (0-65535)</label>
                         <input id="form-stat-value-9" asp-for="ItemTemplate!.StatValue9" type="text" pattern="[0-9]{1,5}" />
                     </div>
 
                     <div class="vmake-form-item">
-                        <label asp-for="ItemTemplate!.StatType10">Stat Type 10</label>
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.StatType10">Stat Type 10</label>
                         <select id="form-stat-type-10" asp-for="ItemTemplate!.StatType10">
                             @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
                             {
@@ -328,7 +328,7 @@ else
                                 }
                             }
                         </select>
-                        <label asp-for="ItemTemplate!.StatValue10">Stat Value 10 (0-65535)</label>
+                        <label class="vmake-form-item-label"  asp-for="ItemTemplate!.StatValue10">Stat Value 10 (0-65535)</label>
                         <input id="form-stat-value-10" asp-for="ItemTemplate!.StatValue10" type="text" pattern="[0-9]{1,5}" />
                     </div>
                 </div>
