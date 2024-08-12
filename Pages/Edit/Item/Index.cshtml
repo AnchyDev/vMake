@@ -1,0 +1,130 @@
+﻿@page
+@model vMake.Pages.Edit.Item.IndexModel
+@using vMake.Extensions
+@using vMake.Database.Types;
+@{
+    ViewData["Title"] = "Edit Item";
+
+    var itemTemplate = this.Model.ItemTemplate;
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        // Update the tooltip when the form changes.
+
+        $(document).ready(function () {
+            $('#form-name').on('input', function () {
+                $('#tooltip-name').text(`${$(this).val()}`);
+            });
+
+            $('#form-description').on('input', function () {
+                $('#tooltip-description').text(`"${$(this).val()}"`);
+            });
+
+            $('#form-bonding').on('input', function () {
+                $('#tooltip-bonding').text(`${$(this).find('option:selected').text()}`);
+            });
+
+            $('#form-itemlevel').on('input', function () {
+                $('#tooltip-itemlevel').text(`Item Level ${$(this).val()}`);
+            });
+
+            $('#form-reqlevel').on('input', function () {
+                $('#tooltip-reqlevel').text(`Requires Level ${$(this).val()}`);
+            });
+        });
+    </script>
+}
+
+@if (itemTemplate is null)
+{
+    <form method="post" class="vmake-form">
+        <input type="hidden" name="type" value="edit" />
+
+        <div class="vmake-form-item">
+            <label for="Entry">Entry Id</label>
+            <input type="text" name="Entry" />
+        </div>
+
+        <div class="vmake-form-item">
+            <button type="submit">Edit</button>
+        </div>
+    </form>
+}
+else
+{
+    <div class="vmake-panel-h">
+        <form method="post" class="vmake-form" style="flex: 8">
+            <div class="vmake-form-item">
+                <h2>Editing Item Entry @itemTemplate.Entry</h2>
+            </div>
+
+            <input type="hidden" name="type" value="update"/>
+            
+            <input type="hidden" asp-for="ItemTemplate!.Entry" value="@itemTemplate.Entry" />
+
+            <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.Name">Name (Max 255 chars)</label>
+                <input id="form-name" asp-for="ItemTemplate!.Name" type="text" value="@itemTemplate.Name" maxlength="255" />
+            </div>
+
+            <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.Description">Description (Max 255 chars)</label>
+                <input id="form-description" asp-for="ItemTemplate!.Description" type="text" value="@itemTemplate.Description" maxlength="255" />
+            </div>
+
+            <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.Bonding">Bonding</label>
+                <select id="form-bonding" asp-for="ItemTemplate!.Bonding" >
+                    @foreach(MangosItemBonding bonding in Enum.GetValues(typeof(MangosItemBonding)))
+                    {
+                        if(bonding == itemTemplate.Bonding)
+                        {
+                            <option value="@bonding" selected>@bonding.GetBondingText()</option>
+                        }
+                        else
+                        {
+                            <option value="@bonding">@bonding.GetBondingText()</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.ItemLevel">Item Level (0-255)</label>
+                <input id="form-itemlevel" asp-for="ItemTemplate!.ItemLevel" type="text" value="@itemTemplate.ItemLevel" pattern="[0-9]{1,3}" /> 
+            </div>
+
+            <div class="vmake-form-item">
+                <label asp-for="ItemTemplate!.RequiredLevel">Required Level (0-255)</label>
+                <input id="form-reqlevel" asp-for="ItemTemplate!.RequiredLevel" type="text" value="@itemTemplate.RequiredLevel" pattern="[0-9]{1,3}" />
+            </div>
+
+            <div class="vmake-form-item">
+                <button type="submit">Update</button>
+            </div>
+        </form>
+
+        <div style="flex: 2;">
+            <h3>Tooltip</h3>
+            <div class="vmake-tooltip" style="flex: 2">
+                <span id="tooltip-name" style="color: #@(itemTemplate.Quality.GetHexColor())">@itemTemplate.Name</span>
+                <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @itemTemplate.ItemLevel</span>
+                @if (itemTemplate.Bonding != MangosItemBonding.None)
+                {
+                    <span id="tooltip-bonding">@itemTemplate.Bonding.GetBondingText()</span>
+                }
+                                <span id="tooltip-reqlevel">Requires level @itemTemplate.RequiredLevel</span>
+                @if (!string.IsNullOrWhiteSpace(itemTemplate.Description))
+                {
+                    <span id="tooltip-description" style="color: #E1D474">"@itemTemplate.Description"</span>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if (this.Model.Error is not null)
+{
+    <span class="alert-danger">@this.Model.Error</span>
+}

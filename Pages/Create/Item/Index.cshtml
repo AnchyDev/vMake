@@ -1,0 +1,21 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Create Item";
+}
+
+<form class="vmake-form" method="POST">
+    <div class="vmake-form-item">
+        <label for="Entry">Entry Id</label>
+        <input type="text" name="Entry"/>
+    </div>
+
+    <div class="vmake-form-item">
+        <button type="submit">Create</button>
+    </div>
+</form>
+
+@if(this.Model.Error is not null)
+{
+    <span class="alert-danger">@this.Model.Error</span>
+}
