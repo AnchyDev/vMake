@@ -366,7 +366,7 @@ else
                     foreach(var stat in stats)
                     {
                         <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
-                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
+                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
                             <span id="tooltip-stat-type-@(index)">@stat.Type</span>
                         </div>
 
