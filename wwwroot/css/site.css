@@ -1,5 +1,11 @@
 html {
   font-size: 14px;
+
+  background-color: rgb(15, 15, 15);
+}
+
+.navbar {
+    background-color: rgb(20, 20, 20);
 }
 
 @media (min-width: 768px) {
@@ -19,6 +25,12 @@ html {
 
 body {
   margin-bottom: 60px;
+
+  background-color: rgb(15, 15, 15);
+}
+
+footer {
+    background-color: rgb(20, 20, 20);
 }
 
 .vmake-form {
@@ -79,6 +91,43 @@ body {
     flex-direction: row;
 
     gap: 0.5rem;
+}
+
+.vmake-input {
+    color: white;
+    background-color: rgb(30, 30, 30);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    padding: 0.25rem;
+}
+.vmake-select {
+    color: white;
+    background-color: rgb(30, 30, 30);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    padding: 0.25rem;
+}
+
+.vmake-button-primary {
+    color: white;
+    background-color: rgb(30, 30, 30);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    padding: 0.25rem;
+
+    transition: background-color 0.5s;
+}
+.vmake-button-primary:hover {
+    background-color: rgb(0, 128, 255);
+}
+.vmake-button-primary:active {
+    background-color: rgb(0, 90, 200);
 }
 
 .hide {
