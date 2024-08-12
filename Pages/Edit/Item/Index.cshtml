@@ -37,23 +37,23 @@
                 $('#tooltip-armor').text(`Requires Level ${$(this).val()}`);
             });
 
-            for (let i = 1; i < 10; i++) {
+            for (let i = 1; i < 11; i++) {
                 $(`#form-stat-type-${i}`).on('input', function () {
                     let type = parseInt($(this).val());
                     console.log(type);
                     console.log(`#tooltip-stat-${i}`);
                     if (type == 0) {
-                        $(`#tooltip-stat-${i}`).attr('hidden', '');
+                        $(`#tooltip-stat-${i}`).hide();
                     }
                     else {
-                        $(`#tooltip-stat-${i}`).removeAttr('hidden');
+                        $(`#tooltip-stat-${i}`).show();
                     }
 
                     $(`#tooltip-stat-type-${i}`).text(`${$(this).find('option:selected').text()}`);
                 });
             }
 
-            for (let i = 1; i < 10; i++) {
+            for (let i = 1; i < 11; i++) {
                 $(`#form-stat-value-${i}`).on('input', function () {
                     let value = parseInt($(this).val());
                     let sign = value > 0 ? '+' : '';
@@ -96,17 +96,17 @@ else
             <input type="hidden" asp-for="ItemTemplate!.Entry" value="@itemTemplate.Entry" />
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.Name">Name (Max 255 chars)</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.Name">Name (Max 255 chars)</label>
                 <input id="form-name" asp-for="ItemTemplate!.Name" type="text" value="@itemTemplate.Name" maxlength="255" />
             </div>
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.Description">Description (Max 255 chars)</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.Description">Description (Max 255 chars)</label>
                 <input id="form-description" asp-for="ItemTemplate!.Description" type="text" value="@itemTemplate.Description" maxlength="255" />
             </div>
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.Bonding">Bonding</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.Bonding">Bonding</label>
                 <select id="form-bonding" asp-for="ItemTemplate!.Bonding" >
                     @foreach(MangosItemBonding bonding in Enum.GetValues(typeof(MangosItemBonding)))
                     {
@@ -123,38 +123,219 @@ else
             </div>
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.ItemLevel">Item Level (0-255)</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.ItemLevel">Item Level (0-255)</label>
                 <input id="form-itemlevel" asp-for="ItemTemplate!.ItemLevel" type="text" value="@itemTemplate.ItemLevel" pattern="[0-9]{1,3}" /> 
             </div>
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.RequiredLevel">Required Level (0-255)</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.RequiredLevel">Required Level (0-255)</label>
                 <input id="form-reqlevel" asp-for="ItemTemplate!.RequiredLevel" type="text" value="@itemTemplate.RequiredLevel" pattern="[0-9]{1,3}" />
             </div>
 
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.Armor">Armor (0-65535)</label>
+                <label class="vmake-form-item-label" asp-for="ItemTemplate!.Armor">Armor (0-65535)</label>
                 <input id="form-armor" asp-for="ItemTemplate!.Armor" type="text" value="@itemTemplate.Armor" pattern="[0-9]{1,5}" />
             </div>
 
+            <!-- STATS START -->
+
             <div class="vmake-form-item">
-                <label asp-for="ItemTemplate!.StatType1">Stat Type 1</label>
-                <select id="form-stat-type-1" asp-for="ItemTemplate!.StatType1">
-                    @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
-                    {
-                        if (itemTemplate.StatType1 == (int)statType)
-                        {
-                            <option value="@((int)statType)" selected>@statType</option>
-                        }
-                        else
-                        {
-                            <option value="@((int)statType)">@statType</option>
-                        }
-                    }
-                </select>
-                <label asp-for="ItemTemplate!.StatValue1">Stat Value 1 (0-65535)</label>
-                <input id="form-stat-value-1" asp-for="ItemTemplate!.StatValue1" type="text" pattern="[0-9]{1,5}" />
+                <div class="vmake-form-item-label">Stats</div>
+                <div class="vmake-form-item-group">
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType1">Stat Type 1</label>
+                        <select id="form-stat-type-1" asp-for="ItemTemplate!.StatType1">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType1 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 1 (0-65535)</label>
+                        <input id="form-stat-value-1" asp-for="ItemTemplate!.StatValue1" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType2">Stat Type 2</label>
+                        <select id="form-stat-type-2" asp-for="ItemTemplate!.StatType2">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType2 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue2">Stat Value 2 (0-65535)</label>
+                        <input id="form-stat-value-2" asp-for="ItemTemplate!.StatValue2" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType3">Stat Type 3</label>
+                        <select id="form-stat-type-3" asp-for="ItemTemplate!.StatType3">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType3 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue3">Stat Value 3 (0-65535)</label>
+                        <input id="form-stat-value-3" asp-for="ItemTemplate!.StatValue3" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType4">Stat Type 4</label>
+                        <select id="form-stat-type-4" asp-for="ItemTemplate!.StatType4">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType4 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue4">Stat Value 4 (0-65535)</label>
+                        <input id="form-stat-value-4" asp-for="ItemTemplate!.StatValue4" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType1">Stat Type 5</label>
+                        <select id="form-stat-type-5" asp-for="ItemTemplate!.StatType5">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType5 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue5">Stat Value 5 (0-65535)</label>
+                        <input id="form-stat-value-5" asp-for="ItemTemplate!.StatValue5" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType6">Stat Type 6</label>
+                        <select id="form-stat-type-6" asp-for="ItemTemplate!.StatType6">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType6 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 6 (0-65535)</label>
+                        <input id="form-stat-value-6" asp-for="ItemTemplate!.StatValue6" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType7">Stat Type 7</label>
+                        <select id="form-stat-type-7" asp-for="ItemTemplate!.StatType7">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType7 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue7">Stat Value 7 (0-65535)</label>
+                        <input id="form-stat-value-7" asp-for="ItemTemplate!.StatValue7" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType8">Stat Type 8</label>
+                        <select id="form-stat-type-8" asp-for="ItemTemplate!.StatType8">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType8 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 8 (0-65535)</label>
+                        <input id="form-stat-value-8" asp-for="ItemTemplate!.StatValue8" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType9">Stat Type 9</label>
+                        <select id="form-stat-type-9" asp-for="ItemTemplate!.StatType9">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType9 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue1">Stat Value 9 (0-65535)</label>
+                        <input id="form-stat-value-9" asp-for="ItemTemplate!.StatValue9" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+
+                    <div class="vmake-form-item">
+                        <label asp-for="ItemTemplate!.StatType10">Stat Type 10</label>
+                        <select id="form-stat-type-10" asp-for="ItemTemplate!.StatType10">
+                            @foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                            {
+                                if (itemTemplate.StatType1 == (int)statType)
+                                {
+                                    <option value="@((int)statType)" selected>@statType</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)statType)">@statType</option>
+                                }
+                            }
+                        </select>
+                        <label asp-for="ItemTemplate!.StatValue10">Stat Value 10 (0-65535)</label>
+                        <input id="form-stat-value-10" asp-for="ItemTemplate!.StatValue10" type="text" pattern="[0-9]{1,5}" />
+                    </div>
+                </div>
             </div>
+
+
+            <!-- STATS END -->
 
             <div class="vmake-form-item">
                 <button type="submit">Update</button>
@@ -184,20 +365,10 @@ else
                     var index = 1;
                     foreach(var stat in stats)
                     {
-                        if(stat.Type == MangosItemStatType.None)
-                        {
-                            <div id="tooltip-stat-@(index)" hidden>
-                                <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
-                                <span id="tooltip-stat-type-@(index)">@stat.Type</span>
-                            </div>
-                        }
-                        else
-                        {
-                            <div id="tooltip-stat-@(index)">
-                                <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
-                                <span id="tooltip-stat-type-@(index)">@stat.Type</span>
-                            </div>
-                        }
+                        <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
+                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "-")@stat.Value</span>
+                            <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                        </div>
 
                         index++;
                     }

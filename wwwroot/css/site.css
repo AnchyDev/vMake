@@ -34,8 +34,24 @@ body {
 
     gap: 0.1rem;
 }
-.vmake-form-item label {
+.vmake-form-item-group {
+    display: flex;
+    flex-direction: row;
+
+    background-color: rgba(0, 0, 0, 0.05);
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+
+    padding: 0.25rem;
+
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+}
+.vmake-form-item-label {
     font-weight: 600;
+    font-size: 1.15rem;
 }
 
 .vmake-tooltip {
@@ -63,4 +79,8 @@ body {
     flex-direction: row;
 
     gap: 0.5rem;
+}
+
+.hide {
+    display: none;
 }
