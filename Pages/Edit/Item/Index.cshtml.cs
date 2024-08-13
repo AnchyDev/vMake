@@ -12,6 +12,7 @@ public class IndexModel : PageModel
     public int Entry { get; set; }
     public int Patch { get; set; }
 
+    public string? Message { get; set; }
     public string? Error { get; set; }
 
     [BindProperty]
@@ -55,6 +56,7 @@ public class IndexModel : PageModel
 
             ItemTemplate = itemTemplate;
 
+            Message = "Updated Item";
             return Page();
         }
         catch(Exception ex)
@@ -83,7 +85,7 @@ public class IndexModel : PageModel
                 return Page();
             }
 
-            return RedirectToPage("/Edit/Item/Index", new { entry = ItemTemplate.Entry });
+            return RedirectToPage("/Edit/Item/Index", new { Entry = ItemTemplate.Entry, Patch = ItemTemplate.Patch });
         }
         catch (Exception ex)
         {

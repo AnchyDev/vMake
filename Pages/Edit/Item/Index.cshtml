@@ -470,6 +470,13 @@ else
                     <span class="vmake-alert-error">@this.Model.Error</span>
                 </div>
             }
+
+            @if (this.Model.Message is not null)
+            {
+                <div class="vmake-form-item">
+                    <span class="vmake-alert-info">@this.Model.Message</span>
+                </div>
+            }
         </form>
 
         <div style="flex: 2;">
