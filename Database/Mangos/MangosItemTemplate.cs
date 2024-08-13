@@ -233,7 +233,7 @@ public class MangosItemTemplate
     public int SpellId1 { get; set; }
 
     [Column("spelltrigger_1")]
-    public int SpellTrigger1 { get; set; }
+    public MangosItemSpellTrigger SpellTrigger1 { get; set; }
 
     [Column("spellcharges_1")]
     public int SpellCharges1 { get; set; }
@@ -254,7 +254,7 @@ public class MangosItemTemplate
     public int SpellId2 { get; set; }
 
     [Column("spelltrigger_2")]
-    public int SpellTrigger2 { get; set; }
+    public MangosItemSpellTrigger SpellTrigger2 { get; set; }
 
     [Column("spellcharges_2")]
     public int SpellCharges2 { get; set; }
@@ -275,7 +275,7 @@ public class MangosItemTemplate
     public int SpellId3 { get; set; }
 
     [Column("spelltrigger_3")]
-    public int SpellTrigger3 { get; set; }
+    public MangosItemSpellTrigger SpellTrigger3 { get; set; }
 
     [Column("spellcharges_3")]
     public int SpellCharges3 { get; set; }
@@ -296,7 +296,7 @@ public class MangosItemTemplate
     public int SpellId4 { get; set; }
 
     [Column("spelltrigger_4")]
-    public int SpellTrigger4 { get; set; }
+    public MangosItemSpellTrigger SpellTrigger4 { get; set; }
 
     [Column("spellcharges_4")]
     public int SpellCharges4 { get; set; }
@@ -317,7 +317,7 @@ public class MangosItemTemplate
     public int SpellId5 { get; set; }
 
     [Column("spelltrigger_5")]
-    public int SpellTrigger5 { get; set; }
+    public MangosItemSpellTrigger SpellTrigger5 { get; set; }
 
     [Column("spellcharges_5")]
     public int SpellCharges5 { get; set; }

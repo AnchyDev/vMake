@@ -57,6 +57,29 @@ public static class MangosExtensions
         return "";
     }
 
+    public static string GetTriggerText(this MangosItemSpellTrigger bonding)
+    {
+        switch (bonding)
+        {
+            case MangosItemSpellTrigger.OnUse:
+                return "Use";
+
+            case MangosItemSpellTrigger.OnEquip:
+                return "Equip";
+
+            case MangosItemSpellTrigger.ChanceOnHit:
+                return "Chance on hit";
+
+            case MangosItemSpellTrigger.Soulstone:
+                return "Use";
+
+            case MangosItemSpellTrigger.OnUseWithoutDelay:
+                return "Use";
+        }
+
+        return "";
+    }
+
     public static List<MangosItemStat> GetStats(this MangosItemTemplate item)
     {
         return new List<MangosItemStat>()
@@ -71,6 +94,50 @@ public static class MangosExtensions
             new() { Type = (MangosItemStatType)item.StatType8, Value = item.StatValue8 },
             new() { Type = (MangosItemStatType)item.StatType9, Value = item.StatValue9 },
             new() { Type = (MangosItemStatType)item.StatType10, Value = item.StatValue10 }
+        };
+    }
+
+    public static MangosItemSpell GetSpellData(MangosItemSpell entry)
+    {
+        entry.Description = "Test";
+        return entry;
+    }
+
+    public static List<MangosItemSpell> GetSpells(this MangosItemTemplate item)
+    {
+        var spell1 = GetSpellData(new MangosItemSpell()
+        {
+            Entry = item.SpellId1,
+            Trigger = item.SpellTrigger1
+        });
+
+        var spell2 = GetSpellData(new MangosItemSpell()
+        {
+            Entry = item.SpellId2,
+            Trigger = item.SpellTrigger2
+        });
+
+        var spell3 = GetSpellData(new MangosItemSpell()
+        {
+            Entry = item.SpellId3,
+            Trigger = item.SpellTrigger3
+        });
+
+        var spell4 = GetSpellData(new MangosItemSpell()
+        {
+            Entry = item.SpellId4,
+            Trigger = item.SpellTrigger4
+        });
+
+        var spell5 = GetSpellData(new MangosItemSpell()
+        {
+            Entry = item.SpellId5,
+            Trigger = item.SpellTrigger5
+        });
+
+        return new List<MangosItemSpell>()
+        {
+            spell1, spell2, spell3, spell4, spell5
         };
     }
 }

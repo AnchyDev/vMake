@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using vMake.Database.Mangos;
 
 namespace vMake.Database;
@@ -6,6 +7,7 @@ namespace vMake.Database;
 public class MangosDbContext : DbContext
 {
     public DbSet<MangosItemTemplate> ItemTemplate { get; set; }
+    public DbSet<MangosSpellTemplate> SpellTemplate { get; set; }
 
     private readonly IConfiguration config;
     private readonly ILogger<MangosDbContext> logger;

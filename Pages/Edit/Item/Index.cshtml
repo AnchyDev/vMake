@@ -113,10 +113,41 @@
                     let value = parseInt($(this).val());
                     let sign = value > 0 ? '+' : '';
 
-                    console.log(value);
-                    console.log(sign);
-
                     $(`#tooltip-stat-value-${i}`).text(`${sign}${value}`);
+                });
+            }
+
+            for (let i = 1; i < 6; i++) {
+                $(`#form-spell-trigger-${i}`).on('input', function () {
+                    $(`#tooltip-spell-trigger-${i}`).text(`${$(this).find('option:selected').text()}:`);
+                });
+            }
+
+            // Load the spell descriptions when an entry changes
+            for (let i = 1; i < 6; i++) {
+                $(`#form-spell-id-${i}`).on('input', function () {
+                    let element = $(`#form-spell-id-${i}`);
+
+                    let value = parseInt($(element).val());
+
+                    $.get(`/api/spell/${value}`, function (data) {
+                        $(`#tooltip-spell-desc-${i}`).text(data.spell.description);
+                        console.log(data.spell.description);
+                    });
+                });
+            }
+
+            // Load the spell descriptions on page load
+            for (let i = 1; i < 6; i++) {
+                let element = $(`#form-spell-id-${i}`);
+
+                let value = parseInt($(element).val());
+
+                $.get(`/api/spell/${value}`, function (data) {
+                    $(`#tooltip-spell-desc-${i}`).text(data.spell.description);
+                    console.log(data.spell.description);
+                }).fail(function (error) {
+                    console.error('Error:', error); // Handle errors
                 });
             }
         });
@@ -428,6 +459,125 @@ else
 
             <!-- STATS END -->
 
+            <!-- SPELLS START -->
+
+            <div class="vmake-form-item">
+                <div class="vmake-form-item-label">Spells</div>
+                <div class="vmake-form-item-group">
+                    <div class="vmake-form-item-group-item">
+                        <span style="align-self: center">Spell 1</span>
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellId1">Id (Max @(UInt32.MaxValue))</label>
+                        <input class="vmake-input" id="form-spell-id-1" asp-for="ItemTemplate!.SpellId1" type="text" pattern="[0-9]{1,5}" />
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellTrigger1">Trigger</label>
+                        <select class="vmake-select" id="form-spell-trigger-1" asp-for="ItemTemplate!.SpellTrigger1">
+                            @foreach (MangosItemSpellTrigger spellTrigger in Enum.GetValues(typeof(MangosItemSpellTrigger)))
+                            {
+                                if (itemTemplate.SpellTrigger1 == spellTrigger)
+                                {
+                                    <option value="@((int)spellTrigger)" selected>@spellTrigger.GetTriggerText()</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)spellTrigger)">@spellTrigger.GetTriggerText()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="vmake-form-item-group-item">
+                        <span style="align-self: center">Spell 2</span>
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellId2">Id (Max @(UInt32.MaxValue))</label>
+                        <input class="vmake-input" id="form-spell-id-2" asp-for="ItemTemplate!.SpellId2" type="text" pattern="[0-9]{1,5}" />
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellTrigger2">Trigger</label>
+                        <select class="vmake-select" id="form-spell-trigger-2" asp-for="ItemTemplate!.SpellTrigger2">
+                            @foreach (MangosItemSpellTrigger spellTrigger in Enum.GetValues(typeof(MangosItemSpellTrigger)))
+                            {
+                                if (itemTemplate.SpellTrigger2 == spellTrigger)
+                                {
+                                    <option value="@((int)spellTrigger)" selected>@spellTrigger.GetTriggerText()</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)spellTrigger)">@spellTrigger.GetTriggerText()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="vmake-form-item-group-item">
+                        <span style="align-self: center">Spell 3</span>
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellId3">Id (Max @(UInt32.MaxValue))</label>
+                        <input class="vmake-input" id="form-spell-id-3" asp-for="ItemTemplate!.SpellId3" type="text" pattern="[0-9]{1,5}" />
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellTrigger3">Trigger</label>
+                        <select class="vmake-select" id="form-spell-trigger-3" asp-for="ItemTemplate!.SpellTrigger3">
+                            @foreach (MangosItemSpellTrigger spellTrigger in Enum.GetValues(typeof(MangosItemSpellTrigger)))
+                            {
+                                if (itemTemplate.SpellTrigger3 == spellTrigger)
+                                {
+                                    <option value="@((int)spellTrigger)" selected>@spellTrigger.GetTriggerText()</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)spellTrigger)">@spellTrigger.GetTriggerText()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="vmake-form-item-group-item">
+                        <span style="align-self: center">Spell 4</span>
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellId4">Id (Max @(UInt32.MaxValue))</label>
+                        <input class="vmake-input" id="form-spell-id-4" asp-for="ItemTemplate!.SpellId4" type="text" pattern="[0-9]{1,5}" />
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellTrigger4">Trigger</label>
+                        <select class="vmake-select" id="form-spell-trigger-4" asp-for="ItemTemplate!.SpellTrigger4">
+                            @foreach (MangosItemSpellTrigger spellTrigger in Enum.GetValues(typeof(MangosItemSpellTrigger)))
+                            {
+                                if (itemTemplate.SpellTrigger4 == spellTrigger)
+                                {
+                                    <option value="@((int)spellTrigger)" selected>@spellTrigger.GetTriggerText()</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)spellTrigger)">@spellTrigger.GetTriggerText()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="vmake-form-item-group-item">
+                        <span style="align-self: center">Spell 5</span>
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellId5">Id (Max @(UInt32.MaxValue))</label>
+                        <input class="vmake-input" id="form-spell-id-5" asp-for="ItemTemplate!.SpellId5" type="text" pattern="[0-9]{1,5}" />
+
+                        <label class="vmake-form-item-label" asp-for="ItemTemplate!.SpellTrigger5">Trigger</label>
+                        <select class="vmake-select" id="form-spell-trigger-5" asp-for="ItemTemplate!.SpellTrigger5">
+                            @foreach (MangosItemSpellTrigger spellTrigger in Enum.GetValues(typeof(MangosItemSpellTrigger)))
+                            {
+                                if (itemTemplate.SpellTrigger5 == spellTrigger)
+                                {
+                                    <option value="@((int)spellTrigger)" selected>@spellTrigger.GetTriggerText()</option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)spellTrigger)">@spellTrigger.GetTriggerText()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPELLS END -->
+
             <div class="vmake-form-item">
                 <button class="vmake-button-primary" type="submit">Update</button>
             </div>
@@ -457,16 +607,31 @@ else
                     var index = 1;
                     foreach (var stat in stats)
                     {
-                                        <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
-                                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
-                                            <span id="tooltip-stat-type-@(index)">@stat.Type</span>
-                                        </div>
+                        <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
+                            <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
+                            <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                        </div>
 
                         index++;
                     }
                 }
 
                 <span id="tooltip-reqlevel" class="@(itemTemplate.RequiredLevel < 1 ? "hide" : "")">Requires Level @itemTemplate.RequiredLevel</span>
+
+                @{
+                    var spells = itemTemplate.GetSpells();
+
+                    index = 1;
+                    foreach (var spell in spells)
+                    {
+                        <div id="tooltip-spell-@(index)" class="@(string.IsNullOrWhiteSpace(spell.Description) ? "hide" : "")" style="color: #00FF00">
+                            <span id="tooltip-spell-trigger-@(index)">@spell.Trigger.GetTriggerText(): </span>
+                            <span id="tooltip-spell-desc-@(index)">@spell.Description</span>
+                        </div>
+
+                        index++;
+                    }
+                }
 
                 <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(itemTemplate.Description) ? "hide" : "")">"@itemTemplate.Description"</span>
             </div>
