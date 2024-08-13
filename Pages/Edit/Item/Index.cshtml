@@ -125,12 +125,15 @@
 
 @if (itemTemplate is null)
 {
-    <form method="post" class="vmake-form">
-        <input type="hidden" name="type" value="edit" />
+    <form method="get" class="vmake-form">
+        <div class="vmake-form-item">
+            <label class="vmake-form-item-label" for="Entry">Entry</label>
+            <input class="vmake-input" type="text" name="Entry" pattern="[0-9]{1,5}" value="@(this.Model.Entry)" />
+        </div>
 
         <div class="vmake-form-item">
-            <label class="vmake-form-item-label" for="Entry">Entry Id</label>
-            <input class="vmake-input" type="text" name="Entry" />
+            <label class="vmake-form-item-label" for="Patch">Patch</label>
+            <input class="vmake-input" type="text" name="Patch" pattern="[0-9]{1,5}" value="@(this.Model.Patch)" />
         </div>
 
         <div class="vmake-form-item">
@@ -153,9 +156,8 @@ else
                 <h2>Editing Item Entry @itemTemplate.Entry</h2>
             </div>
 
-            <input type="hidden" name="type" value="update"/>
-            
             <input type="hidden" asp-for="ItemTemplate!.Entry" value="@itemTemplate.Entry" />
+            <input type="hidden" asp-for="ItemTemplate!.Patch" value="@itemTemplate.Patch" />
 
             <div class="vmake-form-item">
                 <label class="vmake-form-item-label" asp-for="ItemTemplate!.Name">Name (Max 255 chars)</label>

@@ -20,7 +20,7 @@ public class IndexModel : PageModel
         this.logger = logger;
     }
 
-    public async Task<IActionResult> OnPostAsync([FromForm]int? entry)
+    public async Task<IActionResult> OnPostAsync([FromForm]int? entry, [FromForm]int? patch)
     {
         try
         {
@@ -30,16 +30,23 @@ public class IndexModel : PageModel
                 return Page();
             }
 
-            var template = await dbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == entry);
+            if (patch is null)
+            {
+                Error = "You must fill in a patch id to create.";
+                return Page();
+            }
+
+            var template = await dbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == entry && i.Patch == patch);
             if (template is not null)
             {
-                Error = "An item with that entry id already exists.";
+                Error = "An item with that entry id and patch already exists.";
                 return Page();
             }
 
             var newItem = new MangosItemTemplate()
             {
                 Entry = entry.Value,
+                Patch = patch.Value,
                 Name = "New Item",
                 Description = "This is your new item!"
             };
@@ -53,7 +60,7 @@ public class IndexModel : PageModel
                 return Page();
             }
 
-            return RedirectToPage("/Edit/Item/Index", new { entry = entry });
+            return RedirectToPage("/Edit/Item/Index", new { Entry = entry, Patch = patch });
         }
         catch(Exception ex)
         {

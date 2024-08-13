@@ -6,8 +6,13 @@
 
 <form class="vmake-form" method="POST">
     <div class="vmake-form-item">
-        <label class="vmake-form-item-label" for="Entry">Entry Id</label>
-        <input class="vmake-input" type="text" name="Entry"/>
+        <label class="vmake-form-item-label" for="Entry">Entry</label>
+        <input class="vmake-input" type="text" name="Entry" pattern="[0-9]{1,5}" value="0"/>
+    </div>
+
+    <div class="vmake-form-item">
+        <label class="vmake-form-item-label" for="Patch">Patch</label>
+        <input class="vmake-input" type="text" name="Patch" pattern="[0-9]{1,5}" value="0"/>
     </div>
 
     <div class="vmake-form-item">

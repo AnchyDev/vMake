@@ -9,6 +9,9 @@ namespace vMake.Pages.Edit.Item;
 
 public class IndexModel : PageModel
 {
+    public int Entry { get; set; }
+    public int Patch { get; set; }
+
     public string? Error { get; set; }
 
     [BindProperty]
@@ -23,19 +26,30 @@ public class IndexModel : PageModel
         this.logger = logger;
     }
 
-    public async Task<IActionResult> OnGetAsync(int? entry)
+    public async Task<IActionResult> OnGetAsync(int? entry, int? patch)
     {
         try
         {
-            if (entry is null)
+            if (entry is null || patch is null)
             {
                 return Page();
             }
 
-            var itemTemplate = await dbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == entry);
-            if (itemTemplate is null)
+            Entry = entry.Value;
+            Patch = patch.Value; 
+
+            var itemTemplates = await dbContext.ItemTemplate.Where(i => i.Entry == entry).ToListAsync();
+            if(itemTemplates.Count < 1)
             {
                 Error = "An item with that entry id does not exist.";
+                return Page();
+            }
+
+            var itemTemplate = itemTemplates.FirstOrDefault(i => i.Patch == patch);
+            if(itemTemplate is null)
+            {
+                var patches = string.Join(", ", itemTemplates.Select(i => i.Patch.ToString()));
+                Error = $"No entry was found with that patch. Available patch versions: {patches}";
                 return Page();
             }
 
@@ -51,27 +65,7 @@ public class IndexModel : PageModel
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(string? type, int? entry)
-    {
-        if(type is null)
-        {
-            return Page();
-        }
-
-        switch(type.ToLower())
-        {
-            case "edit":
-                return RedirectToPage("/Edit/Item/Index", new { entry = entry });
-
-            case "update":
-                return await UpdateEntryAsync();
-
-            default:
-                return Page();
-        }
-    }
-
-    private async Task<IActionResult> UpdateEntryAsync()
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
@@ -91,7 +85,7 @@ public class IndexModel : PageModel
 
             return RedirectToPage("/Edit/Item/Index", new { entry = ItemTemplate.Entry });
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             logger.LogCritical($"{ex.Message}: {ex.StackTrace}");
             Error = $"An internal error occured while trying to update the item: {ex.Message}";
