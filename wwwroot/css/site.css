@@ -50,8 +50,6 @@ footer {
     display: flex;
     flex-direction: row;
 
-    padding: 0.25rem;
-
     flex-wrap: wrap;
 
     gap: 1rem;
@@ -61,13 +59,6 @@ footer {
 
     display: flex;
     flex-direction: column;
-
-    background-color: rgba(20, 20, 20);
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 5px;
-
-    padding: 0.25rem;
 }
 .vmake-form-item-label {
     font-weight: 600;
