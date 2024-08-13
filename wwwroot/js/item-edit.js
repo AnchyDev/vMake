@@ -52,6 +52,17 @@ function initializeTooltip() {
             $('#tooltip-name').css('color', `#${color}`)
         });
 
+        $('#form-invtype').on('input', function () {
+            let value = $(this).val();
+            if (value === "NotEquipable") {
+                $(`#tooltip-invtype`).hide();
+            }
+            else {
+                $(`#tooltip-invtype`).show();
+            }
+            $('#tooltip-invtype').text(`${$(this).find('option:selected').text()}`);
+        });
+
         $('#form-bonding').on('input', function () {
             let value = $(this).val();
             if (value === "None") {

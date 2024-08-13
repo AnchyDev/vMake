@@ -60,6 +60,8 @@ else
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
+
+                <!-- GENERAL -->
                 <div class="tab-pane fade show active vmake-form" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
                     <div class="vmake-form-item-group">
                         <div class="vmake-form-item-group-item">
@@ -117,11 +119,30 @@ else
                             <label class="vmake-form-item-label" asp-for="ItemTemplate!.RequiredLevel">Required Level (0-255)</label>
                             <input class="vmake-input" id="form-reqlevel" asp-for="ItemTemplate!.RequiredLevel" type="text" value="@itemTemplate.RequiredLevel" pattern="[0-9]{1,3}" />
                         </div>
+
+                        <div class="vmake-form-item-group-item">
+                            <label class="vmake-form-item-label" asp-for="ItemTemplate!.InventoryType">Inventory Type</label>
+                            <select class="vmake-select" id="form-invtype" asp-for="ItemTemplate!.InventoryType">
+                                @foreach (MangosInventoryType invType in Enum.GetValues(typeof(MangosInventoryType)))
+                                {
+                                    if (itemTemplate.InventoryType == invType)
+                                    {
+                                        <option value="@invType" selected>@invType.GetInventoryTypeText()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@invType">@invType.GetInventoryTypeText()</option>
+                                    }
+                                }
+                            </select>
+                        </div>
                     </div>
 
 
                     
                 </div>
+
+                <!-- STATS -->
                 <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
                     <div class="vmake-form-item">
                         <label class="vmake-form-item-label" asp-for="ItemTemplate!.Armor">Armor (-32768-32767)</label>
@@ -338,6 +359,8 @@ else
 
                     <!-- STATS END -->
                 </div>
+
+                <!-- SPELLS -->
                 <div class="tab-pane fade" id="pills-spells" role="tabpanel" aria-labelledby="pills-spells-tab">
                     <!-- SPELLS START -->
 
@@ -487,6 +510,8 @@ else
                 <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @itemTemplate.ItemLevel</span>
 
                 <span id="tooltip-bonding" class="@(itemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">@itemTemplate.Bonding.GetBondingText()</span>
+
+                <span id="tooltip-invtype" class="@(itemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">@itemTemplate.InventoryType.GetInventoryTypeText()</span>
 
                 <span id="tooltip-armor" class="@(itemTemplate.Armor < 1 ? "hide" : "")">@itemTemplate.Armor Armor</span>
 

@@ -38,9 +38,6 @@ public static class MangosExtensions
     {
         switch(bonding)
         {
-            case MangosItemBonding.None:
-                return "None";
-
             case MangosItemBonding.BindOnPickup:
                 return "Binds when picked up";
 
@@ -49,12 +46,26 @@ public static class MangosExtensions
 
             case MangosItemBonding.BindOnUse:
                 return "Binds when used";
-
-            case MangosItemBonding.Quest:
-                return "Quest";
         }
 
-        return "";
+        return bonding.ToString();
+    }
+
+    public static string GetInventoryTypeText(this MangosInventoryType invType)
+    {
+        switch(invType)
+        {
+            case MangosInventoryType.Weapon2H:
+                return "Two-Hand";
+
+            case MangosInventoryType.WeaponMainHand:
+                return "Main Hand";
+
+            case MangosInventoryType.WeaponOffHand:
+                return "Off Hand";
+        }
+
+        return invType.ToString();
     }
 
     public static string GetTriggerText(this MangosItemSpellTrigger bonding)

@@ -47,7 +47,7 @@ public class MangosItemTemplate
     public int SellPrice { get; set; }
 
     [Column("inventory_type")]
-    public int InventoryType { get; set; }
+    public MangosInventoryType InventoryType { get; set; }
 
     [Column("allowable_class")]
     public int AllowableClass { get; set; }
