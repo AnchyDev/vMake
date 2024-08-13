@@ -1,4 +1,5 @@
 using vMake.Database;
+using vMake.SignalR;
 
 namespace vMake;
 
@@ -20,6 +21,7 @@ public class Program
 
     static void ConfigureServices(IServiceCollection services)
     {
+        services.AddSignalR();
         services.AddDbContext<MangosDbContext>();
 
         services.AddControllers();
@@ -39,8 +41,7 @@ public class Program
 
         app.UseRouting();
 
-        //app.UseAuthentication();
-        //app.UseAuthorization();
+        app.MapHub<EditItemHub>("/hub/edit/item");
 
         app.MapControllers();
         app.MapRazorPages();

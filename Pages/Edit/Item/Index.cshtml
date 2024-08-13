@@ -9,149 +9,7 @@
 }
 
 @section Scripts {
-    <script type="text/javascript">
-        function getQualityColor(q) {
-            switch(q) {
-                case 0: return '9d9d9d';
-                case 1: return 'ffffff';
-                case 2: return '1eff00';
-                case 3: return '0070dd';
-                case 4: return 'a335ee';
-                case 5: return 'ff8000';
-                case 6: return 'e6cc80';
-            }
-
-            return '#ffffff';
-        }
-
-        // Update the tooltip when the form changes.
-        $(document).ready(function () {
-            $('#form-name').on('input', function () {
-                $('#tooltip-name').text(`${$(this).val()}`);
-            });
-
-            $('#form-description').on('input', function () {
-                let value = $(this).val();
-                if (!value) {
-                    $(`#tooltip-description`).hide();
-                }
-                else {
-                    $(`#tooltip-description`).show();
-                }
-
-                $('#tooltip-description').text(`"${value}"`);
-            });
-
-            $('#form-quality').on('input', function () {
-                let value = parseInt($(this).val());
-                let color = getQualityColor(value);
-
-                console.log(value);
-                console.log(color);
-
-                $('#tooltip-name').css('color', `#${color}`)
-            });
-
-            $('#form-bonding').on('input', function () {
-                let value = $(this).val();
-
-                if (value === "None") {
-                    $(`#tooltip-bonding`).hide();
-                }
-                else {
-                    $(`#tooltip-bonding`).show();
-                }
-
-                $('#tooltip-bonding').text(`${$(this).find('option:selected').text()}`);
-            });
-
-            $('#form-itemlevel').on('input', function () {
-                $('#tooltip-itemlevel').text(`Item Level ${$(this).val()}`);
-            });
-
-            $('#form-reqlevel').on('input', function () {
-                let value = $(this).val();
-                console.log(value);
-                if (!value || value === '0') {
-                    $(`#tooltip-reqlevel`).hide();
-                }
-                else {
-                    $(`#tooltip-reqlevel`).show();
-                }
-
-                $('#tooltip-reqlevel').text(`Requires Level ${value}`);
-            });
-
-            $('#form-armor').on('input', function () {
-                let value = $(this).val();
-                if (!value) {
-                    $(`#tooltip-armor`).hide();
-                }
-                else {
-                    $(`#tooltip-armor`).show();
-                }
-
-                $('#tooltip-armor').text(`${value} Armor`);
-            });
-
-            for (let i = 1; i < 11; i++) {
-                $(`#form-stat-type-${i}`).on('input', function () {
-                    let type = parseInt($(this).val());
-                    if (type == 0) {
-                        $(`#tooltip-stat-${i}`).hide();
-                    }
-                    else {
-                        $(`#tooltip-stat-${i}`).show();
-                    }
-
-                    $(`#tooltip-stat-type-${i}`).text(`${$(this).find('option:selected').text()}`);
-                });
-            }
-
-            for (let i = 1; i < 11; i++) {
-                $(`#form-stat-value-${i}`).on('input', function () {
-                    let value = parseInt($(this).val());
-                    let sign = value > 0 ? '+' : '';
-
-                    $(`#tooltip-stat-value-${i}`).text(`${sign}${value}`);
-                });
-            }
-
-            for (let i = 1; i < 6; i++) {
-                $(`#form-spell-trigger-${i}`).on('input', function () {
-                    $(`#tooltip-spell-trigger-${i}`).text(`${$(this).find('option:selected').text()}:`);
-                });
-            }
-
-            // Load the spell descriptions when an entry changes
-            for (let i = 1; i < 6; i++) {
-                $(`#form-spell-id-${i}`).on('input', function () {
-                    let element = $(`#form-spell-id-${i}`);
-
-                    let value = parseInt($(element).val());
-
-                    $.get(`/api/spell/${value}`, function (data) {
-                        $(`#tooltip-spell-desc-${i}`).text(data.spell.description);
-                        console.log(data.spell.description);
-                    });
-                });
-            }
-
-            // Load the spell descriptions on page load
-            for (let i = 1; i < 6; i++) {
-                let element = $(`#form-spell-id-${i}`);
-
-                let value = parseInt($(element).val());
-
-                $.get(`/api/spell/${value}`, function (data) {
-                    $(`#tooltip-spell-desc-${i}`).text(data.spell.description);
-                    console.log(data.spell.description);
-                }).fail(function (error) {
-                    console.error('Error:', error); // Handle errors
-                });
-            }
-        });
-    </script>
+    <script type="text/javascript" src="/js/item-edit.js" asp-append-version="true"></script>
 }
 
 @if (itemTemplate is null)
@@ -619,17 +477,12 @@ else
                 <span id="tooltip-reqlevel" class="@(itemTemplate.RequiredLevel < 1 ? "hide" : "")">Requires Level @itemTemplate.RequiredLevel</span>
 
                 @{
-                    var spells = itemTemplate.GetSpells();
-
-                    index = 1;
-                    foreach (var spell in spells)
+                    for(int i = 1; i < 6; i++)
                     {
-                        <div id="tooltip-spell-@(index)" class="@(string.IsNullOrWhiteSpace(spell.Description) ? "hide" : "")" style="color: #00FF00">
-                            <span id="tooltip-spell-trigger-@(index)">@spell.Trigger.GetTriggerText(): </span>
-                            <span id="tooltip-spell-desc-@(index)">@spell.Description</span>
+                        <div id="tooltip-spell-@(i)" style="color: #00FF00">
+                            <span id="tooltip-spell-trigger-@(i)"></span>
+                            <span id="tooltip-spell-desc-@(i)"></span>
                         </div>
-
-                        index++;
                     }
                 }
 
