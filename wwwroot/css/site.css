@@ -78,6 +78,9 @@ footer {
     display: flex;
     flex-direction: column;
 
+    position: sticky;
+    top: 0;
+
     border: 1px solid #969B96;
     border-radius: 5px;
 
