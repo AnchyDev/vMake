@@ -139,10 +139,21 @@ function initializeTooltip() {
             });
         }
 
+        for (let id = 1; id < 6; id++) {
+            let trigger = $(`#form-spell-trigger-${id}`);
+
+            $(`#tooltip-spell-trigger-${id}`).text(`${$(trigger).find('option:selected').text()}:`);
+
+            $(`#form-spell-trigger-${id}`).on('input', function () {
+                $(`#tooltip-spell-trigger-${id}`).text(`${$(trigger).find('option:selected').text()}:`);
+            });
+        }
+
         connection.on("GetSpellInfoCallback", function (response) {
             console.log(response);
             if (response.success) {
                 let id = response.metadata.id;
+                let trigger = $(`#form-spell-trigger-${id}`);
 
                 $(`#tooltip-spell-${id}`).show();
                 $(`#tooltip-spell-desc-${id}`).text(response.object.description);
