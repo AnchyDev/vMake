@@ -93,6 +93,42 @@ public static class MangosExtensions
         return "";
     }
 
+    public static Dictionary<int, string> GetSubClass(this MangosItemClass itemClass)
+    {
+        Type subClassType = itemClass switch
+        {
+            MangosItemClass.Consumable => typeof(MangosItemConsumableSubClass),
+            MangosItemClass.Container => typeof(MangosItemContainerSubclass),
+            MangosItemClass.Weapon => typeof(MangosItemWeaponSubclass),
+            MangosItemClass.Armor => typeof(MangosItemArmorSubclass),
+            MangosItemClass.Reagent => typeof(MangosItemReagentSubclass),
+            MangosItemClass.Projectile => typeof(MangosItemProjectileSubclass),
+            MangosItemClass.TradeGoods => typeof(MangosItemProjectileSubclass),
+            MangosItemClass.Recipe => typeof(MangosItemRecipeSubclass),
+            MangosItemClass.Quiver => typeof(MangosItemQuiverSubclass),
+            MangosItemClass.Quest => typeof(MangosItemQuestSubclass),
+            MangosItemClass.Key => typeof(MangosItemKeySubclass),
+            MangosItemClass.Miscellaneous => typeof(MangosItemMiscellaneousSubclass),
+            _ => throw new NotImplementedException()
+        };
+
+        var kvp = new Dictionary<int, string>();
+        foreach (var item in Enum.GetValues(subClassType))
+        {
+            var value = (int)item;
+            var name = Enum.GetName(subClassType, item);
+
+            if (name is null)
+            {
+                continue;
+            }
+
+            kvp.Add(value, name);
+        }
+
+        return kvp;
+    }
+
     public static List<MangosItemStat> GetStats(this MangosItemTemplate item)
     {
         return new List<MangosItemStat>()

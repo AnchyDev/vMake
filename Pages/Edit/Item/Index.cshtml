@@ -136,6 +136,40 @@ else
                                 }
                             </select>
                         </div>
+
+                        <div class="vmake-form-item-group-item">
+                            <label class="vmake-form-item-label" asp-for="ItemTemplate!.ItemClass">Class</label>
+                            <select class="vmake-select" id="form-iclass" asp-for="ItemTemplate!.ItemClass">
+                                @foreach (MangosItemClass itemClass in Enum.GetValues(typeof(MangosItemClass)))
+                                {
+                                    if (itemTemplate.ItemClass == itemClass)
+                                    {
+                                        <option value="@((int)itemClass)" selected>@itemClass</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@((int)itemClass)">@itemClass</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="vmake-form-item-group-item">
+                            <label class="vmake-form-item-label" asp-for="ItemTemplate!.ItemSubClass">SubClass</label>
+                            <select class="vmake-select" id="form-isubclass" asp-for="ItemTemplate!.ItemSubClass">
+                                @foreach (var itemSubClass in this.Model.ItemTemplate!.ItemClass.GetSubClass())
+                                {
+                                    if (itemTemplate.ItemSubClass == itemSubClass.Key)
+                                    {
+                                        <option value="@itemSubClass.Key" selected>@itemSubClass.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@itemSubClass.Key">@itemSubClass.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
                     </div>
 
 
@@ -511,7 +545,10 @@ else
 
                 <span id="tooltip-bonding" class="@(itemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">@itemTemplate.Bonding.GetBondingText()</span>
 
-                <span id="tooltip-invtype" class="@(itemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">@itemTemplate.InventoryType.GetInventoryTypeText()</span>
+                <div class="tooltip-multiline" style="display: flex; flex-direction: row">
+                    <span style="flex: 1;" id="tooltip-invtype" class="@(itemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">@itemTemplate.InventoryType.GetInventoryTypeText()</span>
+                    <span style="flex: 1;text-align: end;" id="tooltip-isubclass"></span>
+                </div>
 
                 <span id="tooltip-armor" class="@(itemTemplate.Armor < 1 ? "hide" : "")">@itemTemplate.Armor Armor</span>
 

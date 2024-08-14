@@ -3,9 +3,14 @@
     .build();
 
 function updateSpellTooltip(elementId, spellEntry) {
-    console.log(`Updating tooltip ${elementId} with spell ${spellEntry}`);
-
     connection.invoke("GetSpellInfo", spellEntry, { id: elementId })
+        .catch(function (err) {
+            return console.error(err.toString());
+        });
+}
+
+function updateSubClass(itemClass) { 
+    connection.invoke("GetSubClasses", itemClass, {})
         .catch(function (err) {
             return console.error(err.toString());
         });
@@ -62,6 +67,40 @@ function initializeTooltip() {
             }
             $('#tooltip-invtype').text(`${$(this).find('option:selected').text()}`);
         });
+
+        $('#form-iclass').on('input', function () {
+            let itemClass = parseInt($(this).val());
+            updateSubClass(itemClass);
+        });
+
+        $('#form-isubclass').on('input', function () {
+            // Update tooltip with new selected item.
+            $('#tooltip-isubclass').text($(this).find('option:selected').text());
+        });
+
+        connection.on("GetSubClassesCallback", function (response) {
+            console.log(response);
+            if (response.success) {
+                let currentIndex = parseInt($('#form-isubclass').find('option:selected').val());
+                let select = $('#form-isubclass');
+                select.empty();
+
+                $.each(response.object, function (key, value) {
+                    select.append($('<option></option>').attr('value', key).text(value));
+                });
+
+                // Restore the old index
+                let totalIndex = select.children().length;
+                if (currentIndex <= totalIndex) {
+                    select.prop('selectedIndex', currentIndex);
+                }
+
+                // Update tooltip with new selected item.
+                $('#tooltip-isubclass').text($('#form-isubclass').find('option:selected').text());
+            }
+        });
+
+        updateSubClass(parseInt($('#form-iclass').find('option:selected').val()));
 
         $('#form-bonding').on('input', function () {
             let value = $(this).val();
@@ -150,7 +189,6 @@ function initializeTooltip() {
         }
 
         connection.on("GetSpellInfoCallback", function (response) {
-            console.log(response);
             if (response.success) {
                 let id = response.metadata.id;
                 let trigger = $(`#form-spell-trigger-${id}`);

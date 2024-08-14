@@ -17,10 +17,10 @@ public class MangosItemTemplate
     public int Patch { get; set; }
 
     [Column("class")]
-    public int ItemClass { get; set; }
+    public MangosItemClass ItemClass { get; set; }
 
     [Column("subclass")]
-    public int ItemSubclass { get; set; }
+    public int ItemSubClass { get; set; }
 
     [Column("name")]
     public string? Name { get; set; } = "";

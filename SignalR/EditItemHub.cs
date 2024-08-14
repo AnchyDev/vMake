@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using vMake.Database;
 using vMake.Database.Types;
+using vMake.Extensions;
 
 namespace vMake.SignalR;
 
@@ -19,7 +20,7 @@ public class EditItemHub : Hub
     {
         if(entry is null)
         {
-            await Clients.Caller.SendAsync("GetSpellInfoCallback", new SignalResponse(false, "No spell found with that entry.", null));
+            await Clients.Caller.SendAsync("GetSpellInfoCallback", new SignalResponse(false, "Missing spell entry for callback.", null));
             return;
         }
 
@@ -43,6 +44,23 @@ public class EditItemHub : Hub
             Description = template.Description
         };
 
-        await Clients.Caller.SendAsync("GetSpellInfoCallback", new SignalResponse(true, "Found spell", spell, metadata));
+        await Clients.Caller.SendAsync("GetSpellInfoCallback", new SignalResponse(true, "", spell, metadata));
+    }
+
+    public async Task GetSubClasses(MangosItemClass? itemClass, object? metadata)
+    {
+        if (itemClass is null)
+        {
+            await Clients.Caller.SendAsync("GetSubClassesCallback", new SignalResponse(false, "Missing item class for callback.", null));
+            return;
+        }
+
+        if (metadata is null)
+        {
+            await Clients.Caller.SendAsync("GetSubClassesCallback", new SignalResponse(false, "Missing metadata for callback.", null));
+            return;
+        }
+
+        await Clients.Caller.SendAsync("GetSubClassesCallback", new SignalResponse(true, "", itemClass.Value.GetSubClass(), metadata));
     }
 }
