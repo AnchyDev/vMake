@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 using vMake.Database;
 using vMake.Database.Mangos;
+using vMake.Extensions;
 
 namespace vMake.Pages.Edit.Item;
 
@@ -54,7 +55,7 @@ public class IndexModel : PageModel
                 return Page();
             }
 
-            ItemTemplate = itemTemplate;
+            ItemTemplate = itemTemplate.Clone();
 
             Message = "Updated Item";
             return Page();
@@ -76,7 +77,8 @@ public class IndexModel : PageModel
                 return Page();
             }
 
-            dbContext.ItemTemplate.Update(ItemTemplate);
+            var entity = dbContext.ItemTemplate.Attach(ItemTemplate);
+            entity.State = EntityState.Modified;
 
             var rows = await dbContext.SaveChangesAsync();
             if (rows < 1)

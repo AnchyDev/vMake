@@ -1,4 +1,6 @@
-﻿using vMake.Database.Mangos;
+﻿using System.Text.Json;
+
+using vMake.Database.Mangos;
 using vMake.Database.Types;
 
 namespace vMake.Extensions;
@@ -150,5 +152,10 @@ public static class MangosExtensions
         {
             spell1, spell2, spell3, spell4, spell5
         };
+    }
+
+    public static MangosItemTemplate? Clone(this MangosItemTemplate template)
+    {
+        return JsonSerializer.Deserialize<MangosItemTemplate>(JsonSerializer.Serialize(template));
     }
 }
