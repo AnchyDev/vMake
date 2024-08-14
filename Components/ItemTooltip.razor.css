@@ -1,0 +1,22 @@
+﻿.vmake-item-tooltip {
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 0;
+
+    border: 1px solid #969B96;
+    border-radius: 5px;
+
+    word-wrap: anywhere;
+
+    max-width: 300px;
+    height: fit-content;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+
+    padding: 0.5rem;
+
+    font-family: Verdana, "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}

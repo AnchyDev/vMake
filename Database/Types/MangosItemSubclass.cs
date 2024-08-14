@@ -5,7 +5,7 @@ public enum MangosItemConsumableSubClass
     Consumable = 0
 }
 
-public enum MangosItemContainerSubclass
+public enum MangosItemContainerSubClass
 {
     Bag = 0,
     SoulBag = 1,
@@ -14,7 +14,7 @@ public enum MangosItemContainerSubclass
     EngineeringBag = 4,
 }
 
-public enum MangosItemWeaponSubclass
+public enum MangosItemWeaponSubClass
 {
     Axe1H = 0,
     Axe2H = 1,
@@ -36,7 +36,7 @@ public enum MangosItemWeaponSubclass
     FishingPole = 20
 }
 
-public enum MangosItemArmorSubclass
+public enum MangosItemArmorSubClass
 {
     Miscellaneous = 0,
     Cloth = 1,
@@ -49,18 +49,18 @@ public enum MangosItemArmorSubclass
     Totem = 9
 }
 
-public enum MangosItemReagentSubclass
+public enum MangosItemReagentSubClass
 {
     Reagent = 0
 }
 
-public enum MangosItemProjectileSubclass
+public enum MangosItemProjectileSubClass
 {
     Arrow = 2,
     Bullet = 3
 }
 
-public enum MangosItemTradeGoodsSubclass
+public enum MangosItemTradeGoodsSubClass
 {
     TradeGoods = 0,
     Parts = 1,
@@ -68,7 +68,7 @@ public enum MangosItemTradeGoodsSubclass
     Devices = 3
 }
 
-public enum MangosItemRecipeSubclass
+public enum MangosItemRecipeSubClass
 {
     Book = 0,
     Leatherworking = 1,
@@ -82,24 +82,24 @@ public enum MangosItemRecipeSubclass
     Fishing = 9
 }
 
-public enum MangosItemQuiverSubclass
+public enum MangosItemQuiverSubClass
 {
     Quiver = 2,
     AmmoPouch = 3
 }
 
-public enum MangosItemQuestSubclass
+public enum MangosItemQuestSubClass
 {
     Quest = 0
 }
 
-public enum MangosItemKeySubclass
+public enum MangosItemKeySubClass
 {
     Key = 0,
     Lockpick = 1
 }
 
-public enum MangosItemMiscellaneousSubclass
+public enum MangosItemMiscellaneousSubClass
 {
     Junk = 0
 }

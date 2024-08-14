@@ -1,11 +1,11 @@
+using vMake.Components;
 using vMake.Database;
-using vMake.SignalR;
 
 namespace vMake;
 
-public class Program
+class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -18,32 +18,22 @@ public class Program
         app.Run();
     }
 
-
     static void ConfigureServices(IServiceCollection services)
     {
-        services.AddSignalR();
         services.AddDbContext<MangosDbContext>();
-
-        services.AddControllers();
-        services.AddRazorPages();
+        services.AddRazorComponents().AddInteractiveServerComponents();
     }
 
     static void ConfigureMiddleware(WebApplication app)
     {
         if (!app.Environment.IsDevelopment())
         {
-            app.UseExceptionHandler("/Error");
+            app.UseExceptionHandler("/Error", createScopeForErrors: true);
         }
 
-        //RunDatabaseMigrations(app);
-
         app.UseStaticFiles();
+        app.UseAntiforgery();
 
-        app.UseRouting();
-
-        app.MapHub<EditItemHub>("/hub/edit/item");
-
-        app.MapControllers();
-        app.MapRazorPages();
+        app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
     }
 }

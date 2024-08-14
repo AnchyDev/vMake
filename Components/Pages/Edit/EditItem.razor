@@ -1,0 +1,39 @@
+﻿@page "/edit/item"
+
+@if (ItemTemplate is null)
+{
+    <h3>Enter an item entry & patch</h3>
+
+    <form class="vmake-form" method="POST" @onsubmit="OnPostFindAsync" @formname="form-item-edit-find">
+        <AntiforgeryToken />
+
+        <div class="vmake-form-item">
+            <label>
+                Entry <InputNumber @bind-Value="Entry" />
+            </label>
+        </div>
+
+        <div class="vmake-form-item">
+            <label>
+                Patch <InputNumber @bind-Value="Patch" />
+            </label>
+        </div>
+
+        <div class="vmake-form-item">
+            <button class="vmake-button-primary" type="submit">Edit</button>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(this.Error))
+        {
+            <div class="vmake-form-item">
+                <span class="vmake-alert-error">@this.Error</span>
+            </div>
+        }
+    </form>
+}
+else
+{
+    <button @onclick="GoBack">Back</button>
+    <h3>Editing item @ItemTemplate.Entry</h3>
+    <ItemEditor Template="@ItemTemplate"/>
+}

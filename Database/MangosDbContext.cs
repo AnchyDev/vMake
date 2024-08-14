@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using vMake.Database.Mangos;
+using vMake.Database.Tables;
 
 namespace vMake.Database;
 

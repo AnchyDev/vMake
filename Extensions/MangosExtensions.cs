@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-using vMake.Database.Mangos;
+using vMake.Database.Tables;
 using vMake.Database.Types;
 
 namespace vMake.Extensions;
@@ -38,7 +38,7 @@ public static class MangosExtensions
 
     public static string GetBondingText(this MangosItemBonding bonding)
     {
-        switch(bonding)
+        switch (bonding)
         {
             case MangosItemBonding.BindOnPickup:
                 return "Binds when picked up";
@@ -48,6 +48,9 @@ public static class MangosExtensions
 
             case MangosItemBonding.BindOnUse:
                 return "Binds when used";
+
+            case MangosItemBonding.Quest:
+                return "Quest Item";
         }
 
         return bonding.ToString();
@@ -55,7 +58,7 @@ public static class MangosExtensions
 
     public static string GetInventoryTypeText(this MangosInventoryType invType)
     {
-        switch(invType)
+        switch (invType)
         {
             case MangosInventoryType.Weapon2H:
                 return "Two-Hand";
@@ -98,17 +101,17 @@ public static class MangosExtensions
         Type subClassType = itemClass switch
         {
             MangosItemClass.Consumable => typeof(MangosItemConsumableSubClass),
-            MangosItemClass.Container => typeof(MangosItemContainerSubclass),
-            MangosItemClass.Weapon => typeof(MangosItemWeaponSubclass),
-            MangosItemClass.Armor => typeof(MangosItemArmorSubclass),
-            MangosItemClass.Reagent => typeof(MangosItemReagentSubclass),
-            MangosItemClass.Projectile => typeof(MangosItemProjectileSubclass),
-            MangosItemClass.TradeGoods => typeof(MangosItemProjectileSubclass),
-            MangosItemClass.Recipe => typeof(MangosItemRecipeSubclass),
-            MangosItemClass.Quiver => typeof(MangosItemQuiverSubclass),
-            MangosItemClass.Quest => typeof(MangosItemQuestSubclass),
-            MangosItemClass.Key => typeof(MangosItemKeySubclass),
-            MangosItemClass.Miscellaneous => typeof(MangosItemMiscellaneousSubclass),
+            MangosItemClass.Container => typeof(MangosItemContainerSubClass),
+            MangosItemClass.Weapon => typeof(MangosItemWeaponSubClass),
+            MangosItemClass.Armor => typeof(MangosItemArmorSubClass),
+            MangosItemClass.Reagent => typeof(MangosItemReagentSubClass),
+            MangosItemClass.Projectile => typeof(MangosItemProjectileSubClass),
+            MangosItemClass.TradeGoods => typeof(MangosItemProjectileSubClass),
+            MangosItemClass.Recipe => typeof(MangosItemRecipeSubClass),
+            MangosItemClass.Quiver => typeof(MangosItemQuiverSubClass),
+            MangosItemClass.Quest => typeof(MangosItemQuestSubClass),
+            MangosItemClass.Key => typeof(MangosItemKeySubClass),
+            MangosItemClass.Miscellaneous => typeof(MangosItemMiscellaneousSubClass),
             _ => throw new NotImplementedException()
         };
 
@@ -143,50 +146,6 @@ public static class MangosExtensions
             new() { Type = (MangosItemStatType)item.StatType8, Value = item.StatValue8 },
             new() { Type = (MangosItemStatType)item.StatType9, Value = item.StatValue9 },
             new() { Type = (MangosItemStatType)item.StatType10, Value = item.StatValue10 }
-        };
-    }
-
-    public static MangosItemSpell GetSpellData(MangosItemSpell entry)
-    {
-        entry.Description = "Test";
-        return entry;
-    }
-
-    public static List<MangosItemSpell> GetSpells(this MangosItemTemplate item)
-    {
-        var spell1 = GetSpellData(new MangosItemSpell()
-        {
-            Entry = item.SpellId1,
-            Trigger = item.SpellTrigger1
-        });
-
-        var spell2 = GetSpellData(new MangosItemSpell()
-        {
-            Entry = item.SpellId2,
-            Trigger = item.SpellTrigger2
-        });
-
-        var spell3 = GetSpellData(new MangosItemSpell()
-        {
-            Entry = item.SpellId3,
-            Trigger = item.SpellTrigger3
-        });
-
-        var spell4 = GetSpellData(new MangosItemSpell()
-        {
-            Entry = item.SpellId4,
-            Trigger = item.SpellTrigger4
-        });
-
-        var spell5 = GetSpellData(new MangosItemSpell()
-        {
-            Entry = item.SpellId5,
-            Trigger = item.SpellTrigger5
-        });
-
-        return new List<MangosItemSpell>()
-        {
-            spell1, spell2, spell3, spell4, spell5
         };
     }
 

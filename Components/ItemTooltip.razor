@@ -1,0 +1,58 @@
+﻿@using vMake.Database.Types
+@using vMake.Extensions
+
+@if(this.Template is not null)
+{
+    <div class="vmake-item-tooltip">
+        <span id="tooltip-name" style="color: #@(this.Template.Quality.GetHexColor())">@this.Template.Name</span>
+
+        <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @this.Template.ItemLevel</span>
+
+        <span id="tooltip-bonding" class="@(this.Template.Bonding == MangosItemBonding.None ? "hide" : "")">@this.Template.Bonding.GetBondingText()</span>
+
+        <div class="tooltip-multiline" style="display: flex; flex-direction: row">
+            <span style="flex: 1;" id="tooltip-invtype" class="@(this.Template.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">@this.Template.InventoryType.GetInventoryTypeText()</span>
+            <span style="flex: 1;text-align: end;" id="tooltip-isubclass"></span>
+        </div>
+
+        <span id="tooltip-armor" class="@(this.Template.Armor < 1 ? "hide" : "")">@this.Template.Armor Armor</span>
+
+        @{
+            var stats = this.Template.GetStats();
+
+            var index = 1;
+            foreach (var stat in stats)
+            {
+                <div id="tooltip-stat-@(index)" class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
+                    <span id="tooltip-stat-value-@(index)">@(stat.Value > 0 ? "+" : "")@stat.Value</span>
+                    <span id="tooltip-stat-type-@(index)">@stat.Type</span>
+                </div>
+
+                index++;
+            }
+        }
+
+        <span id="tooltip-reqlevel" class="@(this.Template.RequiredLevel < 1 ? "hide" : "")">Requires Level @this.Template.RequiredLevel</span>
+
+        @{
+            foreach(var spell in Spells)
+            {
+                if(spell.Entry == 0)
+                {
+                    continue;
+                }
+
+                <div style="color: #00FF00">
+                    <span>@spell.Trigger.GetTriggerText(): </span>
+                    <span>@spell.Description</span>
+                </div>
+            }
+        }
+
+        <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.Description) ? "hide" : "")">"@this.Template.Description"</span>
+    </div>
+}
+else
+{
+    <span class="alert-danger">Tooltip Template is null.</span>
+}

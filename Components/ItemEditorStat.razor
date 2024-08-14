@@ -1,0 +1,75 @@
+﻿@using System.Diagnostics
+@using vMake.Database.Types
+
+@code {
+    [Parameter]
+    public int StatValue { get; set; }
+
+    [Parameter]
+    public MangosItemStatType StatType { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnValueChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<MangosItemStatType> OnTypeChanged { get; set; }
+
+    private void OnStatValueChanged(ChangeEventArgs e)
+    {
+        if (OnValueChanged.HasDelegate && 
+            int.TryParse(e.Value as string, out int newValue))
+        {
+            OnValueChanged.InvokeAsync(newValue);
+        }
+    }
+
+    private void OnStatTypeChanged(ChangeEventArgs e)
+    {
+        if(OnTypeChanged.HasDelegate && 
+                Enum.TryParse(typeof(MangosItemStatType), e.Value as string, out object? newType))
+        {
+            OnTypeChanged.InvokeAsync((MangosItemStatType)newType);
+        }
+    }
+}
+
+<div class="editor-group-item">
+    <span style="align-self: center">Stat 1</span>
+    <label>
+        Type
+        <InputSelect @bind-Value="StatType" @oninput="OnStatTypeChanged">
+            <option checked="@(StatType == MangosItemStatType.None)"
+                    value="@MangosItemStatType.None">
+                None
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Health)"
+                    value="@MangosItemStatType.Health">
+                Health
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Agility)"
+                    value="@MangosItemStatType.Agility">
+                Agility
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Strength)"
+                    value="@MangosItemStatType.Strength">
+                Strength
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Intellect)"
+                    value="@MangosItemStatType.Intellect">
+                Intellect
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Spirit)"
+                    value="@MangosItemStatType.Spirit">
+                Spirit
+            </option>
+            <option checked="@(StatType == MangosItemStatType.Stamina)"
+                    value="@MangosItemStatType.Stamina">
+                Stamina
+            </option>
+        </InputSelect>
+    </label>
+    <label>
+        Value
+        <InputNumber @bind-Value="StatValue" @oninput="OnStatValueChanged" />
+    </label>
+</div>
