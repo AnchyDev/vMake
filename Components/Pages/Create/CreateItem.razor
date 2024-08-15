@@ -2,33 +2,23 @@
 
 <h3>Create</h3>
 
-<form class="vmake-form" method="POST" @onsubmit="OnPostAsync" @formname="form-item-create">
-    <AntiforgeryToken/>
+<div style="display: flex; flex-direction: column; gap: 0.5rem">
+    <label style="display: flex; flex-direction: column">
+        <span>
+            Entry
+        </span>
+        <InputNumber @bind-Value="Entry" class="vmake-input"/>
+    </label>
 
-    <div class="vmake-form-item">
-        <label style="display: flex; flex-direction: column">
-            <span>
-                Entry
-            </span>
-            <InputNumber @bind-Value="Entry" class="vmake-input"/>
-        </label>
-    </div>
+    <label style="display: flex; flex-direction: column">
+        <span>Patch</span>
+        <InputNumber @bind-Value="Patch" class="vmake-input"/>
+    </label>
 
-    <div class="vmake-form-item">
-        <label style="display: flex; flex-direction: column">
-            <span>Patch</span>
-            <InputNumber @bind-Value="Patch" class="vmake-input"/>
-        </label>
-    </div>
-
-    <div class="vmake-form-item">
-        <button class="vmake-button-primary" type="submit">Create</button>
-    </div>
+    <button class="vmake-button-primary" @onclick="CreateItemAsync">Create</button>
 
     @if (!string.IsNullOrWhiteSpace(this.Error))
     {
-        <div class="vmake-form-item">
-            <span class="vmake-alert-error">@this.Error</span>
-        </div>
+        <span class="vmake-alert-error">@this.Error</span>
     }
-</form>
+</div>

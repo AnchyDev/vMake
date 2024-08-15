@@ -8,10 +8,8 @@ namespace vMake.Components.Pages.Create;
 
 public partial class CreateItem
 {
-    [SupplyParameterFromForm]
     public int Entry { get; set; }
 
-    [SupplyParameterFromForm]
     public int Patch { get; set; }
 
     protected string? Error { get; private set; }
@@ -25,7 +23,7 @@ public partial class CreateItem
     [Inject]
     protected NavigationManager Navigation { get; set; } = default!;
 
-    private async Task OnPostAsync()
+    private async Task CreateItemAsync()
     {
         Error = "";
 
