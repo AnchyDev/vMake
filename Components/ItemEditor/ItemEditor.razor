@@ -1,5 +1,6 @@
 ﻿@using vMake.Database.Types
 @using vMake.Extensions
+
 <div class="vmake-panel-h">
     <div class="editor-group-vertical" style="flex: 7">
         <div class="editor-group-horizontal">
@@ -153,127 +154,33 @@
         <div class="editor-group-horizontal">
             <div class="editor-group-item">
                 <span style="align-self: center">Spell 1</span>
-                <label>
-                    Id
-                    <InputNumber @bind-Value="Template!.SpellId1"></InputNumber>
-                </label>
-                <label>
-                    Trigger
-                    <InputSelect @bind-Value="Template!.SpellTrigger1" >
-                        <option checked="@(Template.SpellTrigger1 == MangosItemSpellTrigger.OnUse)"
-                                value="@MangosItemSpellTrigger.OnUse">
-                            On Use
-                        </option>
-                        <option checked="@(Template.SpellTrigger1 == MangosItemSpellTrigger.OnEquip)"
-                                value="@MangosItemSpellTrigger.OnEquip">
-                            On Equip
-                        </option>
-                        <option checked="@(Template.SpellTrigger1 == MangosItemSpellTrigger.ChanceOnHit)"
-                                value="@MangosItemSpellTrigger.ChanceOnHit">
-                            Chance on Hit
-                        </option>
-                    </InputSelect>
-                </label>
+                <ItemEditorSpell SpellEntry="Template.SpellId1" SpellTrigger="Template.SpellTrigger1"
+                                SpellEntryChanged="value => Template.SpellId1 = value"
+                                SpellTriggerChanged="type => Template.SpellTrigger1 = type" />
             </div>
-
             <div class="editor-group-item">
                 <span style="align-self: center">Spell 2</span>
-                <label>
-                    Id
-                    <InputNumber @bind-Value="Template!.SpellId2"></InputNumber>
-                </label>
-                <label>
-                    Trigger
-                    <InputSelect @bind-Value="Template!.SpellTrigger2">
-                        <option checked="@(Template.SpellTrigger2 == MangosItemSpellTrigger.OnUse)"
-                                value="@MangosItemSpellTrigger.OnUse">
-                            On Use
-                        </option>
-                        <option checked="@(Template.SpellTrigger2 == MangosItemSpellTrigger.OnEquip)"
-                                value="@MangosItemSpellTrigger.OnEquip">
-                            On Equip
-                        </option>
-                        <option checked="@(Template.SpellTrigger2 == MangosItemSpellTrigger.ChanceOnHit)"
-                                value="@MangosItemSpellTrigger.ChanceOnHit">
-                            Chance on Hit
-                        </option>
-                    </InputSelect>
-                </label>
+                <ItemEditorSpell SpellEntry="Template.SpellId2" SpellTrigger="Template.SpellTrigger2"
+                                 SpellEntryChanged="value => Template.SpellId2 = value"
+                                 SpellTriggerChanged="type => Template.SpellTrigger2 = type" />
             </div>
-
             <div class="editor-group-item">
                 <span style="align-self: center">Spell 3</span>
-                <label>
-                    Id
-                    <InputNumber @bind-Value="Template!.SpellId3"></InputNumber>
-                </label>
-                <label>
-                    Trigger
-                    <InputSelect @bind-Value="Template!.SpellTrigger3" >
-                        <option checked="@(Template.SpellTrigger3 == MangosItemSpellTrigger.OnUse)"
-                                value="@MangosItemSpellTrigger.OnUse">
-                            On Use
-                        </option>
-                        <option checked="@(Template.SpellTrigger3 == MangosItemSpellTrigger.OnEquip)"
-                                value="@MangosItemSpellTrigger.OnEquip">
-                            On Equip
-                        </option>
-                        <option checked="@(Template.SpellTrigger3 == MangosItemSpellTrigger.ChanceOnHit)"
-                                value="@MangosItemSpellTrigger.ChanceOnHit">
-                            Chance on Hit
-                        </option>
-                    </InputSelect>
-                </label>
+                <ItemEditorSpell SpellEntry="Template.SpellId3" SpellTrigger="Template.SpellTrigger3"
+                                 SpellEntryChanged="value => Template.SpellId3 = value"
+                                 SpellTriggerChanged="type => Template.SpellTrigger3 = type" />
             </div>
-
             <div class="editor-group-item">
                 <span style="align-self: center">Spell 4</span>
-                <label>
-                    Id
-                    <InputNumber @bind-Value="Template!.SpellId4"></InputNumber>
-                </label>
-                <label>
-                    Trigger
-                    <InputSelect @bind-Value="Template!.SpellTrigger4" >
-                        <option checked="@(Template.SpellTrigger4 == MangosItemSpellTrigger.OnUse)"
-                                value="@MangosItemSpellTrigger.OnUse">
-                            On Use
-                        </option>
-                        <option checked="@(Template.SpellTrigger4 == MangosItemSpellTrigger.OnEquip)"
-                                value="@MangosItemSpellTrigger.OnEquip">
-                            On Equip
-                        </option>
-                        <option checked="@(Template.SpellTrigger4 == MangosItemSpellTrigger.ChanceOnHit)"
-                                value="@MangosItemSpellTrigger.ChanceOnHit">
-                            Chance on Hit
-                        </option>
-                    </InputSelect>
-                </label>
+                <ItemEditorSpell SpellEntry="Template.SpellId4" SpellTrigger="Template.SpellTrigger4"
+                                SpellEntryChanged="value => Template.SpellId4 = value"
+                                SpellTriggerChanged="type => Template.SpellTrigger4 = type" />
             </div>
-
             <div class="editor-group-item">
                 <span style="align-self: center">Spell 5</span>
-                <label>
-                    Id
-                    <InputNumber @bind-Value="Template!.SpellId5"></InputNumber>
-                </label>
-                <label>
-                    Trigger
-                    <InputSelect @bind-Value="Template!.SpellTrigger5">
-                        <option checked="@(Template.SpellTrigger5 == MangosItemSpellTrigger.OnUse)"
-                                value="@MangosItemSpellTrigger.OnUse">
-                            On Use
-                        </option>
-                        <option checked="@(Template.SpellTrigger5 == MangosItemSpellTrigger.OnEquip)"
-                                value="@MangosItemSpellTrigger.OnEquip">
-                            On Equip
-                        </option>
-                        <option checked="@(Template.SpellTrigger5 == MangosItemSpellTrigger.ChanceOnHit)"
-                                value="@MangosItemSpellTrigger.ChanceOnHit">
-                            Chance on Hit
-                        </option>
-                    </InputSelect>
-                </label>
+                <ItemEditorSpell SpellEntry="Template.SpellId5" SpellTrigger="Template.SpellTrigger5"
+                                 SpellEntryChanged="value => Template.SpellId5 = value"
+                                 SpellTriggerChanged="type => Template.SpellTrigger5 = type" />
             </div>
         </div>
 

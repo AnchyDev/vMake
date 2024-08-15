@@ -1,0 +1,58 @@
+﻿@using System.Diagnostics
+@using vMake.Database.Types
+
+@code {
+    [Parameter]
+    public int SpellEntry { get; set; }
+
+    [Parameter]
+    public MangosItemSpellTrigger SpellTrigger { get; set; }
+
+    [Parameter]
+    public EventCallback<int> SpellEntryChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<MangosItemSpellTrigger> SpellTriggerChanged { get; set; }
+
+    private void OnSpellEntryChanged(ChangeEventArgs e)
+    {
+        if (SpellEntryChanged.HasDelegate &&
+            int.TryParse(e.Value as string, out int newValue))
+        {
+            SpellEntryChanged.InvokeAsync(newValue);
+        }
+    }
+
+    private void OnSpellTriggerChanged(ChangeEventArgs e)
+    {
+        if (SpellTriggerChanged.HasDelegate &&
+                Enum.TryParse(typeof(MangosItemSpellTrigger), e.Value as string, out object? newType))
+        {
+            SpellTriggerChanged.InvokeAsync((MangosItemSpellTrigger)newType);
+        }
+    }
+}
+
+<div class="editor-group-item">
+    <label>
+        Entry
+        <InputNumber @bind-Value="SpellEntry" @oninput="OnSpellEntryChanged" />
+    </label>
+    <label>
+        Trigger
+        <InputSelect @bind-Value="SpellTrigger" @oninput="OnSpellTriggerChanged">
+            <option checked="@(SpellTrigger == MangosItemSpellTrigger.OnUse)"
+                    value="@MangosItemSpellTrigger.OnUse">
+                On Use
+            </option>
+            <option checked="@(SpellTrigger == MangosItemSpellTrigger.OnEquip)"
+                    value="@MangosItemSpellTrigger.OnEquip">
+                On Equip
+            </option>
+            <option checked="@(SpellTrigger == MangosItemSpellTrigger.ChanceOnHit)"
+                    value="@MangosItemSpellTrigger.ChanceOnHit">
+                Chance on Hit
+            </option>
+        </InputSelect>
+    </label>
+</div>

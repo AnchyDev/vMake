@@ -3,7 +3,7 @@
 using vMake.Database;
 using vMake.Database.Tables;
 
-namespace vMake.Components;
+namespace vMake.Components.ItemEditor;
 
 public partial class ItemEditor
 {

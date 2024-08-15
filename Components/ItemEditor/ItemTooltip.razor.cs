@@ -5,7 +5,7 @@ using vMake.Database;
 using vMake.Database.Tables;
 using vMake.Database.Types;
 
-namespace vMake.Components;
+namespace vMake.Components.ItemEditor;
 
 public partial class ItemTooltip
 {
