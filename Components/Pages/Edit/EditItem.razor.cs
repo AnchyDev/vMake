@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 
+using System.Text;
+using System.Text.Json;
+
+using vMake.Database.Tables;
+
 namespace vMake.Components.Pages.Edit;
 
 public partial class EditItem
@@ -18,15 +23,38 @@ public partial class EditItem
 
     protected string? Error { get; set; }
 
-    private void NavigateToProperRoute()
+    private void HandleBase64()
     {
-        if(Entry is not null && Patch is not null)
+        if(string.IsNullOrWhiteSpace(Import))
         {
-            Navigation.NavigateTo($"/edit/item/{Entry}/{Patch}");
+            Error = "You must enter a base64 string exported from an item.";
+            return;
         }
-        else if(Import is not null)
+
+        try
         {
-            Navigation.NavigateTo($"/edit/item/{Import}");
+            var data = Convert.FromBase64String(Import);
+            var json = Encoding.UTF8.GetString(data);
+
+            _ = JsonSerializer.Deserialize<MangosItemTemplate>(json);
         }
+        catch(Exception)
+        {
+            Error = "Invalid import string.";
+            return;
+        }
+
+        Navigation.NavigateTo($"/edit/item/{Import}");
+    }
+
+    private void HandleEntryPatch()
+    {
+        if (Entry is null && Patch is null)
+        {
+            Error = "You must enter an entry and patch.";
+            return;
+        }
+
+        Navigation.NavigateTo($"/edit/item/{Entry}/{Patch}");
     }
 }
