@@ -18,6 +18,16 @@ public partial class ItemEditor
 
     public string Status { get; set; } = "";
 
+    private enum ItemEditorTab
+    {
+        General,
+        Stats,
+        Spells,
+        Save
+    }
+
+    private ItemEditorTab currentTab = ItemEditorTab.General;
+
     private async void UpdateItemAsync()
     {
         try

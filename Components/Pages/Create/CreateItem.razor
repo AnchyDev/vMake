@@ -6,14 +6,18 @@
     <AntiforgeryToken/>
 
     <div class="vmake-form-item">
-        <label>
-            Entry <InputNumber @bind-Value="Entry"/>
+        <label style="display: flex; flex-direction: column">
+            <span>
+                Entry
+            </span>
+            <InputNumber @bind-Value="Entry" class="vmake-input"/>
         </label>
     </div>
 
     <div class="vmake-form-item">
-        <label>
-            Patch <InputNumber @bind-Value="Patch" />
+        <label style="display: flex; flex-direction: column">
+            <span>Patch</span>
+            <InputNumber @bind-Value="Patch" class="vmake-input"/>
         </label>
     </div>
 

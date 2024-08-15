@@ -34,13 +34,13 @@
 }
 
 <div class="editor-group-item">
-    <label>
-        Entry
-        <InputNumber @bind-Value="SpellEntry" @oninput="OnSpellEntryChanged" />
+    <label style="display: flex; flex-direction: column">
+        <span>Entry</span>
+        <InputNumber @bind-Value="SpellEntry" @oninput="OnSpellEntryChanged" class="vmake-input" />
     </label>
-    <label>
-        Trigger
-        <InputSelect @bind-Value="SpellTrigger" @oninput="OnSpellTriggerChanged">
+    <label style="display: flex; flex-direction: column">
+        <span>Trigger</span>
+        <InputSelect @bind-Value="SpellTrigger" @oninput="OnSpellTriggerChanged" class="vmake-input">
             <option checked="@(SpellTrigger == MangosItemSpellTrigger.OnUse)"
                     value="@MangosItemSpellTrigger.OnUse">
                 On Use

@@ -34,9 +34,9 @@
 }
 
 <div class="editor-group-item">
-    <label>
-        Type
-        <InputSelect @bind-Value="StatType" @oninput="OnStatTypeChanged">
+    <label style="display: flex; flex-direction: column">
+        <span>Type</span>
+        <InputSelect @bind-Value="StatType" @oninput="OnStatTypeChanged" class="vmake-input">
             <option checked="@(StatType == MangosItemStatType.None)"
                     value="@MangosItemStatType.None">
                 None
@@ -67,8 +67,8 @@
             </option>
         </InputSelect>
     </label>
-    <label>
-        Value
-        <InputNumber @bind-Value="StatValue" @oninput="OnStatValueChanged" />
+    <label style="display: flex; flex-direction: column">
+        <span>Value</span>
+        <InputNumber @bind-Value="StatValue" @oninput="OnStatValueChanged" class="vmake-input" />
     </label>
 </div>

@@ -18,8 +18,27 @@
     display: flex;
     flex-direction: column;
 
-    background-color: rgb(243, 243, 243);
-    border: 1px solid rgb(229, 229, 229);
+    gap: 0.5rem;
+}
 
-    padding: 0.5rem;
+.tab-button {
+    color: white;
+    background-color: rgb(0, 128, 255);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    min-width: 4rem;
+    padding: 0.25rem;
+
+    transition: background-color 0.5s;
+}
+.tab-button:hover {
+    background-color: rgb(0, 160, 255);
+}
+.tab-button:active {
+    background-color: rgb(0, 90, 200);
+}
+.tab-button.active {
+    background-color: rgb(0, 50, 100);
 }

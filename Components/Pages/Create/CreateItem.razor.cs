@@ -63,6 +63,6 @@ public partial class CreateItem
             return;
         }
 
-        Navigation.NavigateTo("/edit/item");
+        Navigation.NavigateTo($"/edit/item/{Entry}/{Patch}");
     }
 }
