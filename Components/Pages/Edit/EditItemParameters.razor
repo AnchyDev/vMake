@@ -1,0 +1,18 @@
+﻿@page "/edit/item/{Entry:int?}/{Patch:int?}"
+@page "/edit/item/{Import?}"
+
+@using vMake.Components.ItemEditor
+
+@if(ItemTemplate is null)
+{
+    <span>Loading Item..</span>
+}
+else
+{
+    <ItemEditor Template="@ItemTemplate"/>
+}
+
+@if(Error is not null)
+{
+    <span class="alert-danger">@Error</span>
+}

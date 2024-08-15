@@ -2,40 +2,35 @@
 
 @using vMake.Components.ItemEditor
 
-@if (ItemTemplate is null)
+
+<div style="display: flex; flex-direction: column; gap: 1rem">
+    <div style="display: flex; flex-direction: row; gap: 0.5rem">
+        <label style="display: flex; flex-direction: column">
+            <span>Entry</span>
+            <InputNumber @bind-Value="Entry" placeholder="Enter entry" />
+        </label>
+
+        <label style="display: flex; flex-direction: column">
+            <span>Patch</span>
+            <InputNumber @bind-Value="Patch" placeholder="Enter patch" />
+        </label>
+
+        <button @onclick="NavigateToProperRoute">Edit</button>
+    </div>
+
+    <span style="font-weight: bold; font-size: 1rem">or</span>
+
+    <div style="display:flex; flex-direction: column; gap: 0.5rem">
+        <label style="display: flex; flex-direction: column">
+            <span>Import Base64 String</span>
+            <InputText @bind-Value="Import" placeholder="Enter base64 string" />
+        </label>
+
+        <button @onclick="NavigateToProperRoute">Import</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Error))
 {
-    <h3>Enter an item entry & patch</h3>
-
-    <form class="vmake-form" method="POST" @onsubmit="OnPostFindAsync" @formname="form-item-edit-find">
-        <AntiforgeryToken />
-
-        <div class="vmake-form-item">
-            <label>
-                Entry <InputNumber @bind-Value="Entry" />
-            </label>
-        </div>
-
-        <div class="vmake-form-item">
-            <label>
-                Patch <InputNumber @bind-Value="Patch" />
-            </label>
-        </div>
-
-        <div class="vmake-form-item">
-            <button class="vmake-button-primary" type="submit">Edit</button>
-        </div>
-
-        @if (!string.IsNullOrWhiteSpace(this.Error))
-        {
-            <div class="vmake-form-item">
-                <span class="vmake-alert-error">@this.Error</span>
-            </div>
-        }
-    </form>
-}
-else
-{
-    <button @onclick="GoBack">Back</button>
-    <h3>Editing item @ItemTemplate.Entry</h3>
-    <ItemEditor Template="@ItemTemplate"/>
+    <span class="alert-danger">@Error</span>
 }

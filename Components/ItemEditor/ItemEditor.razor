@@ -3,6 +3,8 @@
 
 <div class="vmake-panel-h">
     <div class="editor-group-vertical" style="flex: 7">
+        <span class="alert-info">@Status</span>
+
         <div class="editor-group-horizontal">
             <label class="editor-group-item">
                 Name: <InputText @bind-Value="Template!.Name" />
@@ -186,7 +188,11 @@
 
         <button @onclick="UpdateItemAsync">Update</button>
 
-        <span class="alert-info">@Status</span>
+        <label class="editor-group-item">
+            <span>Export</span>
+            <InputText @bind-Value="Export" placeholder="Export string" />
+            <button @onclick="ExportTemplate">Generate</button>
+        </label>
     </div>
     <div style="flex: 3">
         <ItemTooltip Template="Template" />

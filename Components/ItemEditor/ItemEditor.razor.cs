@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-
+using System.Text;
+using System.Text.Json;
 using vMake.Database;
 using vMake.Database.Tables;
 
@@ -12,6 +13,8 @@ public partial class ItemEditor
 
     [Inject]
     protected MangosDbContext DbContext { get; set; } = default!;
+
+    public string? Export { get; private set; }
 
     public string Status { get; set; } = "";
 
@@ -31,6 +34,21 @@ public partial class ItemEditor
         catch(Exception ex)
         {
             Status = $"An error occured during save: {ex.Message}";
+        }
+    }
+
+    private void ExportTemplate()
+    {
+        try
+        {
+            var json = JsonSerializer.Serialize(Template);
+            Export = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
+
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            Status = $"Failed to generate export string: {ex.Message}";
         }
     }
 }
