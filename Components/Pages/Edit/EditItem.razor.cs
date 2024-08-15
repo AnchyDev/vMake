@@ -5,10 +5,10 @@ namespace vMake.Components.Pages.Edit;
 public partial class EditItem
 {
     [Parameter]
-    public int? Entry { get; set; }
+    public int? Entry { get; set; } = 0;
 
     [Parameter]
-    public int? Patch { get; set; }
+    public int? Patch { get; set; } = 0;
 
     [Parameter]
     public string? Import { get; set; }
