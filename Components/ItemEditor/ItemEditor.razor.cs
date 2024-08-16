@@ -35,7 +35,7 @@ public partial class ItemEditor
         try
         {
             // Re-attach the cloned entity so we can update the original.
-            var entity = DbContext.Attach(Template);
+            var entity = DbContext.Attach(Template.ItemTemplate);
             entity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             await DbContext.SaveChangesAsync();
