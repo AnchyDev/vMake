@@ -124,7 +124,7 @@ public static class MangosExtensions
             MangosItemClass.Armor => typeof(MangosItemArmorSubClass),
             MangosItemClass.Reagent => typeof(MangosItemReagentSubClass),
             MangosItemClass.Projectile => typeof(MangosItemProjectileSubClass),
-            MangosItemClass.TradeGoods => typeof(MangosItemProjectileSubClass),
+            MangosItemClass.TradeGoods => typeof(MangosItemTradeGoodsSubClass),
             MangosItemClass.Recipe => typeof(MangosItemRecipeSubClass),
             MangosItemClass.Quiver => typeof(MangosItemQuiverSubClass),
             MangosItemClass.Quest => typeof(MangosItemQuestSubClass),
@@ -148,6 +148,110 @@ public static class MangosExtensions
         }
 
         return kvp;
+    }
+
+    public static string GetSubClassText(this MangosItemClass itemClass, int itemSubClass)
+    {
+        switch(itemClass)
+        {
+            case MangosItemClass.Consumable:
+                return GetSubClassConsumableText((MangosItemConsumableSubClass)itemSubClass);
+
+            case MangosItemClass.Container:
+                return GetSubClassContainerText((MangosItemContainerSubClass)itemSubClass);
+
+            case MangosItemClass.Weapon:
+                return GetSubClassWeaponText((MangosItemWeaponSubClass)itemSubClass);
+
+            case MangosItemClass.Armor:
+                return GetSubClassArmorText((MangosItemArmorSubClass)itemSubClass);
+
+            case MangosItemClass.Reagent:
+                return GetSubClassReagentText((MangosItemReagentSubClass)itemSubClass);
+
+            case MangosItemClass.Projectile:
+                return GetSubClassProjectileText((MangosItemProjectileSubClass)itemSubClass);
+
+            case MangosItemClass.TradeGoods:
+                return GetSubClassTradeGoodsText((MangosItemTradeGoodsSubClass)itemSubClass);
+
+            case MangosItemClass.Recipe:
+                return GetSubClassRecipeText((MangosItemRecipeSubClass)itemSubClass);
+
+            case MangosItemClass.Quiver:
+                return GetSubClassQuiverText((MangosItemQuiverSubClass)itemSubClass);
+
+            case MangosItemClass.Quest:
+                return GetSubClassQuestText((MangosItemQuestSubClass)itemSubClass);
+
+            case MangosItemClass.Key:
+                return GetSubClassKeyText((MangosItemKeySubClass)itemSubClass);
+
+            case MangosItemClass.Miscellaneous:
+                return GetSubClassMiscellaneousText((MangosItemMiscellaneousSubClass)itemSubClass);
+        }
+
+        return "";
+    }
+
+    public static string GetSubClassConsumableText(this MangosItemConsumableSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassContainerText(this MangosItemContainerSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassWeaponText(this MangosItemWeaponSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassArmorText(this MangosItemArmorSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassReagentText(this MangosItemReagentSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassProjectileText(this MangosItemProjectileSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassTradeGoodsText(this MangosItemTradeGoodsSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassRecipeText(this MangosItemRecipeSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassQuiverText(this MangosItemQuiverSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassQuestText(this MangosItemQuestSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassKeyText(this MangosItemKeySubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
+    }
+
+    public static string GetSubClassMiscellaneousText(this MangosItemMiscellaneousSubClass itemSubClass)
+    {
+        return itemSubClass.ToString();
     }
 
     public static List<MangosItemStat> GetStats(this MangosItemTemplate item)

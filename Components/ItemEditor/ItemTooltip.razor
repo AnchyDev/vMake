@@ -4,18 +4,30 @@
 @if(this.Template is not null)
 {
     <div class="vmake-item-tooltip">
-        <span id="tooltip-name" style="color: #@(this.Template.ItemTemplate.Quality.GetHexColor())">@this.Template.ItemTemplate.Name</span>
+        <span id="tooltip-name" style="color: #@(this.Template.ItemTemplate.Quality.GetHexColor())">
+            @this.Template.ItemTemplate.Name
+        </span>
 
-        <span id="tooltip-itemlevel" style="color: #E3BF00">Item Level @this.Template.ItemTemplate.ItemLevel</span>
+        <span id="tooltip-itemlevel" style="color: #E3BF00">
+            Item Level @this.Template.ItemTemplate.ItemLevel
+        </span>
 
-        <span id="tooltip-bonding" class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">@this.Template.ItemTemplate.Bonding.GetBondingText()</span>
+        <span id="tooltip-bonding" class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">
+            @this.Template.ItemTemplate.Bonding.GetBondingText()
+        </span>
 
         <div class="tooltip-multiline" style="display: flex; flex-direction: row">
-            <span style="flex: 1;" id="tooltip-invtype" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">@this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()</span>
-            <span style="flex: 1;text-align: end;" id="tooltip-isubclass"></span>
+            <span style="flex: 1;" id="tooltip-invtype" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                @this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()
+            </span>
+            <span style="flex: 1;text-align: end;">
+                @this.Template.ItemTemplate.ItemClass.GetSubClassText(this.Template.ItemTemplate.ItemSubClass)
+            </span>
         </div>
 
-        <span id="tooltip-armor" class="@(this.Template.ItemTemplate.Armor < 1 ? "hide" : "")">@this.Template.ItemTemplate.Armor Armor</span>
+        <span id="tooltip-armor" class="@(this.Template.ItemTemplate.Armor < 1 ? "hide" : "")">
+            @this.Template.ItemTemplate.Armor Armor
+        </span>
 
         @{
             var stats = this.Template.ItemTemplate.GetStats();
@@ -29,7 +41,9 @@
             }
         }
 
-        <span id="tooltip-reqlevel" class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">Requires Level @this.Template.ItemTemplate.RequiredLevel</span>
+        <span id="tooltip-reqlevel" class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">
+            Requires Level @this.Template.ItemTemplate.RequiredLevel
+        </span>
 
         @{
             var spells = this.Template.ItemTemplate.GetSpells(DbContext);
@@ -58,7 +72,9 @@
             }
         }
 
-        <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">"@this.Template.ItemTemplate.Description"</span>
+        <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">
+            "@this.Template.ItemTemplate.Description"
+        </span>
     </div>
 }
 else
