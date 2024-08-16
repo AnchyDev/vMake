@@ -57,10 +57,24 @@ public static class MangosExtensions
         return bonding.ToString();
     }
 
+    public static string GetItemClassText(this MangosItemClass itemClass)
+    {
+        switch (itemClass)
+        {
+            case MangosItemClass.TradeGoods:
+                return "Trade Goods";
+        }
+
+        return itemClass.ToString();
+    }
+
     public static string GetInventoryTypeText(this MangosInventoryType invType)
     {
         switch (invType)
         {
+            case MangosInventoryType.NotEquipable:
+                return "Not Equipable";
+
             case MangosInventoryType.Weapon2H:
                 return "Two-Hand";
 
@@ -69,6 +83,9 @@ public static class MangosExtensions
 
             case MangosInventoryType.WeaponOffHand:
                 return "Off Hand";
+
+            case MangosInventoryType.Cloak:
+                return "Back";
         }
 
         return invType.ToString();

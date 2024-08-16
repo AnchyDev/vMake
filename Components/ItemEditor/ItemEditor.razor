@@ -22,74 +22,94 @@
                     </span>
                     <InputText @bind-Value="Template!.ItemTemplate.Name" class="vmake-input" />
                 </label>
+
                 <label class="editor-group-item">
                     <span>Description</span>
                     <InputText @bind-Value="Template!.ItemTemplate.Description" class="vmake-input" />
                 </label>
+
                 <label class="editor-group-item">
                     <span>Item Level</span>
                     <InputNumber @bind-Value="Template!.ItemTemplate.ItemLevel" class="vmake-input" />
                 </label>
+
                 <label class="editor-group-item">
                     <span>Required Level</span>
                     <InputNumber @bind-Value="Template!.ItemTemplate.RequiredLevel" class="vmake-input" />
                 </label>
+
                 <label class="editor-group-item">
                     <span>Bonding</span>
                     <InputSelect @bind-Value="Template!.ItemTemplate.Bonding" class="vmake-input">
-                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.None)"
-                                value="@MangosItemBonding.None">
-                            None
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnPickup)"
-                                value="@MangosItemBonding.BindOnPickup">
-                            Bind on Pickup
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnEquip)"
-                                value="@MangosItemBonding.BindOnEquip">
-                            Bind on Equip
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnUse)"
-                                value="@MangosItemBonding.BindOnUse">
-                            Bind on Use
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.Quest)"
-                                value="@MangosItemBonding.Quest">
-                            Quest Item
-                        </option>
+                        @{
+                            foreach (MangosItemBonding bonding in Enum.GetValues(typeof(MangosItemBonding)))
+                            {
+                                <option checked="@(Template.ItemTemplate.Bonding == bonding)"
+                                        value="@bonding">
+                                    @bonding.GetBondingText()
+                                </option>
+                            }
+                        }
                     </InputSelect>
                 </label>
+
                 <label class="editor-group-item">
                     <span>Quality</span>
                     <InputSelect @bind-Value="Template!.ItemTemplate.Quality" class="vmake-input">
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Poor)"
-                                value="@MangosItemQuality.Poor">
-                            Poor
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Common)"
-                                value="@MangosItemQuality.Common">
-                            Common
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Uncommon)"
-                                value="@MangosItemQuality.Uncommon">
-                            Uncommon
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Rare)"
-                                value="@MangosItemQuality.Rare">
-                            Rare
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Epic)"
-                                value="@MangosItemQuality.Epic">
-                            Epic
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Legendary)"
-                                value="@MangosItemQuality.Legendary">
-                            Legendary
-                        </option>
-                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Artifact)"
-                                value="@MangosItemQuality.Artifact">
-                            Artifact
-                        </option>
+                        @{
+                            foreach (MangosItemQuality quality in Enum.GetValues(typeof(MangosItemQuality)))
+                            {
+                                <option checked="@(Template.ItemTemplate.Quality == quality)"
+                                        value="@quality">
+                                    @quality.ToString()
+                                </option>
+                            }
+                        }
+                    </InputSelect>
+                </label>
+
+                <label class="editor-group-item">
+                    <span>Inventory Type</span>
+                    <InputSelect @bind-Value="Template!.ItemTemplate.InventoryType" class="vmake-input">
+                        @{
+                            foreach (MangosInventoryType invType in Enum.GetValues(typeof(MangosInventoryType)))
+                            {
+                                <option checked="@(Template.ItemTemplate.InventoryType == invType)"
+                                        value="@invType">
+                                    @invType.GetInventoryTypeText()
+                                </option>
+                            }
+                        }
+                    </InputSelect>
+                </label>
+
+                <label class="editor-group-item">
+                    <span>Class</span>
+                    <InputSelect @bind-Value="Template!.ItemTemplate.ItemClass" class="vmake-input">
+                        @{
+                            foreach (MangosItemClass itemClass in Enum.GetValues(typeof(MangosItemClass)))
+                            {
+                                <option checked="@(Template.ItemTemplate.ItemClass == itemClass)"
+                                        value="@itemClass">
+                                    @itemClass.ToString()
+                                </option>
+                            }
+                        }
+                    </InputSelect>
+                </label>
+
+                <label class="editor-group-item">
+                    <span>Sub Class</span>
+                    <InputSelect @bind-Value="Template!.ItemTemplate.ItemClass" class="vmake-input">
+                        @{
+                            foreach (var subClass in Template.ItemTemplate.ItemClass.GetSubClass())
+                            {
+                                <option checked="@((int)Template.ItemTemplate.ItemSubClass == subClass.Key)"
+                                        value="@subClass.Key">
+                                    @subClass.Value
+                                </option>
+                            }
+                        }
                     </InputSelect>
                 </label>
             </div>
