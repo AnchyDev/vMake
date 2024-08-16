@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 using vMake.Database;
-using vMake.Database.Tables;
-using vMake.Database.Types;
 using vMake.Extensions;
 using vMake.Models;
 
