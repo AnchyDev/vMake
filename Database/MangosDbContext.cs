@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using vMake.Configuration;
 using vMake.Database.Tables;
 
 namespace vMake.Database;
@@ -9,11 +10,11 @@ public class MangosDbContext : DbContext
     public DbSet<MangosItemTemplate> ItemTemplate { get; set; }
     public DbSet<MangosSpellTemplate> SpellTemplate { get; set; }
 
-    private readonly IConfiguration config;
+    private readonly MakeConfig config;
     private readonly ILogger<MangosDbContext> logger;
 
     public MangosDbContext(DbContextOptions<MangosDbContext> options,
-        IConfiguration config, ILogger<MangosDbContext> logger) : base(options)
+        MakeConfig config, ILogger<MangosDbContext> logger) : base(options)
     {
         this.config = config;
         this.logger = logger;
@@ -21,13 +22,7 @@ public class MangosDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        string? mySqlConn = config.GetConnectionString("MySqlMangos");
-
-        if (string.IsNullOrEmpty(mySqlConn))
-        {
-            logger.LogCritical("MySql ConnectionString for MySqlMangos was null or empty.");
-            return;
-        }
+        string mySqlConn = config.MySql.ConnectionString;
 
         ServerVersion? mySqlVersion = ServerVersion.AutoDetect(mySqlConn);
         if (mySqlVersion is null)

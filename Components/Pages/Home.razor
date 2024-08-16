@@ -1,7 +1,39 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>vMake</PageTitle>
 
-<h1>Hello, world!</h1>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+    <span style="font-size: 1.25rem; font-weight: bold">Configure MySql</span>
 
-Welcome to your new app.
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="display: flex; flex-direction: column">
+            <span>Host</span>
+            <InputText @bind-Value="Config.MySql.Host" class="vmake-input" />
+        </label>
+
+        <label style="display: flex; flex-direction: column">
+            <span>Database</span>
+            <InputText @bind-Value="Config.MySql.Database" class="vmake-input" />
+        </label>
+
+        <label style="display: flex; flex-direction: column">
+            <span>User</span>
+            <InputText @bind-Value="Config.MySql.User" class="vmake-input" />
+        </label>
+
+        <label style="display: flex; flex-direction: column">
+            <span>Password</span>
+            <InputText @bind-Value="Config.MySql.Password" typeof="password" class="vmake-input" />
+        </label>
+
+        <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+            <button style="flex: 1;" @onclick="TestMySqlConnection" class="vmake-button-primary">Test Connection</button>
+            <button style="flex: 1;" @onclick="SaveConfigurationAsync" class="vmake-button-primary" disabled="@(!canSaveConfiguration)">Save Configuration</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(status))
+    {
+        <span style="word-wrap: break-word;" class="@(hasErrors ? "vmake-alert-error" : "vmake-alert-success")">@status</span>
+    }
+</div>

@@ -1,27 +1,51 @@
-using vMake.Components;
+using ElectronNET.API;
+
+using vMake.Configuration;
 using vMake.Database;
 
 namespace vMake;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        ConfigureServices(builder.Services);
+        builder.WebHost.UseElectron(args);
+        builder.WebHost.UseStaticWebAssets();
+
+        await ConfigureServicesAsync(builder);
 
         var app = builder.Build();
 
         ConfigureMiddleware(app);
 
-        app.Run();
+        await app.StartAsync();
+
+        await Electron.WindowManager.CreateWindowAsync();
+
+        await app.WaitForShutdownAsync();
     }
 
-    static void ConfigureServices(IServiceCollection services)
+    static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
     {
+        var services = builder.Services;
+
+        var config = new MakeConfig();
+        if (!File.Exists(MakeConfig.FILE_NAME))
+        {
+            await config.SaveAsync();
+        }
+
+        builder.Configuration.AddJsonFile(MakeConfig.FILE_NAME);
+        builder.Configuration.Bind(config);
+
+        services.AddSingleton(config);
+
         services.AddDbContext<MangosDbContext>(ServiceLifetime.Transient);
         services.AddRazorComponents().AddInteractiveServerComponents();
+
+        services.AddElectron();
     }
 
     static void ConfigureMiddleware(WebApplication app)
@@ -34,6 +58,6 @@ class Program
         app.UseStaticFiles();
         app.UseAntiforgery();
 
-        app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+        app.MapRazorComponents<Components.App>().AddInteractiveServerRenderMode();
     }
 }
