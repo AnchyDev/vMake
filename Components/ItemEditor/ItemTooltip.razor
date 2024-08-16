@@ -23,7 +23,7 @@
             foreach (var stat in stats)
             {
                 <div class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
-                    <span>@(stat.Value > 0 ? "+" : "")@stat.Value</span>
+                    <span>@(stat.Value > 0 ? "+" : "-")@(Math.Abs(stat.Value))</span>
                     <span>@stat.Type</span>
                 </div>
             }
