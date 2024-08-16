@@ -206,6 +206,24 @@ public static class MangosExtensions
 
     public static string GetSubClassWeaponText(this MangosItemWeaponSubClass itemSubClass)
     {
+        switch(itemSubClass)
+        {
+            case MangosItemWeaponSubClass.Axe1H:
+            case MangosItemWeaponSubClass.Axe2H:
+                return "Axe";
+
+            case MangosItemWeaponSubClass.Sword1H:
+            case MangosItemWeaponSubClass.Sword2H:
+                return "Sword";
+
+            case MangosItemWeaponSubClass.Mace1H:
+            case MangosItemWeaponSubClass.Mace2H:
+                return "Mace";
+
+            case MangosItemWeaponSubClass.FishingPole:
+                return "Fishing Pole";
+        }
+
         return itemSubClass.ToString();
     }
 
