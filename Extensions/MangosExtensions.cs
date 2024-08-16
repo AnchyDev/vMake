@@ -358,8 +358,9 @@ public static class MangosExtensions
     public static float GetDps(this MangosItemTemplate template)
     {
         float divisor = template.Delay / 1000;
+        float avgDmg = (template.DmgMin1 + template.DmgMin2 + template.DmgMin3 + template.DmgMin4 + template.DmgMin5 +
+                template.DmgMax1 + template.DmgMax2 + template.DmgMax3 + template.DmgMax4 + template.DmgMax5) / 2;
 
-        return (template.DmgMin1 + template.DmgMin2 + template.DmgMin3 + template.DmgMin4 + template.DmgMin5 +
-                template.DmgMax1 + template.DmgMax2 + template.DmgMax3 + template.DmgMax4 + template.DmgMax5) / divisor;
+        return avgDmg / divisor;
     }
 }

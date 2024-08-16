@@ -94,6 +94,13 @@
             }
         }
 
+        @if (Template.ItemTemplate.DurabilityMax > 0)
+        {
+            <span>
+                Durability @Template.ItemTemplate.DurabilityMax / @Template.ItemTemplate.DurabilityMax
+            </span>
+        }
+
         <span class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">
             Requires Level @this.Template.ItemTemplate.RequiredLevel
         </span>

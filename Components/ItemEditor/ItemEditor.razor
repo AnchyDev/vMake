@@ -108,6 +108,11 @@
                         }
                     </InputSelect>
                 </label>
+
+                <label class="editor-group-item">
+                    <span>Max Durability</span>
+                    <InputNumber @bind-Value="Template!.ItemTemplate.DurabilityMax" class="vmake-input" />
+                </label>
             </div>
         }
         else if(currentTab == ItemEditorTab.Stats)
