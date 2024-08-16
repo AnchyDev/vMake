@@ -99,7 +99,7 @@ public partial class EditItemParameters
         try
         {
             var json = Convert.FromBase64String(Import);
-            var template = JsonSerializer.Deserialize<MangosItemTemplate>(json);
+            var template = JsonSerializer.Deserialize<MakeItemTemplate>(json);
 
             if (template is null)
             {
@@ -107,11 +107,7 @@ public partial class EditItemParameters
                 return;
             }
 
-            ItemTemplate = new MakeItemTemplate()
-            {
-                ItemTemplate = template,
-                ItemSpells = template.GetSpells(DbContext)
-            };
+            ItemTemplate = template;
         }
         catch (Exception)
         {
