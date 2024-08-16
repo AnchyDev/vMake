@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
+
 using System.Text;
 using System.Text.Json;
+
 using vMake.Database;
-using vMake.Database.Tables;
+using vMake.Models;
 
 namespace vMake.Components.ItemEditor;
 
 public partial class ItemEditor
 {
     [Parameter]
-    public MangosItemTemplate Template { get; set; } = default!;
+    public MakeItemTemplate Template { get; set; } = default!;
 
     [Inject]
     protected MangosDbContext DbContext { get; set; } = default!;

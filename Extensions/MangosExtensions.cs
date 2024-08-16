@@ -1,5 +1,6 @@
-﻿using System.Text.Json;
-
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using vMake.Database;
 using vMake.Database.Tables;
 using vMake.Database.Types;
 
@@ -147,6 +148,88 @@ public static class MangosExtensions
             new() { Type = (MangosItemStatType)item.StatType9, Value = item.StatValue9 },
             new() { Type = (MangosItemStatType)item.StatType10, Value = item.StatValue10 }
         };
+    }
+
+    public static List<MangosItemSpell> GetSpells(this MangosItemTemplate itemTemplate, MangosDbContext dbContext)
+    {
+        var spells = new List<MangosItemSpell>();
+
+        if (itemTemplate.SpellId1 > 0)
+        {
+            var spell = dbContext.SpellTemplate.FirstOrDefault(s => s.Entry == itemTemplate.SpellId1);
+            if (spell is not null)
+            {
+                spells.Add(new MangosItemSpell()
+                {
+                    Trigger = itemTemplate.SpellTrigger1,
+                    Entry = itemTemplate.SpellId1,
+                    Name = spell.Name,
+                    Description = spell.Description
+                });
+            }
+        }
+
+        if (itemTemplate.SpellId2 > 0)
+        {
+            var spell = dbContext.SpellTemplate.FirstOrDefault(s => s.Entry == itemTemplate.SpellId2);
+            if (spell is not null)
+            {
+                spells.Add(new MangosItemSpell()
+                {
+                    Trigger = itemTemplate.SpellTrigger2,
+                    Entry = itemTemplate.SpellId2,
+                    Name = spell.Name,
+                    Description = spell.Description
+                });
+            }
+        }
+
+        if (itemTemplate.SpellId3 > 0)
+        {
+            var spell = dbContext.SpellTemplate.FirstOrDefault(s => s.Entry == itemTemplate.SpellId3);
+            if (spell is not null)
+            {
+                spells.Add(new MangosItemSpell()
+                {
+                    Trigger = itemTemplate.SpellTrigger3,
+                    Entry = itemTemplate.SpellId3,
+                    Name = spell.Name,
+                    Description = spell.Description
+                });
+            }
+        }
+
+        if (itemTemplate.SpellId4 > 0)
+        {
+            var spell = dbContext.SpellTemplate.FirstOrDefault(s => s.Entry == itemTemplate.SpellId4);
+            if (spell is not null)
+            {
+                spells.Add(new MangosItemSpell()
+                {
+                    Trigger = itemTemplate.SpellTrigger4,
+                    Entry = itemTemplate.SpellId4,
+                    Name = spell.Name,
+                    Description = spell.Description
+                });
+            }
+        }
+
+        if (itemTemplate.SpellId5 > 0)
+        {
+            var spell = dbContext.SpellTemplate.FirstOrDefault(s => s.Entry == itemTemplate.SpellId5);
+            if (spell is not null)
+            {
+                spells.Add(new MangosItemSpell()
+                {
+                    Trigger = itemTemplate.SpellTrigger5,
+                    Entry = itemTemplate.SpellId5,
+                    Name = spell.Name,
+                    Description = spell.Description
+                });
+            }
+        }
+
+        return spells;
     }
 
     public static MangosItemTemplate? Clone(this MangosItemTemplate template)

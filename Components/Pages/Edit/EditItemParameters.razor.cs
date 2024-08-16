@@ -5,7 +5,9 @@ using System.Text.Json;
 
 using vMake.Database;
 using vMake.Database.Tables;
+using vMake.Database.Types;
 using vMake.Extensions;
+using vMake.Models;
 
 namespace vMake.Components.Pages.Edit;
 
@@ -26,7 +28,7 @@ public partial class EditItemParameters
     [Inject]
     protected ILogger<EditItemParameters> Logger { get; set; } = default!;
 
-    public MangosItemTemplate? ItemTemplate { get; set; }
+    public MakeItemTemplate? ItemTemplate { get; set; }
     protected string? Error { get; set; }
 
     protected override async Task OnParametersSetAsync()
@@ -63,10 +65,22 @@ public partial class EditItemParameters
             }
 
             // Clone the entity so we can edit a copy of it instead of the original.
-            ItemTemplate = itemTemplate.Clone();
+            var clone = itemTemplate.Clone();
 
             // Detach the original entity since we do not want to track it.
             DbContext.Entry(itemTemplate).State = EntityState.Detached;
+
+            if (clone is null)
+            {
+                Error = "Failed to clone original item template.";
+                return;
+            }
+
+            ItemTemplate = new MakeItemTemplate()
+            {
+                ItemTemplate = clone,
+                ItemSpells = clone.GetSpells(DbContext)
+            };
         }
         catch (Exception ex)
         {
@@ -93,7 +107,11 @@ public partial class EditItemParameters
                 return;
             }
 
-            ItemTemplate = template;
+            ItemTemplate = new MakeItemTemplate()
+            {
+                ItemTemplate = template,
+                ItemSpells = template.GetSpells(DbContext)
+            };
         }
         catch (Exception)
         {

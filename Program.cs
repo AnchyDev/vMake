@@ -20,7 +20,7 @@ class Program
 
     static void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<MangosDbContext>();
+        services.AddDbContext<MangosDbContext>(ServiceLifetime.Transient);
         services.AddRazorComponents().AddInteractiveServerComponents();
     }
 

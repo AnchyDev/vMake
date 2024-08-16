@@ -1,7 +1,7 @@
 ﻿@using vMake.Database.Types
 @using vMake.Extensions
 
-<h3>Editing @Template.Name (@Template.Entry / @Template.Patch)</h3>
+<h3>Editing @Template.ItemTemplate.Name (@Template.ItemTemplate.Entry / @Template.ItemTemplate.Patch)</h3>
 
 <div class="vmake-panel-h">
     <div class="editor-group-vertical" style="flex: 7">
@@ -20,40 +20,40 @@
                     <span>
                         Name
                     </span>
-                    <InputText @bind-Value="Template!.Name" class="vmake-input" />
+                    <InputText @bind-Value="Template!.ItemTemplate.Name" class="vmake-input" />
                 </label>
                 <label class="editor-group-item">
                     <span>Description</span>
-                    <InputText @bind-Value="Template!.Description" class="vmake-input" />
+                    <InputText @bind-Value="Template!.ItemTemplate.Description" class="vmake-input" />
                 </label>
                 <label class="editor-group-item">
                     <span>Item Level</span>
-                    <InputNumber @bind-Value="Template!.ItemLevel" class="vmake-input" />
+                    <InputNumber @bind-Value="Template!.ItemTemplate.ItemLevel" class="vmake-input" />
                 </label>
                 <label class="editor-group-item">
                     <span>Required Level</span>
-                    <InputNumber @bind-Value="Template!.RequiredLevel" class="vmake-input" />
+                    <InputNumber @bind-Value="Template!.ItemTemplate.RequiredLevel" class="vmake-input" />
                 </label>
                 <label class="editor-group-item">
                     <span>Bonding</span>
-                    <InputSelect @bind-Value="Template!.Bonding" class="vmake-input">
-                        <option checked="@(Template.Bonding == MangosItemBonding.None)"
+                    <InputSelect @bind-Value="Template!.ItemTemplate.Bonding" class="vmake-input">
+                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.None)"
                                 value="@MangosItemBonding.None">
                             None
                         </option>
-                        <option checked="@(Template.Bonding == MangosItemBonding.BindOnPickup)"
+                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnPickup)"
                                 value="@MangosItemBonding.BindOnPickup">
                             Bind on Pickup
                         </option>
-                        <option checked="@(Template.Bonding == MangosItemBonding.BindOnEquip)"
+                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnEquip)"
                                 value="@MangosItemBonding.BindOnEquip">
                             Bind on Equip
                         </option>
-                        <option checked="@(Template.Bonding == MangosItemBonding.BindOnUse)"
+                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.BindOnUse)"
                                 value="@MangosItemBonding.BindOnUse">
                             Bind on Use
                         </option>
-                        <option checked="@(Template.Bonding == MangosItemBonding.Quest)"
+                        <option checked="@(Template.ItemTemplate.Bonding == MangosItemBonding.Quest)"
                                 value="@MangosItemBonding.Quest">
                             Quest Item
                         </option>
@@ -61,32 +61,32 @@
                 </label>
                 <label class="editor-group-item">
                     <span>Quality</span>
-                    <InputSelect @bind-Value="Template!.Quality" class="vmake-input">
-                        <option checked="@(Template.Quality == MangosItemQuality.Poor)"
+                    <InputSelect @bind-Value="Template!.ItemTemplate.Quality" class="vmake-input">
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Poor)"
                                 value="@MangosItemQuality.Poor">
                             Poor
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Common)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Common)"
                                 value="@MangosItemQuality.Common">
                             Common
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Uncommon)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Uncommon)"
                                 value="@MangosItemQuality.Uncommon">
                             Uncommon
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Rare)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Rare)"
                                 value="@MangosItemQuality.Rare">
                             Rare
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Epic)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Epic)"
                                 value="@MangosItemQuality.Epic">
                             Epic
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Legendary)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Legendary)"
                                 value="@MangosItemQuality.Legendary">
                             Legendary
                         </option>
-                        <option checked="@(Template.Quality == MangosItemQuality.Artifact)"
+                        <option checked="@(Template.ItemTemplate.Quality == MangosItemQuality.Artifact)"
                                 value="@MangosItemQuality.Artifact">
                             Artifact
                         </option>
@@ -98,78 +98,78 @@
         {
             <label class="editor-group-item">
                 <span>Armor</span>
-                <InputNumber @bind-Value="Template!.Armor" class="vmake-input" />
+                <InputNumber @bind-Value="Template!.ItemTemplate.Armor" class="vmake-input" />
             </label>
 
             <div class="editor-group-horizontal">
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 1</span>
-                    <ItemEditorStat StatType="Template.StatType1" StatValue="Template.StatValue1"
-                                    OnValueChanged="value => Template.StatValue1 = value"
-                                    OnTypeChanged="type => Template.StatType1 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType1" StatValue="Template.ItemTemplate.StatValue1"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue1 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType1 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 2</span>
-                    <ItemEditorStat StatType="Template.StatType2" StatValue="Template.StatValue2"
-                                    OnValueChanged="value => Template.StatValue2 = value"
-                                    OnTypeChanged="type => Template.StatType2 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType2" StatValue="Template.ItemTemplate.StatValue2"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue2 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType2 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 3</span>
-                    <ItemEditorStat StatType="Template.StatType3" StatValue="Template.StatValue3"
-                                    OnValueChanged="value => Template.StatValue3 = value"
-                                    OnTypeChanged="type => Template.StatType3 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType3" StatValue="Template.ItemTemplate.StatValue3"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue3 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType3 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 4</span>
-                    <ItemEditorStat StatType="Template.StatType4" StatValue="Template.StatValue4"
-                                    OnValueChanged="value => Template.StatValue4 = value"
-                                    OnTypeChanged="type => Template.StatType4 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType4" StatValue="Template.ItemTemplate.StatValue4"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue4 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType4 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 5</span>
-                    <ItemEditorStat StatType="Template.StatType5" StatValue="Template.StatValue5"
-                                    OnValueChanged="value => Template.StatValue5 = value"
-                                    OnTypeChanged="type => Template.StatType5 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType5" StatValue="Template.ItemTemplate.StatValue5"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue5 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType5 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 6</span>
-                    <ItemEditorStat StatType="Template.StatType6" StatValue="Template.StatValue6"
-                                    OnValueChanged="value => Template.StatValue6 = value"
-                                    OnTypeChanged="type => Template.StatType6 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType6" StatValue="Template.ItemTemplate.StatValue6"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue6 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType6 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 7</span>
-                    <ItemEditorStat StatType="Template.StatType7" StatValue="Template.StatValue7"
-                                    OnValueChanged="value => Template.StatValue7 = value"
-                                    OnTypeChanged="type => Template.StatType7 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType7" StatValue="Template.ItemTemplate.StatValue7"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue7 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType7 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 8</span>
-                    <ItemEditorStat StatType="Template.StatType8" StatValue="Template.StatValue8"
-                                    OnValueChanged="value => Template.StatValue8 = value"
-                                    OnTypeChanged="type => Template.StatType8 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType8" StatValue="Template.ItemTemplate.StatValue8"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue8 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType8 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 9</span>
-                    <ItemEditorStat StatType="Template.StatType9" StatValue="Template.StatValue9"
-                                    OnValueChanged="value => Template.StatValue9 = value"
-                                    OnTypeChanged="type => Template.StatType9 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType9" StatValue="Template.ItemTemplate.StatValue9"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue9 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType9 = type" />
                 </div>
 
                 <div class="editor-group-item">
                     <span style="align-self: center">Stat 10</span>
-                    <ItemEditorStat StatType="Template.StatType10" StatValue="Template.StatValue10"
-                                    OnValueChanged="value => Template.StatValue10 = value"
-                                    OnTypeChanged="type => Template.StatType10 = type" />
+                    <ItemEditorStat StatType="Template.ItemTemplate.StatType10" StatValue="Template.ItemTemplate.StatValue10"
+                                    OnValueChanged="value => Template.ItemTemplate.StatValue10 = value"
+                                    OnTypeChanged="type => Template.ItemTemplate.StatType10 = type" />
                 </div>
             </div>
         }
@@ -178,33 +178,33 @@
             <div class="editor-group-horizontal">
                 <div class="editor-group-item">
                     <span style="align-self: center">Spell 1</span>
-                    <ItemEditorSpell SpellEntry="Template.SpellId1" SpellTrigger="Template.SpellTrigger1"
-                                     SpellEntryChanged="value => Template.SpellId1 = value"
-                                     SpellTriggerChanged="type => Template.SpellTrigger1 = type" />
+                    <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId1" SpellTrigger="Template.ItemTemplate.SpellTrigger1"
+                                     SpellEntryChanged="value => Template.ItemTemplate.SpellId1 = value"
+                                     SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger1 = type" />
                 </div>
                 <div class="editor-group-item">
                     <span style="align-self: center">Spell 2</span>
-                    <ItemEditorSpell SpellEntry="Template.SpellId2" SpellTrigger="Template.SpellTrigger2"
-                                     SpellEntryChanged="value => Template.SpellId2 = value"
-                                     SpellTriggerChanged="type => Template.SpellTrigger2 = type" />
+                    <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId2" SpellTrigger="Template.ItemTemplate.SpellTrigger2"
+                                     SpellEntryChanged="value => Template.ItemTemplate.SpellId2 = value"
+                                     SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger2 = type" />
                 </div>
                 <div class="editor-group-item">
                     <span style="align-self: center">Spell 3</span>
-                    <ItemEditorSpell SpellEntry="Template.SpellId3" SpellTrigger="Template.SpellTrigger3"
-                                     SpellEntryChanged="value => Template.SpellId3 = value"
-                                     SpellTriggerChanged="type => Template.SpellTrigger3 = type" />
+                    <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId3" SpellTrigger="Template.ItemTemplate.SpellTrigger3"
+                                     SpellEntryChanged="value => Template.ItemTemplate.SpellId3 = value"
+                                     SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger3 = type" />
                 </div>
                 <div class="editor-group-item">
                     <span style="align-self: center">Spell 4</span>
-                    <ItemEditorSpell SpellEntry="Template.SpellId4" SpellTrigger="Template.SpellTrigger4"
-                                     SpellEntryChanged="value => Template.SpellId4 = value"
-                                     SpellTriggerChanged="type => Template.SpellTrigger4 = type" />
+                    <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId4" SpellTrigger="Template.ItemTemplate.SpellTrigger4"
+                                     SpellEntryChanged="value => Template.ItemTemplate.SpellId4 = value"
+                                     SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger4 = type" />
                 </div>
                 <div class="editor-group-item">
                     <span style="align-self: center">Spell 5</span>
-                    <ItemEditorSpell SpellEntry="Template.SpellId5" SpellTrigger="Template.SpellTrigger5"
-                                     SpellEntryChanged="value => Template.SpellId5 = value"
-                                     SpellTriggerChanged="type => Template.SpellTrigger5 = type" />
+                    <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId5" SpellTrigger="Template.ItemTemplate.SpellTrigger5"
+                                     SpellEntryChanged="value => Template.ItemTemplate.SpellId5 = value"
+                                     SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger5 = type" />
                 </div>
             </div>
         }
