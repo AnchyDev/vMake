@@ -152,46 +152,22 @@ public static class MangosExtensions
 
     public static string GetSubClassText(this MangosItemClass itemClass, int itemSubClass)
     {
-        switch(itemClass)
+        return itemClass switch
         {
-            case MangosItemClass.Consumable:
-                return GetSubClassConsumableText((MangosItemConsumableSubClass)itemSubClass);
-
-            case MangosItemClass.Container:
-                return GetSubClassContainerText((MangosItemContainerSubClass)itemSubClass);
-
-            case MangosItemClass.Weapon:
-                return GetSubClassWeaponText((MangosItemWeaponSubClass)itemSubClass);
-
-            case MangosItemClass.Armor:
-                return GetSubClassArmorText((MangosItemArmorSubClass)itemSubClass);
-
-            case MangosItemClass.Reagent:
-                return GetSubClassReagentText((MangosItemReagentSubClass)itemSubClass);
-
-            case MangosItemClass.Projectile:
-                return GetSubClassProjectileText((MangosItemProjectileSubClass)itemSubClass);
-
-            case MangosItemClass.TradeGoods:
-                return GetSubClassTradeGoodsText((MangosItemTradeGoodsSubClass)itemSubClass);
-
-            case MangosItemClass.Recipe:
-                return GetSubClassRecipeText((MangosItemRecipeSubClass)itemSubClass);
-
-            case MangosItemClass.Quiver:
-                return GetSubClassQuiverText((MangosItemQuiverSubClass)itemSubClass);
-
-            case MangosItemClass.Quest:
-                return GetSubClassQuestText((MangosItemQuestSubClass)itemSubClass);
-
-            case MangosItemClass.Key:
-                return GetSubClassKeyText((MangosItemKeySubClass)itemSubClass);
-
-            case MangosItemClass.Miscellaneous:
-                return GetSubClassMiscellaneousText((MangosItemMiscellaneousSubClass)itemSubClass);
-        }
-
-        return "";
+            MangosItemClass.Consumable => GetSubClassConsumableText((MangosItemConsumableSubClass)itemSubClass),
+            MangosItemClass.Container => GetSubClassContainerText((MangosItemContainerSubClass)itemSubClass),
+            MangosItemClass.Weapon => GetSubClassWeaponText((MangosItemWeaponSubClass)itemSubClass),
+            MangosItemClass.Armor => GetSubClassArmorText((MangosItemArmorSubClass)itemSubClass),
+            MangosItemClass.Reagent => GetSubClassReagentText((MangosItemReagentSubClass)itemSubClass),
+            MangosItemClass.Projectile => GetSubClassProjectileText((MangosItemProjectileSubClass)itemSubClass),
+            MangosItemClass.TradeGoods => GetSubClassTradeGoodsText((MangosItemTradeGoodsSubClass)itemSubClass),
+            MangosItemClass.Recipe => GetSubClassRecipeText((MangosItemRecipeSubClass)itemSubClass),
+            MangosItemClass.Quiver => GetSubClassQuiverText((MangosItemQuiverSubClass)itemSubClass),
+            MangosItemClass.Quest => GetSubClassQuestText((MangosItemQuestSubClass)itemSubClass),
+            MangosItemClass.Key => GetSubClassKeyText((MangosItemKeySubClass)itemSubClass),
+            MangosItemClass.Miscellaneous => GetSubClassMiscellaneousText((MangosItemMiscellaneousSubClass)itemSubClass),
+            _ => "No subclass text found"
+        };
     }
 
     public static string GetSubClassConsumableText(this MangosItemConsumableSubClass itemSubClass)
