@@ -167,7 +167,7 @@ public class MangosItemTemplate
     public float DmgMax1 { get; set; }
 
     [Column("dmg_type1")]
-    public int DmgType1 { get; set; }
+    public MangosItemDamageType DmgType1 { get; set; }
 
     [Column("dmg_min2")]
     public float DmgMin2 { get; set; }
@@ -176,7 +176,7 @@ public class MangosItemTemplate
     public float DmgMax2 { get; set; }
 
     [Column("dmg_type2")]
-    public int DmgType2 { get; set; }
+    public MangosItemDamageType DmgType2 { get; set; }
 
     [Column("dmg_min3")]
     public float DmgMin3 { get; set; }
@@ -185,7 +185,7 @@ public class MangosItemTemplate
     public float DmgMax3 { get; set; }
 
     [Column("dmg_type3")]
-    public int DmgType3 { get; set; }
+    public MangosItemDamageType DmgType3 { get; set; }
 
     [Column("dmg_min4")]
     public float DmgMin4 { get; set; }
@@ -194,7 +194,7 @@ public class MangosItemTemplate
     public float DmgMax4 { get; set; }
 
     [Column("dmg_type4")]
-    public int DmgType4 { get; set; }
+    public MangosItemDamageType DmgType4 { get; set; }
 
     [Column("dmg_min5")]
     public float DmgMin5 { get; set; }
@@ -203,7 +203,7 @@ public class MangosItemTemplate
     public float DmgMax5 { get; set; }
 
     [Column("dmg_type5")]
-    public int DmgType5 { get; set; }
+    public MangosItemDamageType DmgType5 { get; set; }
 
     [Column("block")]
     public int Block { get; set; }

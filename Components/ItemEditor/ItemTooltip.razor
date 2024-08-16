@@ -4,20 +4,20 @@
 @if(this.Template is not null)
 {
     <div class="vmake-item-tooltip">
-        <span id="tooltip-name" style="color: #@(this.Template.ItemTemplate.Quality.GetHexColor())">
+        <span style="color: #@(this.Template.ItemTemplate.Quality.GetHexColor())">
             @this.Template.ItemTemplate.Name
         </span>
 
-        <span id="tooltip-itemlevel" style="color: #E3BF00">
+        <span style="color: #E3BF00">
             Item Level @this.Template.ItemTemplate.ItemLevel
         </span>
 
-        <span id="tooltip-bonding" class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">
+        <span class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">
             @this.Template.ItemTemplate.Bonding.GetBondingText()
         </span>
 
-        <div class="tooltip-multiline" style="display: flex; flex-direction: row">
-            <span style="flex: 1;" id="tooltip-invtype" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+        <div style="display: flex; flex-direction: row">
+            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
                 @this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()
             </span>
             <span style="flex: 1;text-align: end;">
@@ -25,7 +25,60 @@
             </span>
         </div>
 
-        <span id="tooltip-armor" class="@(this.Template.ItemTemplate.Armor < 1 ? "hide" : "")">
+        @if(this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
+            this.Template.ItemTemplate.DmgMax1 > 0)
+        {
+            <div style="display: flex; flex-direction: row">
+                <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                    @this.Template.ItemTemplate.DmgMin1 - @this.Template.ItemTemplate.DmgMax1 @(this.Template.ItemTemplate.DmgType1 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType1 : "") Damage
+                </span>
+                <span style="flex: 1;text-align: end;">
+                    Speed @(((decimal)this.Template.ItemTemplate.Delay / 1000).ToString("0.00"))
+                </span>
+            </div>
+        }
+
+        @if (this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
+            this.Template.ItemTemplate.DmgMax2 > 0)
+        {
+            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                +@this.Template.ItemTemplate.DmgMin2 - @this.Template.ItemTemplate.DmgMax2 @(this.Template.ItemTemplate.DmgType2 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType2 : "") Damage
+            </span>
+        }
+
+        @if (this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
+       this.Template.ItemTemplate.DmgMax3 > 0)
+        {
+            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                +@this.Template.ItemTemplate.DmgMin3 - @this.Template.ItemTemplate.DmgMax3 @(this.Template.ItemTemplate.DmgType3 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType3 : "") Damage
+            </span>
+        }
+
+        @if (this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
+            this.Template.ItemTemplate.DmgMax4 > 0)
+        {
+            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                +@this.Template.ItemTemplate.DmgMin4 - @this.Template.ItemTemplate.DmgMax4 @(this.Template.ItemTemplate.DmgType4 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType4 : "") Damage
+            </span>
+        }
+
+        @if (this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
+            this.Template.ItemTemplate.DmgMax5 > 0)
+        {
+            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                +@this.Template.ItemTemplate.DmgMin5 - @this.Template.ItemTemplate.DmgMax5 @(this.Template.ItemTemplate.DmgType5 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType5 : "") Damage
+            </span>
+        }
+
+        @{
+            var dps = this.Template.ItemTemplate.GetDps();
+            if(dps > 0)
+            {
+                <span>(@dps.ToString("##.0") damage per second)</span>
+            }
+        }
+
+        <span class="@(this.Template.ItemTemplate.Armor < 1 ? "hide" : "")">
             @this.Template.ItemTemplate.Armor Armor
         </span>
 
@@ -41,7 +94,7 @@
             }
         }
 
-        <span id="tooltip-reqlevel" class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">
+        <span class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">
             Requires Level @this.Template.ItemTemplate.RequiredLevel
         </span>
 
@@ -72,7 +125,7 @@
             }
         }
 
-        <span id="tooltip-description" style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">
+        <span style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">
             "@this.Template.ItemTemplate.Description"
         </span>
     </div>

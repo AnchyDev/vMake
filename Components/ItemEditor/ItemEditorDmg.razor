@@ -1,0 +1,82 @@
+﻿@using System.Diagnostics
+
+@using vMake.Database.Types
+
+@code {
+    [Parameter]
+    public float DmgMin { get; set; }
+
+    [Parameter]
+    public float DmgMax { get; set; }
+
+    [Parameter]
+    public MangosItemDamageType DmgType { get; set; }
+
+    [Parameter]
+    public EventCallback<float> DmgMinChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<float> DmgMaxChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<MangosItemDamageType> DmgTypeChanged { get; set; }
+
+    private void OnDmgMinChanged(ChangeEventArgs e)
+    {
+        if (DmgMinChanged.HasDelegate &&
+            float.TryParse(e.Value as string, out float newValue))
+        {
+            DmgMinChanged.InvokeAsync(newValue);
+        }
+    }
+
+    private void OnDmgMaxChanged(ChangeEventArgs e)
+    {
+        if (DmgMaxChanged.HasDelegate &&
+            float.TryParse(e.Value as string, out float newValue))
+        {
+            DmgMaxChanged.InvokeAsync(newValue);
+        }
+    }
+
+    private void OnDmgTypeChanged(ChangeEventArgs e)
+    {
+        if (DmgTypeChanged.HasDelegate &&
+                Enum.TryParse(typeof(MangosItemDamageType), e.Value as string, out object? newType))
+        {
+            DmgTypeChanged.InvokeAsync((MangosItemDamageType)newType);
+        }
+    }
+}
+
+<div style="display: flex; flex-direction: column">
+    <label style="display: flex; flex-direction: column">
+        <span>Type</span>
+        <InputSelect @bind-Value="DmgType" @oninput="OnDmgTypeChanged" class="vmake-input">
+
+            @{
+                foreach (MangosItemDamageType dmgType in Enum.GetValues(typeof(MangosItemDamageType)))
+                {
+                    <option checked="@(DmgType == dmgType)" value="@dmgType">
+                        @dmgType.ToString()
+                    </option>
+                }
+            }
+            
+        </InputSelect>
+    </label>
+
+    <label style="display: flex; flex-direction: column;">
+        <span>
+            Min
+        </span>
+        <InputNumber @bind-Value="DmgMin" @oninput="OnDmgMinChanged" class="vmake-input" />
+    </label>
+
+    <label style="display: flex; flex-direction: column;">
+        <span>
+            Max
+        </span>
+        <InputNumber @bind-Value="DmgMax" @oninput="OnDmgMaxChanged" class="vmake-input" />
+    </label>
+</div>

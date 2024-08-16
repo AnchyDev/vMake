@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 
 using System.Text;
 using System.Text.Json;
@@ -24,6 +25,7 @@ public partial class ItemEditor
     {
         General,
         Stats,
+        Damage,
         Spells,
         Save
     }
@@ -36,9 +38,12 @@ public partial class ItemEditor
         {
             // Re-attach the cloned entity so we can update the original.
             var entity = DbContext.Attach(Template.ItemTemplate);
-            entity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            entity.State = EntityState.Modified;
 
             await DbContext.SaveChangesAsync();
+
+            // Detach the entity again as we do not want to track it.
+            entity.State = EntityState.Detached;
 
             Status = "Saved changes.";
             StateHasChanged();

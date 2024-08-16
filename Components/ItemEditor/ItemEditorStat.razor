@@ -37,34 +37,14 @@
     <label style="display: flex; flex-direction: column">
         <span>Type</span>
         <InputSelect @bind-Value="StatType" @oninput="OnStatTypeChanged" class="vmake-input">
-            <option checked="@(StatType == MangosItemStatType.None)"
-                    value="@MangosItemStatType.None">
-                None
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Health)"
-                    value="@MangosItemStatType.Health">
-                Health
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Agility)"
-                    value="@MangosItemStatType.Agility">
-                Agility
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Strength)"
-                    value="@MangosItemStatType.Strength">
-                Strength
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Intellect)"
-                    value="@MangosItemStatType.Intellect">
-                Intellect
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Spirit)"
-                    value="@MangosItemStatType.Spirit">
-                Spirit
-            </option>
-            <option checked="@(StatType == MangosItemStatType.Stamina)"
-                    value="@MangosItemStatType.Stamina">
-                Stamina
-            </option>
+            @{
+                foreach (MangosItemStatType statType in Enum.GetValues(typeof(MangosItemStatType)))
+                {
+                    <option checked="@(StatType == statType)" value="@statType">
+                        @statType.ToString()
+                    </option>
+                }
+            }
         </InputSelect>
     </label>
     <label style="display: flex; flex-direction: column">
