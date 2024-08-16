@@ -41,10 +41,20 @@
                     continue;
                 }
 
-                <div style="color: #00FF00">
-                    <span>@spell.Trigger.GetTriggerText(): </span>
-                    <span>@spell.Description</span>
-                </div>
+                if(string.IsNullOrWhiteSpace(spell.Description))
+                {
+                    <div style="color: #FF0000">
+                        <span>@spell.Trigger.GetTriggerText(): </span>
+                        <span>This spell has no description.</span>
+                    </div>
+                }
+                else
+                {
+                    <div style="color: #00FF00">
+                        <span>@spell.Trigger.GetTriggerText(): </span>
+                        <span>@spell.Description</span>
+                    </div>
+                }
             }
         }
 
