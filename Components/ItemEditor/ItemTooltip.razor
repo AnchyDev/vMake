@@ -12,6 +12,11 @@
             Item Level @this.Template.ItemTemplate.ItemLevel
         </span>
 
+        @if(this.Template.ItemTemplate.Flags.HasFlag(MangosItemFlags.ITEM_FLAG_CONJURED))
+        {
+            <span>Conjured Item</span>
+        }
+
         <span class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">
             @this.Template.ItemTemplate.Bonding.GetBondingText()
         </span>
