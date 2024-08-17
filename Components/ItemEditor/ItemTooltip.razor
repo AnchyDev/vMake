@@ -16,6 +16,13 @@
             @this.Template.ItemTemplate.Bonding.GetBondingText()
         </span>
 
+        @if(this.Template.ItemTemplate.MaxCount > 0)
+        {
+            <span>
+                Unique @(this.Template.ItemTemplate.MaxCount > 1 ? $"({this.Template.ItemTemplate.MaxCount})" : "")
+            </span>
+        }
+
         @if(this.Template.ItemTemplate.InventoryType != MangosInventoryType.NotEquipable)
         {
             <div style="display: flex; flex-direction: row">

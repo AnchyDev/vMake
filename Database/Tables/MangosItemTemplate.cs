@@ -35,7 +35,7 @@ public class MangosItemTemplate
     public MangosItemQuality Quality { get; set; }
 
     [Column("flags")]
-    public int Flags { get; set; }
+    public MangosItemFlags Flags { get; set; }
 
     [Column("buy_count")]
     public int BuyCount { get; set; }
