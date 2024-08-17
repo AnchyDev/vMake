@@ -17,9 +17,12 @@
             <span>Conjured Item</span>
         }
 
-        <span class="@(this.Template.ItemTemplate.Bonding == MangosItemBonding.None ? "hide" : "")">
-            @this.Template.ItemTemplate.Bonding.GetBondingText()
-        </span>
+        @if (this.Template.ItemTemplate.Bonding != MangosItemBonding.None)
+        {
+            <span>
+                @this.Template.ItemTemplate.Bonding.GetBondingText()
+            </span>
+        }
 
         @if(this.Template.ItemTemplate.MaxCount > 0)
         {
@@ -123,7 +126,12 @@
 
             foreach (var stat in stats)
             {
-                <div class="@(stat.Type == MangosItemStatType.None ? "hide" : "")">
+                if(stat.Type == MangosItemStatType.None)
+                {
+                    continue;
+                }
+
+                <div>
                     <span>@(stat.Value > 0 ? "+" : "-")@(Math.Abs(stat.Value))</span>
                     <span>@stat.Type</span>
                 </div>
@@ -153,9 +161,12 @@
             </span>
         }
 
-        <span class="@(this.Template.ItemTemplate.RequiredLevel < 1 ? "hide" : "")">
-            Requires Level @this.Template.ItemTemplate.RequiredLevel
-        </span>
+        @if (this.Template.ItemTemplate.RequiredLevel > 0)
+        {
+            <span>
+                Requires Level @this.Template.ItemTemplate.RequiredLevel
+            </span>
+        }
 
         @{
             var spells = this.Template.ItemTemplate.GetSpells(DbContext);
@@ -184,9 +195,12 @@
             }
         }
 
-        <span style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">
-            "@this.Template.ItemTemplate.Description"
-        </span>
+        @if (!string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description))
+        {
+            <span style="color: #E1D474">
+                "@this.Template.ItemTemplate.Description"
+            </span>
+        }
 
         @if(this.Template.ItemTemplate.SellPrice > 0)
         {
