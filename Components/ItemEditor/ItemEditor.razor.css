@@ -1,27 +1,4 @@
-﻿.editor-group-vertical {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.5rem;
-}
-
-.editor-group-horizontal {
-    display: flex;
-    flex-direction: row;
-
-    flex-wrap: wrap;
-
-    gap: 0.5rem;
-}
-
-.editor-group-item {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.5rem;
-}
-
-.tab-button {
+﻿.tab-button {
     color: white;
     background-color: rgb(0, 128, 255);
 
@@ -41,4 +18,50 @@
 }
 .tab-button.active {
     background-color: rgb(0, 50, 100);
+}
+
+
+.editor-group-title {
+    flex: 1;
+
+    color: white;
+    background-color: rgb(20, 20, 20);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    padding: 0.5rem;
+}
+
+.editor-group {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.editor-group-content {
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    padding: 0.5rem;
+
+    color: white;
+    background-color: rgb(25, 25, 25);
+}
+
+.editor-group-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.25rem;
+}
+
+.editor-tab-page {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5rem;
 }
