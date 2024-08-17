@@ -94,6 +94,22 @@
             }
         }
 
+        @{
+            var reistances = this.Template.ItemTemplate.GetResists();
+
+            foreach (var resist in reistances)
+            {
+                if(resist.Value == 0)
+                {
+                    continue;
+                }
+
+                <div>
+                    <span>@(resist.Value > 0 ? "+" : "-")@Math.Abs(resist.Value) @resist.Key.ToString() Resistance</span>
+                </div>
+            }
+        }
+
         @if (Template.ItemTemplate.DurabilityMax > 0)
         {
             <span>

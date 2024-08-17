@@ -1,0 +1,26 @@
+﻿@using System.Diagnostics
+@using vMake.Database.Types
+
+@code {
+    [Parameter]
+    public int ResistValue { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ResistValueChanged { get; set; }
+
+    private void OnResistValueChanged(ChangeEventArgs e)
+    {
+        if (ResistValueChanged.HasDelegate &&
+            int.TryParse(e.Value as string, out int newValue))
+        {
+            ResistValueChanged.InvokeAsync(newValue);
+        }
+    }
+}
+
+<div class="editor-group-item">
+    <label style="display: flex; flex-direction: column">
+        <span>Value</span>
+        <InputNumber @bind-Value="ResistValue" @oninput="OnResistValueChanged" class="vmake-input" />
+    </label>
+</div>

@@ -268,6 +268,19 @@ public static class MangosExtensions
         };
     }
 
+    public static Dictionary<MangosItemResistType, int> GetResists(this MangosItemTemplate item)
+    {
+        return new Dictionary<MangosItemResistType, int>()
+        {
+            { MangosItemResistType.Holy, item.HolyResistance },
+            { MangosItemResistType.Fire, item.FireResistance },
+            { MangosItemResistType.Nature, item.NatureResistance },
+            { MangosItemResistType.Frost, item.FrostResistance },
+            { MangosItemResistType.Shadow, item.ShadowResistance },
+            { MangosItemResistType.Arcane, item.ArcaneResistance },
+        };
+    }
+
     public static List<MangosItemSpell> GetSpells(this MangosItemTemplate itemTemplate, MangosDbContext dbContext)
     {
         var spells = new List<MangosItemSpell>();

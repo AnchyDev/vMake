@@ -192,6 +192,42 @@
                                     OnValueChanged="value => Template.ItemTemplate.StatValue10 = value"
                                     OnTypeChanged="type => Template.ItemTemplate.StatType10 = type" />
                 </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Holy</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.HolyResistance" 
+                                      ResistValueChanged="value => Template.ItemTemplate.HolyResistance = value"/>
+                </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Fire</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.FireResistance"
+                                      ResistValueChanged="value => Template.ItemTemplate.FireResistance = value" />
+                </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Nature</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.NatureResistance"
+                                      ResistValueChanged="value => Template.ItemTemplate.NatureResistance = value" />
+                </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Frost</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.FrostResistance"
+                                      ResistValueChanged="value => Template.ItemTemplate.FrostResistance = value" />
+                </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Shadow</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.ShadowResistance"
+                                      ResistValueChanged="value => Template.ItemTemplate.ShadowResistance = value" />
+                </div>
+
+                <div class="editor-group-item">
+                    <span style="align-self: center">Arcane</span>
+                    <ItemEditorResist ResistValue="Template.ItemTemplate.ArcaneResistance"
+                                      ResistValueChanged="value => Template.ItemTemplate.ArcaneResistance = value" />
+                </div>
             </div>
         }
         else if(currentTab == ItemEditorTab.Damage)
