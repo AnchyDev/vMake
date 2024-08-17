@@ -104,9 +104,19 @@
             }
         }
 
-        <span class="@(this.Template.ItemTemplate.Armor < 1 ? "hide" : "")">
-            @this.Template.ItemTemplate.Armor Armor
-        </span>
+        @if (this.Template.ItemTemplate.Armor != 0)
+        {
+            <span>
+                @this.Template.ItemTemplate.Armor Armor
+            </span>            
+        }
+
+        @if(this.Template.ItemTemplate.Block > 0)
+        {
+            <span>
+                @this.Template.ItemTemplate.Block Block
+            </span>
+        }
 
         @{
             var stats = this.Template.ItemTemplate.GetStats();
