@@ -75,6 +75,9 @@ public static class MangosExtensions
             case MangosInventoryType.NotEquipable:
                 return "Not Equipable";
 
+            case MangosInventoryType.Ammo:
+                return "Projectile";
+
             case MangosInventoryType.Weapon:
                 return "One-hand";
 

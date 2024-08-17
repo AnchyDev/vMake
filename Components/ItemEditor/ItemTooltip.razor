@@ -81,10 +81,21 @@
         }
 
         @{
-            var dps = this.Template.ItemTemplate.GetDps();
-            if(dps > 0)
+            if(this.Template.ItemTemplate.InventoryType == MangosInventoryType.Ammo)
             {
-                <span>(@dps.ToString("##.0") damage per second)</span>
+                var dps = (this.Template.ItemTemplate.DmgMin1 + this.Template.ItemTemplate.DmgMax1) / 2f;
+                if (dps > 0)
+                {
+                    <span>Adds @dps.ToString("##.#") damage per second</span>
+                }
+            }
+            else
+            {
+                var dps = this.Template.ItemTemplate.GetDps();
+                if (dps > 0)
+                {
+                    <span>(@dps.ToString("##.0") damage per second)</span>
+                }
             }
         }
 
