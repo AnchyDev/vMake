@@ -32,7 +32,7 @@
                 <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
                     @this.Template.ItemTemplate.DmgMin1 - @this.Template.ItemTemplate.DmgMax1 @(this.Template.ItemTemplate.DmgType1 != MangosItemDamageType.Physical ? this.Template.ItemTemplate.DmgType1 : "") Damage
                 </span>
-                <span style="flex: 1;text-align: end;">
+                <span>
                     Speed @(((decimal)this.Template.ItemTemplate.Delay / 1000).ToString("0.00"))
                 </span>
             </div>
