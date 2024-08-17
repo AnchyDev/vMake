@@ -16,14 +16,17 @@
             @this.Template.ItemTemplate.Bonding.GetBondingText()
         </span>
 
-        <div style="display: flex; flex-direction: row">
-            <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
-                @this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()
-            </span>
-            <span style="flex: 1;text-align: end;">
-                @this.Template.ItemTemplate.ItemClass.GetSubClassText(this.Template.ItemTemplate.ItemSubClass)
-            </span>
-        </div>
+        @if(this.Template.ItemTemplate.InventoryType != MangosInventoryType.NotEquipable)
+        {
+            <div style="display: flex; flex-direction: row">
+                <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
+                    @this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()
+                </span>
+                <span style="flex: 1;text-align: end;">
+                    @this.Template.ItemTemplate.ItemClass.GetSubClassText(this.Template.ItemTemplate.ItemSubClass)
+                </span>
+            </div>
+        }
 
         @if(this.Template.ItemTemplate.ItemClass == MangosItemClass.Weapon &&
             this.Template.ItemTemplate.DmgMax1 > 0)
