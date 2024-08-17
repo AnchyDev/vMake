@@ -3,16 +3,17 @@
 
 <h3>Editing @Template.ItemTemplate.Name (@Template.ItemTemplate.Entry / @Template.ItemTemplate.Patch)</h3>
 
-<div class="vmake-panel-h">
-    <div style="flex: 7">
-        <div style="display: flex; flex-direction: row; gap: 0.5rem; margin-bottom: 1rem">
+<div class="editor-root">
+    <div class="editor-panel-left">
+        <span class="alert-info">@Status</span>
+
+        <div style="display: flex; flex-direction: row; gap: 0.5rem">
             <button @onclick="() => currentTab = ItemEditorTab.General" class="tab-button @(currentTab == ItemEditorTab.General ? "active" : "")">General</button>
             <button @onclick="() => currentTab = ItemEditorTab.Stats" class="tab-button @(currentTab == ItemEditorTab.Stats ? "active" : "")">Stats</button>
             <button @onclick="() => currentTab = ItemEditorTab.Damage" class="tab-button @(currentTab == ItemEditorTab.Damage ? "active" : "")">Damage</button>
             <button @onclick="() => currentTab = ItemEditorTab.Spells" class="tab-button @(currentTab == ItemEditorTab.Spells ? "active" : "")">Spells</button>
             <button @onclick="() => currentTab = ItemEditorTab.Save" class="tab-button @(currentTab == ItemEditorTab.Save ? "active" : "")">Save</button>
         </div>
-        <span class="alert-info">@Status</span>
 
         @if(currentTab == ItemEditorTab.General)
         {
@@ -401,7 +402,7 @@
         }
 
     </div>
-    <div style="flex: 3">
+    <div class="editor-panel-right">
         <ItemTooltip Template="Template" />
     </div>
 </div>
