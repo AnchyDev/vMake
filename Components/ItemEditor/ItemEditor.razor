@@ -121,13 +121,24 @@
                         </label>
 
                         <label class="editor-group-item">
+                            <span>Max Count</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.MaxCount" class="vmake-input" />
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-group">
+                    <div class="editor-group-title">
+                        Vendor
+                    </div>
+                    <div class="editor-group-content">
+                        <label class="editor-group-item">
                             <span>Sell Price</span>
                             <InputNumber @bind-Value="Template!.ItemTemplate.SellPrice" class="vmake-input" />
                         </label>
 
                         <label class="editor-group-item">
-                            <span>Max Count</span>
-                            <InputNumber @bind-Value="Template!.ItemTemplate.MaxCount" class="vmake-input" />
+                            <span>Buy Price</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.BuyPrice" class="vmake-input" />
                         </label>
                     </div>
                 </div>

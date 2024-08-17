@@ -202,6 +202,36 @@
                 }
             </div>
         }
+
+        @if (this.Template.ItemTemplate.BuyPrice > 0)
+        {
+            var currency = MangosCurrency.ToCurrency(this.Template.ItemTemplate.BuyPrice);
+
+            <div style="display: flex; flex-direction: row; gap: 0.25rem; align-items: center">
+                <span>Buy Price:</span>
+                @if (currency.Gold > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Gold</span>
+                        <img src="assets/images/currency/gold.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+                @if (currency.Silver > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Silver</span>
+                        <img src="assets/images/currency/silver.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+                @if (currency.Copper > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Copper</span>
+                        <img src="assets/images/currency/copper.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+            </div>
+        }
     </div>
 }
 else
