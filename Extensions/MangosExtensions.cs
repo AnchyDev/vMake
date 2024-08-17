@@ -10,31 +10,17 @@ public static class MangosExtensions
 {
     public static string GetHexColor(this MangosItemQuality quality)
     {
-        switch (quality)
+        return quality switch
         {
-            case MangosItemQuality.Poor:
-                return "9d9d9d";
-
-            case MangosItemQuality.Common:
-                return "ffffff";
-
-            case MangosItemQuality.Uncommon:
-                return "1eff00";
-
-            case MangosItemQuality.Rare:
-                return "0070dd";
-
-            case MangosItemQuality.Epic:
-                return "a335ee";
-
-            case MangosItemQuality.Legendary:
-                return "ff8000";
-
-            case MangosItemQuality.Artifact:
-                return "e6cc80";
-        }
-
-        return "ffffff";
+            MangosItemQuality.Poor => "9d9d9d",
+            MangosItemQuality.Common => "ffffff",
+            MangosItemQuality.Uncommon => "1eff00",
+            MangosItemQuality.Rare => "0070dd",
+            MangosItemQuality.Epic => "a335ee",
+            MangosItemQuality.Legendary => "ff8000",
+            MangosItemQuality.Artifact => "e6cc80",
+            _ => "ffffff"
+        };
     }
 
     public static string GetBondingText(this MangosItemBonding bonding)
@@ -378,5 +364,38 @@ public static class MangosExtensions
                 template.DmgMax1 + template.DmgMax2 + template.DmgMax3 + template.DmgMax4 + template.DmgMax5) / 2;
 
         return avgDmg / divisor;
+    }
+
+    public static List<MangosClass> GetAllowableClasses(this MangosItemTemplate template)
+    {
+        var allowableClasses = new List<MangosClass>();
+
+        foreach (MangosClass mangosClass in Enum.GetValues(typeof(MangosClass)))
+        {
+            if (template.AllowableClass.HasFlag(mangosClass))
+            {
+                allowableClasses.Add(mangosClass);
+            }
+        }
+
+        return allowableClasses;
+    }
+
+    public static string GetHexColor(this MangosClass mangosClass)
+    {
+        return mangosClass switch
+        {
+            MangosClass.Warrior => "C69B6D",
+            MangosClass.Paladin => "F48CBA",
+            MangosClass.Hunter => "AAD372",
+            MangosClass.Rogue => "FFF468",
+            MangosClass.Priest => "FFFFFF",
+            MangosClass.DeathKnight => "C41E3A",
+            MangosClass.Shaman => "0070DD",
+            MangosClass.Mage => "3FC7EB",
+            MangosClass.Warlock => "8788EE",
+            MangosClass.Druid => "FF7C0A",
+            _ => "ffffff"
+        };
     }
 }

@@ -161,6 +161,29 @@
             </span>
         }
 
+        @if(Template.ItemTemplate.AllowableClass > 0)
+        {
+            var allowableClasses = Template.ItemTemplate.GetAllowableClasses();
+            int count = 0;
+
+            <div style="display: flex; flex-direction: row; gap: 0.25rem">
+                <span>Classes:</span>
+                @foreach(var allowableClass in allowableClasses)
+                {
+                    count++;
+
+                    <span>
+                        <span style="color: #@(allowableClass.GetHexColor())">@allowableClass.ToString()</span>
+
+                        @if(allowableClasses.Count > 1 && count < allowableClasses.Count)
+                        {
+                            <span>,</span>
+                        }
+                    </span>
+                }
+            </div>
+        }
+
         @if (this.Template.ItemTemplate.RequiredLevel > 0)
         {
             <span>

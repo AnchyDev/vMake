@@ -50,7 +50,7 @@ public class MangosItemTemplate
     public MangosInventoryType InventoryType { get; set; }
 
     [Column("allowable_class")]
-    public int AllowableClass { get; set; }
+    public MangosClass AllowableClass { get; set; }
 
     [Column("allowable_race")]
     public int AllowableRace { get; set; }
