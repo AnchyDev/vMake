@@ -95,9 +95,9 @@
         }
 
         @{
-            var reistances = this.Template.ItemTemplate.GetResists();
+            var resistances = this.Template.ItemTemplate.GetResists();
 
-            foreach (var resist in reistances)
+            foreach (var resist in resistances)
             {
                 if(resist.Value == 0)
                 {
@@ -151,6 +151,36 @@
         <span style="color: #E1D474" class="@(string.IsNullOrWhiteSpace(this.Template.ItemTemplate.Description) ? "hide" : "")">
             "@this.Template.ItemTemplate.Description"
         </span>
+
+        @if(this.Template.ItemTemplate.SellPrice > 0)
+        {
+            var currency = MangosCurrency.ToCurrency(this.Template.ItemTemplate.SellPrice);
+
+            <div style="display: flex; flex-direction: row; gap: 0.25rem; align-items: center">
+                <span>Sell Price:</span>
+                @if(currency.Gold > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Gold</span>
+                        <img src="assets/images/currency/gold.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+                @if (currency.Silver > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Silver</span>
+                        <img src="assets/images/currency/silver.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+                @if (currency.Copper > 0)
+                {
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.1rem">
+                        <span>@currency.Copper</span>
+                        <img src="assets/images/currency/copper.png" style="width: 1rem; height: 1rem" />
+                    </div>
+                }
+            </div>
+        }
     </div>
 }
 else
