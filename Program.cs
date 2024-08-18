@@ -2,6 +2,7 @@ using ElectronNET.API;
 
 using vMake.Configuration;
 using vMake.Database;
+using vMake.Services;
 
 namespace vMake;
 
@@ -41,6 +42,7 @@ class Program
         builder.Configuration.Bind(config);
 
         services.AddSingleton(config);
+        services.AddSingleton<MakeCacheService>();
 
         services.AddDbContext<MangosDbContext>(ServiceLifetime.Transient);
         services.AddRazorComponents().AddInteractiveServerComponents();
