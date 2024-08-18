@@ -12,7 +12,7 @@ class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.WebHost.UseElectron(args);
+        //builder.WebHost.UseElectron(args);
         builder.WebHost.UseStaticWebAssets();
 
         await ConfigureServicesAsync(builder);
@@ -23,7 +23,7 @@ class Program
 
         await app.StartAsync();
 
-        await Electron.WindowManager.CreateWindowAsync();
+        //await Electron.WindowManager.CreateWindowAsync();
 
         await app.WaitForShutdownAsync();
     }

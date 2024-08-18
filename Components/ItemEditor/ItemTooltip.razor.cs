@@ -11,5 +11,5 @@ public partial class ItemTooltip
     public MakeItemTemplate? Template { get; set; }
 
     [Inject]
-    protected MangosDbContext DbContext { get; set; } = default!;
+    private MangosDbContext DbContext { get; set; } = default!;
 }

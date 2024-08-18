@@ -98,6 +98,29 @@ h1:focus {
     background-color: rgb(0, 40, 150);
 }
 
+.vmake-button-critical {
+    color: white;
+    background-color: rgb(255, 0, 0);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    min-width: 4rem;
+    padding: 0.25rem;
+
+    transition: background-color 0.5s;
+}
+.vmake-button-critical:hover {
+    background-color: rgb(255, 0, 0);
+}
+.vmake-button-critical:active {
+    background-color: rgb(200, 0, 0);
+}
+.vmake-button-critical:disabled {
+    color: rgb(173, 173, 173);
+    background-color: rgb(150, 0, 0);
+}
+
 .vmake-alert-info {
     padding: 0.25rem;
 

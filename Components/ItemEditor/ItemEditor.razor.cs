@@ -15,7 +15,7 @@ public partial class ItemEditor
     public MakeItemTemplate Template { get; set; } = default!;
 
     [Inject]
-    protected MangosDbContext DbContext { get; set; } = default!;
+    private MangosDbContext DbContext { get; set; } = default!;
 
     public string? Export { get; private set; }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+
 using System.Text;
 using System.Text.Json;
 
@@ -17,13 +18,10 @@ public partial class MakeItem
     private MakeCacheService Cache { get; set; } = default!;
 
     [Inject]
-    protected NavigationManager Navigation { get; set; } = default!;
+    private MangosDbContext DbContext { get; set; } = default!;
 
     [Inject]
-    protected MangosDbContext DbContext { get; set; } = default!;
-
-    [Inject]
-    protected ILogger<MakeItem> Logger { get; set; } = default!;
+    private ILogger<MakeItem> Logger { get; set; } = default!;
 
     public int? Entry { get; set; } = 0;
 
@@ -146,5 +144,10 @@ public partial class MakeItem
             createEditHasError = true;
             createEditStatus = $"An internal error occured while trying to edit the item: {ex.Message}";
         }
+    }
+
+    private void HandleCloseTemplate()
+    {
+        Cache.ItemTemplate = null;
     }
 }
