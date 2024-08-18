@@ -8,25 +8,22 @@
         <span class="alert-info">@Status</span>
 
         <div style="display: flex; flex-direction: row; gap: 0.5rem">
-            <button @onclick="() => currentTab = ItemEditorTab.General" class="tab-button @(currentTab == ItemEditorTab.General ? "active" : "")">General</button>
-            <button @onclick="() => currentTab = ItemEditorTab.Stats" class="tab-button @(currentTab == ItemEditorTab.Stats ? "active" : "")">Stats</button>
-            <button @onclick="() => currentTab = ItemEditorTab.Damage" class="tab-button @(currentTab == ItemEditorTab.Damage ? "active" : "")">Damage</button>
-            <button @onclick="() => currentTab = ItemEditorTab.Spells" class="tab-button @(currentTab == ItemEditorTab.Spells ? "active" : "")">Spells</button>
-            <button @onclick="() => currentTab = ItemEditorTab.Save" class="tab-button @(currentTab == ItemEditorTab.Save ? "active" : "")">Save</button>
+            @foreach(ItemEditorTab tab in Enum.GetValues(typeof(ItemEditorTab)))
+            {
+                <button @onclick="() => currentTab = tab" class="tab-button @(currentTab == tab ? "active" : "")">@tab.ToString()</button>
+            }
         </div>
 
-        @if(currentTab == ItemEditorTab.General)
-        {
-            <div class="editor-tab-page">
+        <div class="editor-tab-page">
+            @if(currentTab == ItemEditorTab.General)
+            {
                 <div class="editor-group">
                     <div class="editor-group-title">
                         Misc
                     </div>
                     <div class="editor-group-content">
                         <label class="editor-group-item">
-                            <span>
-                                Name
-                            </span>
+                            <span>Name</span>
                             <InputText @bind-Value="Template!.ItemTemplate.Name" class="vmake-input" />
                         </label>
 
@@ -152,11 +149,9 @@
                         </label>
                     </div>
                 </div>
-            </div>
-        }
-        else if(currentTab == ItemEditorTab.Stats)
-        {
-            <div class="editor-tab-page">
+            }
+            else if(currentTab == ItemEditorTab.Stats)
+            {
                 <div class="editor-group">
                     <div class="editor-group-title">
                         Misc
@@ -258,45 +253,43 @@
                         <div class="editor-group-item">
                             <span style="align-self: center">Holy</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.HolyResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.HolyResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.HolyResistance = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Fire</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.FireResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.FireResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.FireResistance = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Nature</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.NatureResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.NatureResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.NatureResistance = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Frost</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.FrostResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.FrostResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.FrostResistance = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Shadow</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.ShadowResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.ShadowResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.ShadowResistance = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Arcane</span>
                             <ItemEditorResist ResistValue="Template.ItemTemplate.ArcaneResistance"
-                                              ResistValueChanged="value => Template.ItemTemplate.ArcaneResistance = value" />
+                                                ResistValueChanged="value => Template.ItemTemplate.ArcaneResistance = value" />
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-        else if(currentTab == ItemEditorTab.Damage)
-        {
-            <div class="editor-tab-page">
+            }
+            else if(currentTab == ItemEditorTab.Damage)
+            {
                 <div class="editor-group">
                     <div class="editor-group-title">
                         Misc
@@ -318,45 +311,42 @@
                         <div class="editor-group-item">
                             <span style="align-self: center">Dmg 1</span>
                             <ItemEditorDmg DmgType="Template.ItemTemplate.DmgType1" DmgTypeChanged="type => Template.ItemTemplate.DmgType1 = type"
-                                           DmgMin="Template.ItemTemplate.DmgMin1" DmgMinChanged="value => Template.ItemTemplate.DmgMin1 = value"
-                                           DmgMax="Template.ItemTemplate.DmgMax1" DmgMaxChanged="value => Template.ItemTemplate.DmgMax1 = value" />
+                                            DmgMin="Template.ItemTemplate.DmgMin1" DmgMinChanged="value => Template.ItemTemplate.DmgMin1 = value"
+                                            DmgMax="Template.ItemTemplate.DmgMax1" DmgMaxChanged="value => Template.ItemTemplate.DmgMax1 = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Dmg 2</span>
                             <ItemEditorDmg DmgType="Template.ItemTemplate.DmgType2" DmgTypeChanged="type => Template.ItemTemplate.DmgType2 = type"
-                                           DmgMin="Template.ItemTemplate.DmgMin2" DmgMinChanged="value => Template.ItemTemplate.DmgMin2 = value"
-                                           DmgMax="Template.ItemTemplate.DmgMax2" DmgMaxChanged="value => Template.ItemTemplate.DmgMax2 = value" />
+                                            DmgMin="Template.ItemTemplate.DmgMin2" DmgMinChanged="value => Template.ItemTemplate.DmgMin2 = value"
+                                            DmgMax="Template.ItemTemplate.DmgMax2" DmgMaxChanged="value => Template.ItemTemplate.DmgMax2 = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Dmg 3</span>
                             <ItemEditorDmg DmgType="Template.ItemTemplate.DmgType3" DmgTypeChanged="type => Template.ItemTemplate.DmgType3 = type"
-                                           DmgMin="Template.ItemTemplate.DmgMin3" DmgMinChanged="value => Template.ItemTemplate.DmgMin3 = value"
-                                           DmgMax="Template.ItemTemplate.DmgMax3" DmgMaxChanged="value => Template.ItemTemplate.DmgMax3 = value" />
+                                            DmgMin="Template.ItemTemplate.DmgMin3" DmgMinChanged="value => Template.ItemTemplate.DmgMin3 = value"
+                                            DmgMax="Template.ItemTemplate.DmgMax3" DmgMaxChanged="value => Template.ItemTemplate.DmgMax3 = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Dmg 4</span>
                             <ItemEditorDmg DmgType="Template.ItemTemplate.DmgType4" DmgTypeChanged="type => Template.ItemTemplate.DmgType4 = type"
-                                           DmgMin="Template.ItemTemplate.DmgMin4" DmgMinChanged="value => Template.ItemTemplate.DmgMin4 = value"
-                                           DmgMax="Template.ItemTemplate.DmgMax4" DmgMaxChanged="value => Template.ItemTemplate.DmgMax4 = value" />
+                                            DmgMin="Template.ItemTemplate.DmgMin4" DmgMinChanged="value => Template.ItemTemplate.DmgMin4 = value"
+                                            DmgMax="Template.ItemTemplate.DmgMax4" DmgMaxChanged="value => Template.ItemTemplate.DmgMax4 = value" />
                         </div>
 
                         <div class="editor-group-item">
                             <span style="align-self: center">Dmg 5</span>
                             <ItemEditorDmg DmgType="Template.ItemTemplate.DmgType5" DmgTypeChanged="type => Template.ItemTemplate.DmgType5 = type"
-                                           DmgMin="Template.ItemTemplate.DmgMin5" DmgMinChanged="value => Template.ItemTemplate.DmgMin5 = value"
-                                           DmgMax="Template.ItemTemplate.DmgMax5" DmgMaxChanged="value => Template.ItemTemplate.DmgMax5 = value" />
+                                            DmgMin="Template.ItemTemplate.DmgMin5" DmgMinChanged="value => Template.ItemTemplate.DmgMin5 = value"
+                                            DmgMax="Template.ItemTemplate.DmgMax5" DmgMaxChanged="value => Template.ItemTemplate.DmgMax5 = value" />
                         </div>
                     </div>
                 </div>
-            </div>
-           
-        }
-        else if(currentTab == ItemEditorTab.Spells)
-        {
-            <div class="editor-tab-page">
+            }
+            else if(currentTab == ItemEditorTab.Spells)
+            {
                 <div class="editor-group">
                     <div class="editor-group-title">
                         Spell Effects
@@ -365,40 +355,38 @@
                         <div class="editor-group-item">
                             <span style="align-self: center">Spell 1</span>
                             <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId1" SpellTrigger="Template.ItemTemplate.SpellTrigger1"
-                                             SpellEntryChanged="value => Template.ItemTemplate.SpellId1 = value"
-                                             SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger1 = type" />
+                                                SpellEntryChanged="value => Template.ItemTemplate.SpellId1 = value"
+                                                SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger1 = type" />
                         </div>
                         <div class="editor-group-item">
                             <span style="align-self: center">Spell 2</span>
                             <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId2" SpellTrigger="Template.ItemTemplate.SpellTrigger2"
-                                             SpellEntryChanged="value => Template.ItemTemplate.SpellId2 = value"
-                                             SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger2 = type" />
+                                                SpellEntryChanged="value => Template.ItemTemplate.SpellId2 = value"
+                                                SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger2 = type" />
                         </div>
                         <div class="editor-group-item">
                             <span style="align-self: center">Spell 3</span>
                             <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId3" SpellTrigger="Template.ItemTemplate.SpellTrigger3"
-                                             SpellEntryChanged="value => Template.ItemTemplate.SpellId3 = value"
-                                             SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger3 = type" />
+                                                SpellEntryChanged="value => Template.ItemTemplate.SpellId3 = value"
+                                                SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger3 = type" />
                         </div>
                         <div class="editor-group-item">
                             <span style="align-self: center">Spell 4</span>
                             <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId4" SpellTrigger="Template.ItemTemplate.SpellTrigger4"
-                                             SpellEntryChanged="value => Template.ItemTemplate.SpellId4 = value"
-                                             SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger4 = type" />
+                                                SpellEntryChanged="value => Template.ItemTemplate.SpellId4 = value"
+                                                SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger4 = type" />
                         </div>
                         <div class="editor-group-item">
                             <span style="align-self: center">Spell 5</span>
                             <ItemEditorSpell SpellEntry="Template.ItemTemplate.SpellId5" SpellTrigger="Template.ItemTemplate.SpellTrigger5"
-                                             SpellEntryChanged="value => Template.ItemTemplate.SpellId5 = value"
-                                             SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger5 = type" />
+                                                SpellEntryChanged="value => Template.ItemTemplate.SpellId5 = value"
+                                                SpellTriggerChanged="type => Template.ItemTemplate.SpellTrigger5 = type" />
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-        else if(currentTab == ItemEditorTab.Save)
-        {
-            <div class="editor-tab-page">
+            }
+            else if(currentTab == ItemEditorTab.Save)
+            {
                 <div class="editor-group">
                     <div class="editor-group-title">
                         Database
@@ -423,9 +411,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-
+            }
+        </div>
     </div>
     <div class="editor-panel-right">
         <ItemTooltip Template="Template" />
