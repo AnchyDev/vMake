@@ -4,7 +4,7 @@
 @if(this.Template is not null)
 {
     <div class="vmake-item-tooltip">
-        <span style="color: #@(this.Template.ItemTemplate.Quality.GetHexColor())">
+        <span style="color: #@(this.Template.ItemTemplate.Quality.ToHexColor())">
             @this.Template.ItemTemplate.Name
         </span>
 
@@ -20,7 +20,7 @@
         @if (this.Template.ItemTemplate.Bonding != MangosItemBonding.None)
         {
             <span>
-                @this.Template.ItemTemplate.Bonding.GetBondingText()
+                @this.Template.ItemTemplate.Bonding.ToDisplayText()
             </span>
         }
 
@@ -35,10 +35,10 @@
         {
             <div style="display: flex; flex-direction: row">
                 <span style="flex: 1;" class="@(this.Template.ItemTemplate.InventoryType == MangosInventoryType.NotEquipable ? "hide" : "")">
-                    @this.Template.ItemTemplate.InventoryType.GetInventoryTypeText()
+                    @this.Template.ItemTemplate.InventoryType.ToDisplayText()
                 </span>
                 <span style="flex: 1;text-align: end;">
-                    @this.Template.ItemTemplate.ItemClass.GetSubClassText(this.Template.ItemTemplate.ItemSubClass)
+                    @this.Template.ItemTemplate.ItemClass.ToDisplayText(this.Template.ItemTemplate.ItemSubClass)
                 </span>
             </div>
         }
@@ -173,7 +173,7 @@
                     count++;
 
                     <span>
-                        <span style="color: #@(allowableClass.GetHexColor())">@allowableClass.ToString()</span>
+                        <span style="color: #@(allowableClass.ToHexColor())">@allowableClass.ToString()</span>
 
                         @if(allowableClasses.Count > 1 && count < allowableClasses.Count)
                         {
@@ -204,14 +204,14 @@
                 if(string.IsNullOrWhiteSpace(spell.Description))
                 {
                     <div style="color: #FF0000">
-                        <span>@spell.Trigger.GetTriggerText(): </span>
+                        <span>@spell.Trigger.ToDisplayText(): </span>
                         <span>This spell has no description.</span>
                     </div>
                 }
                 else
                 {
                     <div style="color: #00FF00">
-                        <span>@spell.Trigger.GetTriggerText(): </span>
+                        <span>@spell.Trigger.ToDisplayText(): </span>
                         <span>@spell.Description</span>
                     </div>
                 }

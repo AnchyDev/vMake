@@ -52,7 +52,7 @@
                                     foreach (MangosItemBonding bonding in Enum.GetValues(typeof(MangosItemBonding)))
                                     {
                                         <option checked="@(Template.ItemTemplate.Bonding == bonding)" value="@bonding">
-                                            @bonding.GetBondingText()
+                                            @bonding.ToDisplayText()
                                         </option>
                                     }
                                 }
@@ -80,7 +80,7 @@
                                     foreach (MangosInventoryType invType in Enum.GetValues(typeof(MangosInventoryType)))
                                     {
                                         <option checked="@(Template.ItemTemplate.InventoryType == invType)" value="@invType">
-                                            @invType.GetInventoryTypeText()
+                                            @invType.ToDisplayText()
                                         </option>
                                     }
                                 }
@@ -105,7 +105,7 @@
                             <span>Sub Class</span>
                             <InputSelect @bind-Value="Template!.ItemTemplate.ItemSubClass" class="vmake-input">
                                 @{
-                                    foreach (var subClass in Template.ItemTemplate.ItemClass.GetSubClass())
+                                    foreach (var subClass in Template.ItemTemplate.GetSubClasses())
                                     {
                                         <option checked="@((int)Template.ItemTemplate.ItemSubClass == subClass.Key)" value="@subClass.Key">
                                             @subClass.Value
