@@ -68,4 +68,9 @@ public partial class ItemEditor
             Status = $"Failed to generate export string: {ex.Message}";
         }
     }
+
+    private void NotifySpellsChanged()
+    {
+        Template.NotifyItemTemplateSpellsChanged();
+    }
 }
