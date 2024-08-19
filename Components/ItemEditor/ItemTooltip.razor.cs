@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 
 using vMake.Database;
-using vMake.Extensions;
 using vMake.Models;
+using vMake.Services;
 
 namespace vMake.Components.ItemEditor;
 
@@ -12,7 +12,7 @@ public partial class ItemTooltip
     public MakeItemTemplate? Template { get; set; }
 
     [Inject]
-    private MangosDbContext DbContext { get; set; } = default!;
+    private MakeService Make { get; set; } = default!;
 
     protected override void OnInitialized()
     {
@@ -24,14 +24,21 @@ public partial class ItemTooltip
         Template.ItemTemplateSpellsChanged += Template_ItemTemplateSpellsChanged;
     }
 
-    private void Template_ItemTemplateSpellsChanged(object? sender, EventArgs e)
+    private async void Template_ItemTemplateSpellsChanged(object? sender, EventArgs e)
     {
         if(Template is null)
         {
             return;
         }
 
-        Template.ItemSpells = Template.ItemTemplate.GetSpells(DbContext);
+        var spellsResult = await Make.GetSpellsForItemAsync(Template.ItemTemplate.Entry, Template.ItemTemplate.Patch);
+        if(!spellsResult.Success ||
+            spellsResult.Result is null)
+        {
+            return;
+        }
+
+        Template.ItemSpells = spellsResult.Result;
         StateHasChanged();
     }
 }
