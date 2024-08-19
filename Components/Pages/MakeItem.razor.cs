@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 
 using System.Text;
 using System.Text.Json;
 
-using vMake.Database;
 using vMake.Database.Tables;
-using vMake.Extensions;
 using vMake.Models;
 using vMake.Services;
 
@@ -18,7 +15,7 @@ public partial class MakeItem
     private MakeCacheService Cache { get; set; } = default!;
 
     [Inject]
-    private MangosDbContext DbContext { get; set; } = default!;
+    private MakeService Make { get; set; } = default!;
 
     [Inject]
     private ILogger<MakeItem> Logger { get; set; } = default!;
@@ -81,8 +78,8 @@ public partial class MakeItem
 
         try
         {
-            var existingTemplate = await DbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == Entry && i.Patch == Patch);
-            if (existingTemplate is not null)
+            var existingTemplate = await Make.GetItemTemplateAsync(Entry.Value, Patch.Value);
+            if (existingTemplate.Success)
             {
                 createEditHasError = true;
                 createEditStatus = "An item with that entry id and patch already exists.";
@@ -125,18 +122,26 @@ public partial class MakeItem
 
         try
         {
-            var itemTemplate = await DbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == Entry && i.Patch == Patch);
-            if (itemTemplate is null)
+            var result = await Make.GetItemTemplateAsync(Entry.Value, Patch.Value);
+            if (!result.Success)
             {
                 createEditHasError = true;
-                createEditStatus = "An item with that entry id and patch does not exist.";
+                createEditStatus = result.Message;
+                return;
+            }
+
+            var spellsResult = await Make.GetSpellsForItemAsync(Entry.Value, Patch.Value);
+            if(!spellsResult.Success)
+            {
+                createEditHasError = true;
+                createEditStatus = spellsResult.Message;
                 return;
             }
 
             Cache.ItemTemplate = new MakeItemTemplate()
             {
-                ItemTemplate = itemTemplate,
-                ItemSpells = itemTemplate.GetSpells(DbContext)
+                ItemTemplate = result.Result,
+                ItemSpells = spellsResult.Result
             };
         }
         catch(Exception ex)

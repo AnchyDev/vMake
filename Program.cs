@@ -23,8 +23,7 @@ class Program
 
         await app.StartAsync();
 
-        var windowOptions = new BrowserWindowOptions { Width = 1366, Height = 768 };
-        await Electron.WindowManager.CreateWindowAsync(windowOptions);
+        await ConfigureElectronAsync();
 
         await app.WaitForShutdownAsync();
     }
@@ -43,6 +42,8 @@ class Program
         builder.Configuration.Bind(config);
 
         services.AddSingleton(config);
+
+        services.AddScoped<MakeService>();
         services.AddSingleton<MakeCacheService>();
 
         services.AddDbContext<MangosDbContext>(ServiceLifetime.Transient);
@@ -62,5 +63,11 @@ class Program
         app.UseAntiforgery();
 
         app.MapRazorComponents<Components.App>().AddInteractiveServerRenderMode();
+    }
+
+    static async Task ConfigureElectronAsync()
+    {
+        var windowOptions = new BrowserWindowOptions { Width = 1366, Height = 768 };
+        await Electron.WindowManager.CreateWindowAsync(windowOptions);
     }
 }
