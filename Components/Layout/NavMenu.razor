@@ -1,24 +1,45 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">vMake</a>
+﻿<nav class="sidebar-nav">
+    <div class="sidebar-nav-item">
+        <a class="sidebar-navlink @(IsActive("/"))" href="">
+            <i class="bi bi-gear sidebar-navlink-icon"></i>
+            <span class="sidebar-navlink-text">Configuration</span>
+        </a>
     </div>
-</div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+    <div class="sidebar-nav-item">
+        <a class="sidebar-navlink @(IsActive("/item"))" href="item" Match="NavLinkMatch.All">
+            <i class="bi bi-plus-square sidebar-navlink-icon"></i>
+            <span class="sidebar-navlink-text">Item</span>
+        </a>
+    </div>
+</nav>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Configuration
-            </NavLink>
-        </div>
+@code {
+    [Inject]
+    protected NavigationManager Navigation { get; set; } = default!;
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="item">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Item
-            </NavLink>
-        </div>
-    </nav>
-</div>
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs args)
+    {
+        StateHasChanged();
+    }
+
+    private string IsActive(string href)
+    {
+        // Get the absolute URI of the current page
+        var currentUri = new Uri(Navigation.Uri);
+
+        // Extract only the path for comparison
+        var currentPath = currentUri.AbsolutePath;
+
+        // Check if the current path matches or starts with the target href
+        return currentPath.Equals(href, StringComparison.OrdinalIgnoreCase) ||
+               currentPath.StartsWith(href + "/", StringComparison.OrdinalIgnoreCase)
+               ? "active" : "";
+    }
+}
 

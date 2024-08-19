@@ -1,5 +1,5 @@
 using ElectronNET.API;
-
+using ElectronNET.API.Entities;
 using vMake.Configuration;
 using vMake.Database;
 using vMake.Services;
@@ -23,7 +23,8 @@ class Program
 
         await app.StartAsync();
 
-        await Electron.WindowManager.CreateWindowAsync();
+        var windowOptions = new BrowserWindowOptions { Width = 1366, Height = 768 };
+        await Electron.WindowManager.CreateWindowAsync(windowOptions);
 
         await app.WaitForShutdownAsync();
     }
