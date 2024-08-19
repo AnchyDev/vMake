@@ -130,11 +130,23 @@ public partial class MakeItem
                 return;
             }
 
+            if (result.Result is null)
+            {
+                Logger.LogCritical("Result was null for item template in HandleEditItemAsync.");
+                return;
+            }
+
             var spellsResult = await Make.GetSpellsForItemAsync(Entry.Value, Patch.Value);
             if(!spellsResult.Success)
             {
                 createEditHasError = true;
                 createEditStatus = spellsResult.Message;
+                return;
+            }
+
+            if(spellsResult.Result is null)
+            {
+                Logger.LogCritical("Result was null for spells in HandleEditItemAsync.");
                 return;
             }
 

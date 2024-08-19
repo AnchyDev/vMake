@@ -5,7 +5,7 @@ public class MakeResult<T>
     public bool Success { get; set; }
     public string Message { get; set; }
 
-    public T Result { get; set; } = default!;
+    public T? Result { get; set; }
 
     public MakeResult(bool success, string message = "")
     {
