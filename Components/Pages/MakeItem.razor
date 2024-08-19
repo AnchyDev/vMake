@@ -45,8 +45,13 @@
 }
 else
 {
-    <button class="vmake-button-critical" @onclick="HandleCloseTemplate" style="align-self: end">
-        Close
-    </button>
-    <ItemEditor Template="Cache.ItemTemplate" />
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: row; align-items: center">
+            <span style="flex: 1; font-size: 1.25rem; font-weight: bold">Editing @Cache.ItemTemplate.ItemTemplate.Name (@Cache.ItemTemplate.ItemTemplate.Entry / @Cache.ItemTemplate.ItemTemplate.Patch)</span>
+            <button class="vmake-button-critical" @onclick="HandleCloseTemplate" style="align-self: end">
+                Close
+            </button>
+        </div>
+        <ItemEditor Template="Cache.ItemTemplate" />
+    </div>
 }
