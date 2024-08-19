@@ -36,6 +36,10 @@ public class MakeService
         }
 
         var itemTemplate = result.Result;
+        if(itemTemplate is null)
+        {
+            return MakeResult<List<MangosItemSpell>>.Fail("An unexpected error occured: Item Template was null.");
+        }
 
         var spells = new List<MangosItemSpell>();
 

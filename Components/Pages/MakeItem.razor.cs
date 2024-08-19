@@ -133,6 +133,9 @@ public partial class MakeItem
             if (result.Result is null)
             {
                 Logger.LogCritical("Result was null for item template in HandleEditItemAsync.");
+
+                createEditHasError = true;
+                createEditStatus = "An unexpected error occured: Item template result was null.";
                 return;
             }
 
@@ -147,6 +150,9 @@ public partial class MakeItem
             if(spellsResult.Result is null)
             {
                 Logger.LogCritical("Result was null for spells in HandleEditItemAsync.");
+
+                createEditHasError = true;
+                createEditStatus = "An unexpected error occured: Spells result was null.";
                 return;
             }
 
