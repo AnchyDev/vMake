@@ -196,12 +196,12 @@
 
             foreach (var spell in spells)
             {
-                if(spell.Entry == 0)
+                if (spell.Spell.Entry == 0)
                 {
                     continue;
                 }
 
-                if(string.IsNullOrWhiteSpace(spell.Description))
+                if(string.IsNullOrWhiteSpace(spell.Spell.Description))
                 {
                     <div style="color: #FF0000">
                         <span>@spell.Trigger.ToDisplayText(): </span>
@@ -212,7 +212,7 @@
                 {
                     <div style="color: #00FF00">
                         <span>@spell.Trigger.ToDisplayText(): </span>
-                        <span>@spell.Description</span>
+                        <span>@spell.Spell.Description</span>
                     </div>
                 }
             }

@@ -69,79 +69,22 @@ public class MakeService
         }
 
         var spells = new List<MangosItemSpell>();
+        var spellIds = new[] { itemTemplate.SpellId1, itemTemplate.SpellId2, itemTemplate.SpellId3, itemTemplate.SpellId4, itemTemplate.SpellId5 };
+        var triggers = new[] { itemTemplate.SpellTrigger1, itemTemplate.SpellTrigger2, itemTemplate.SpellTrigger3, itemTemplate.SpellTrigger4, itemTemplate.SpellTrigger5 };
 
-        if (itemTemplate.SpellId1 > 0)
+        for (int i = 0; i < spellIds.Length; i++)
         {
-            var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == itemTemplate.SpellId1);
-            if (spell is not null)
+            if (spellIds[i] > 0)
             {
-                spells.Add(new MangosItemSpell()
+                var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == spellIds[i]);
+                if (spell is not null)
                 {
-                    Trigger = itemTemplate.SpellTrigger1,
-                    Entry = itemTemplate.SpellId1,
-                    Name = spell.Name,
-                    Description = spell.Description
-                });
-            }
-        }
-
-        if (itemTemplate.SpellId2 > 0)
-        {
-            var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == itemTemplate.SpellId2);
-            if (spell is not null)
-            {
-                spells.Add(new MangosItemSpell()
-                {
-                    Trigger = itemTemplate.SpellTrigger2,
-                    Entry = itemTemplate.SpellId2,
-                    Name = spell.Name,
-                    Description = spell.Description
-                });
-            }
-        }
-
-        if (itemTemplate.SpellId3 > 0)
-        {
-            var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == itemTemplate.SpellId3);
-            if (spell is not null)
-            {
-                spells.Add(new MangosItemSpell()
-                {
-                    Trigger = itemTemplate.SpellTrigger3,
-                    Entry = itemTemplate.SpellId3,
-                    Name = spell.Name,
-                    Description = spell.Description
-                });
-            }
-        }
-
-        if (itemTemplate.SpellId4 > 0)
-        {
-            var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == itemTemplate.SpellId4);
-            if (spell is not null)
-            {
-                spells.Add(new MangosItemSpell()
-                {
-                    Trigger = itemTemplate.SpellTrigger4,
-                    Entry = itemTemplate.SpellId4,
-                    Name = spell.Name,
-                    Description = spell.Description
-                });
-            }
-        }
-
-        if (itemTemplate.SpellId5 > 0)
-        {
-            var spell = await dbContext.SpellTemplate.FirstOrDefaultAsync(s => s.Entry == itemTemplate.SpellId5);
-            if (spell is not null)
-            {
-                spells.Add(new MangosItemSpell()
-                {
-                    Trigger = itemTemplate.SpellTrigger5,
-                    Entry = itemTemplate.SpellId5,
-                    Name = spell.Name,
-                    Description = spell.Description
-                });
+                    spells.Add(new MangosItemSpell
+                    {
+                        Trigger = triggers[i],
+                        Spell = spell
+                    });
+                }
             }
         }
 
