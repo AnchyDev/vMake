@@ -1,5 +1,6 @@
 using ElectronNET.API;
 using ElectronNET.API.Entities;
+
 using vMake.Configuration;
 using vMake.Database;
 using vMake.Services;
@@ -67,7 +68,13 @@ class Program
 
     static async Task ConfigureElectronAsync()
     {
-        var windowOptions = new BrowserWindowOptions { Width = 1366, Height = 768 };
+        var windowOptions = new BrowserWindowOptions 
+        { 
+            Width = 1366, 
+            Height = 768,
+            AutoHideMenuBar = true
+        };
+
         await Electron.WindowManager.CreateWindowAsync(windowOptions);
     }
 }
