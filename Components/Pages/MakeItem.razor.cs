@@ -3,7 +3,6 @@
 using System.Text;
 using System.Text.Json;
 
-using vMake.Database.Tables;
 using vMake.Models;
 using vMake.Services;
 
@@ -78,25 +77,24 @@ public partial class MakeItem
 
         try
         {
-            var existingTemplate = await Make.GetItemTemplateAsync(Entry.Value, Patch.Value);
-            if (existingTemplate.Success)
+            var result = await Make.CreateItemTemplateAsync(Entry.Value, Patch.Value);
+            if(!result.Success)
             {
                 createEditHasError = true;
-                createEditStatus = "An item with that entry id and patch already exists.";
+                createEditStatus = result.Message;
                 return;
             }
 
-            var itemTemplate = new MangosItemTemplate()
+            if (result.Result is null)
             {
-                Entry = Entry.Value,
-                Patch = Patch.Value,
-                Name = "New Item",
-                Description = "This is your new item!"
-            };
+                createEditHasError = true;
+                createEditStatus = "An unexpected error occured: Item template result was null.";
+                return;
+            }
 
             Cache.ItemTemplate = new MakeItemTemplate()
             {
-                ItemTemplate = itemTemplate,
+                ItemTemplate = result.Result,
                 ItemSpells = new List<Database.Types.MangosItemSpell>()
             };
         }

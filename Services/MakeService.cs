@@ -16,6 +16,33 @@ public class MakeService
         this.dbContext = dbContext;
     }
 
+    public async Task<MakeResult<MangosItemTemplate>> CreateItemTemplateAsync(int entry, int patch)
+    {
+        var result = await GetItemTemplateAsync(entry, patch);
+        if(result.Success)
+        {
+            return MakeResult<MangosItemTemplate>.Fail("An item with that entry and patch already exists.");
+        }
+
+        var itemTemplate = new MangosItemTemplate()
+        {
+            Entry = entry,
+            Patch = patch,
+            Name = "vMake Item",
+            Description = "This item was created using vMake!"
+        };
+
+        await dbContext.ItemTemplate.AddAsync(itemTemplate);
+        var rows = await dbContext.SaveChangesAsync();
+
+        if(rows < 1)
+        {
+            return MakeResult<MangosItemTemplate>.Fail("Item template not saved, expected 1 rows changed but 0 were changed.");
+        }
+
+        return MakeResult<MangosItemTemplate>.Succeed(result: itemTemplate);
+    }
+
     public async Task<MakeResult<MangosItemTemplate>> GetItemTemplateAsync(int entry, int patch)
     {
         var itemTemplate = await dbContext.ItemTemplate.FirstOrDefaultAsync(i => i.Entry == entry && i.Patch == patch);
