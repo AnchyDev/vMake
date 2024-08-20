@@ -70,6 +70,13 @@ class Program
     {
         var windowOptions = new BrowserWindowOptions 
         { 
+            Frame = false,
+            WebPreferences = new WebPreferences()
+            {
+                EnableRemoteModule = true,
+                WebSecurity = true,
+                ContextIsolation = true,
+            },
             Width = 1366, 
             Height = 768,
             AutoHideMenuBar = true

@@ -1,14 +1,33 @@
 ﻿@inherits LayoutComponentBase
 
-<main>
-    <div class="sidebar">
-        <NavMenu />
+<div class="chrome">
+    <div class="chrome-top">
+        <div class="chrome-title">
+            vMake
+        </div>
+        <div class="chrome-actions">
+            <a href="#" @onclick="Minimize">
+                <i class="bi bi-dash"></i>
+            </a>
+            <a href="#" @onclick="MaximizeAsync">
+                <i class="bi bi-arrows-angle-@(maximizeState ? "contract" : "expand")"></i>
+            </a>
+            <a href="#" class="exit" @onclick="Exit">
+                <i class="bi bi-x"></i>
+            </a>
+        </div>
     </div>
 
-    <div class="content">
-        @Body
-    </div>
-</main>
+    <main class="chrome-bottom">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <div class="content">
+            @Body
+        </div>
+    </main>
+</div>
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

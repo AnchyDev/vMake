@@ -1,8 +1,71 @@
-main {
+.chrome {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+.chrome-top {
+    display: flex;
+    flex-direction: row;
+
+    border-bottom: 1px solid rgb(60, 60, 60);
+
+    /* Required by Electron to make window draggable */
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+.chrome-title {
     flex: 1;
 
     display: flex;
     flex-direction: row;
+
+    align-items: center;
+
+    padding: 1rem;
+}
+.chrome-actions {
+    display: flex;
+    flex-direction: row;
+
+    align-items: stretch;
+
+    /* Required by Electron to allow clickable elements in drag region */
+    -webkit-app-region: no-drag;
+}
+.chrome-actions a {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem;
+
+    color: white;
+
+    width: 32px;
+
+    text-decoration: none;
+
+    transition: background-color 0.25s;
+}
+.chrome-actions a:hover {
+    background-color: rgb(50, 50, 50);
+}
+.chrome-actions a.exit:hover {
+    background-color: red;
+}
+
+.chrome-bottom {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    flex: 1;
 }
 
 .sidebar {
