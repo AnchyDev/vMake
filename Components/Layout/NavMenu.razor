@@ -1,5 +1,12 @@
 ﻿<nav class="sidebar-nav">
     <div class="sidebar-nav-item">
+        <a class="sidebar-navlink" onclick="toggleNav()" href="#">
+            <i id="sidebar-toggle" class="bi bi-arrow-bar-left sidebar-navlink-icon"></i>
+            <span class="sidebar-navlink-text">Minimize</span>
+        </a>
+    </div>
+
+    <div class="sidebar-nav-item">
         <a class="sidebar-navlink @(IsActive("/"))" href="">
             <i class="bi bi-gear sidebar-navlink-icon"></i>
             <span class="sidebar-navlink-text">Configuration</span>

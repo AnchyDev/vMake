@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
 
-    padding: 1rem;
+    padding: 0.5rem;
 
     gap: 0.5rem;
 
@@ -21,14 +21,23 @@
 
     gap: 0.5rem;
 
+    border: unset;
+    border-radius: 0.25rem;
+
     color: white;
+    background-color: unset;
+
     text-decoration: none;
 
     padding: 1rem;
+
+    transition: background-color 0.25s;
+}
+.sidebar-navlink:hover {
+    background-color: rgb(60, 60, 60);
 }
 .sidebar-navlink.active {
     background-color: rgb(60, 60, 60);
-    border-radius: 0.25rem;
 }
 
 .sidebar-navlink-icon {
