@@ -47,6 +47,7 @@
     width: 32px;
 
     text-decoration: none;
+    cursor: pointer;
 
     transition: background-color 0.25s;
 }
