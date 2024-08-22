@@ -179,7 +179,8 @@
             }
         }
 
-        @if(Template.ItemTemplate.AllowableClass > 0)
+        @if(Template.ItemTemplate.AllowableClass > 0 && 
+            !Template.ItemTemplate.AllowsAllClasses())
         {
             var allowableClasses = Template.ItemTemplate.GetAllowableClasses();
             int count = 0;

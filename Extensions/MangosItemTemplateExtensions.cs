@@ -101,4 +101,17 @@ public static class MangosItemTemplateExtensions
 
         return kvp;
     }
+
+    public static bool AllowsAllClasses(this MangosItemTemplate template)
+    {
+        return template.AllowableClass.HasFlag(MangosClass.Warrior) &&
+                template.AllowableClass.HasFlag(MangosClass.Paladin) &&
+                template.AllowableClass.HasFlag(MangosClass.Hunter) &&
+                template.AllowableClass.HasFlag(MangosClass.Rogue) &&
+                template.AllowableClass.HasFlag(MangosClass.Priest) &&
+                template.AllowableClass.HasFlag(MangosClass.Shaman) &&
+                template.AllowableClass.HasFlag(MangosClass.Mage) &&
+                template.AllowableClass.HasFlag(MangosClass.Warlock) &&
+                template.AllowableClass.HasFlag(MangosClass.Druid);
+    }
 }
