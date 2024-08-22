@@ -14,6 +14,9 @@ public partial class ItemTooltip
     [Inject]
     private MakeService Make { get; set; } = default!;
 
+    [Inject]
+    private MakeDBC DBC { get; set; } = default!;
+
     protected override void OnInitialized()
     {
         if(Template is null)

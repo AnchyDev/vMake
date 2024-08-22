@@ -161,6 +161,24 @@
             </span>
         }
 
+        @if(Template.ItemTemplate.RequiredSkill > 0)
+        {
+            var skill = DBC.SkillLine.FirstOrDefault(s => s.Id == Template.ItemTemplate.RequiredSkill);
+
+            if(skill is not null)
+            {
+                <span>
+                    Requires @skill.DisplayNameEnUS (@Template.ItemTemplate.RequiredSkillRank)
+                </span>
+            }
+            else
+            {
+                <span style="color: red">
+                    Required skill not found.
+                </span>
+            }
+        }
+
         @if(Template.ItemTemplate.AllowableClass > 0)
         {
             var allowableClasses = Template.ItemTemplate.GetAllowableClasses();

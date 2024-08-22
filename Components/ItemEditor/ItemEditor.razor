@@ -36,11 +36,6 @@
                         </label>
 
                         <label class="editor-group-item">
-                            <span>Required Level</span>
-                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredLevel" class="vmake-input" />
-                        </label>
-
-                        <label class="editor-group-item">
                             <span>Display Id</span>
                             <InputNumber @bind-Value="Template!.ItemTemplate.DisplayId" class="vmake-input" />
                         </label>
@@ -164,6 +159,55 @@
                         <label class="editor-group-item">
                             <span>Buy Count</span>
                             <InputNumber @bind-Value="Template!.ItemTemplate.BuyCount" class="vmake-input" />
+                        </label>
+                    </div>
+                </div>
+            }
+            else if(currentTab == ItemEditorTab.Requirements)
+            {
+                <div class="editor-group">
+                    <div class="editor-group-title">
+                        Misc
+                    </div>
+                    <div class="editor-group-content">
+                        <label class="editor-group-item">
+                            <span>Required Level</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredLevel" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Skill</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredSkill" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Skill Rank</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredSkillRank" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Spell</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredSpell" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Honor Rank</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredHonorRank" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required City Rank</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredCityRank" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Reputation Faction</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredReputationFaction" class="vmake-input" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Required Reputation Rank</span>
+                            <InputNumber @bind-Value="Template!.ItemTemplate.RequiredReputationRank" class="vmake-input" />
                         </label>
                     </div>
                 </div>

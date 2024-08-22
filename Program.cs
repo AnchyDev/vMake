@@ -3,6 +3,7 @@ using ElectronNET.API.Entities;
 
 using vMake.Configuration;
 using vMake.Database;
+using vMake.Models;
 using vMake.Services;
 
 namespace vMake;
@@ -41,6 +42,12 @@ class Program
 
         builder.Configuration.AddJsonFile(MakeConfig.FILE_NAME);
         builder.Configuration.Bind(config);
+
+        var dbc = new MakeDBC()
+        {
+            SkillLine = await MakeDBC.LoadDBCAsync<MakeDBCSkillLineEntry>("./Data/DBC/SkillLine.json")
+        };
+        services.AddSingleton(dbc);
 
         services.AddSingleton(config);
 

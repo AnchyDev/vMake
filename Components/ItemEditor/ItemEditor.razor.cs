@@ -24,6 +24,7 @@ public partial class ItemEditor
     private enum ItemEditorTab
     {
         General,
+        Requirements,
         Stats,
         Damage,
         Spells,
