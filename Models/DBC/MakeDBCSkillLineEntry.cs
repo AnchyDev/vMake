@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace vMake.Models;
+namespace vMake.Models.DBC;
 
 public class MakeDBCSkillLineEntry
 {

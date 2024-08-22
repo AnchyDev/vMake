@@ -4,16 +4,19 @@ using vMake.Database;
 using vMake.Database.Tables;
 using vMake.Database.Types;
 using vMake.Models;
+using vMake.Models.DBC;
 
 namespace vMake.Services;
 
 public class MakeService
 {
     private readonly MangosDbContext dbContext;
+    private readonly MakeDBC dbc;
 
-    public MakeService(MangosDbContext dbContext)
+    public MakeService(MangosDbContext dbContext, MakeDBC dbc)
     {
         this.dbContext = dbContext;
+        this.dbc = dbc;
     }
 
     public async Task<MakeResult<MangosItemTemplate>> CreateItemTemplateAsync(int entry, int patch)

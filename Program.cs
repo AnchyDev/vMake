@@ -3,7 +3,7 @@ using ElectronNET.API.Entities;
 
 using vMake.Configuration;
 using vMake.Database;
-using vMake.Models;
+using vMake.Models.DBC;
 using vMake.Services;
 
 namespace vMake;
@@ -45,7 +45,8 @@ class Program
 
         var dbc = new MakeDBC()
         {
-            SkillLine = await MakeDBC.LoadDBCAsync<MakeDBCSkillLineEntry>("./Data/DBC/SkillLine.json")
+            SkillLine = await MakeDBC.LoadDBCAsync<MakeDBCSkillLineEntry>("./Data/DBC/SkillLine.json"),
+            ItemSet = await MakeDBC.LoadDBCAsync<MakeDBCItemSet>("./Data/DBC/ItemSet.json")
         };
         services.AddSingleton(dbc);
 

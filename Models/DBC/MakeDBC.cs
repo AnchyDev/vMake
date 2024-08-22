@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
 
-namespace vMake.Models;
+namespace vMake.Models.DBC;
 
 public class MakeDBC
 {
     public required List<MakeDBCSkillLineEntry> SkillLine { get; set; }
+    public required List<MakeDBCItemSet> ItemSet { get; set; }
 
     public static async Task<List<T>> LoadDBCAsync<T>(string path)
     {

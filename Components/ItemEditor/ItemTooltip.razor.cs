@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-using vMake.Database;
 using vMake.Models;
+using vMake.Models.DBC;
 using vMake.Services;
 
 namespace vMake.Components.ItemEditor;
