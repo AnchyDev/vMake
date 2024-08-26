@@ -1,23 +1,33 @@
 ﻿<nav class="sidebar-nav">
-    <div class="sidebar-nav-item">
-        <a class="sidebar-navlink" onclick="toggleNav()">
-            <i id="sidebar-toggle" class="bi bi-arrow-bar-left sidebar-navlink-icon"></i>
-            <span class="sidebar-navlink-text">Minimize</span>
-        </a>
-    </div>
+    <div class="sidebar-nav-top">
+        <div class="sidebar-nav-item">
+            <a class="sidebar-navlink @(IsActive("/item"))" href="item" Match="NavLinkMatch.All">
+                <i class="bi bi-plus-square sidebar-navlink-icon"></i>
+                <span class="sidebar-navlink-text">Item</span>
+            </a>
+        </div>
 
-    <div class="sidebar-nav-item">
-        <a class="sidebar-navlink @(IsActive("/"))" href="">
-            <i class="bi bi-gear sidebar-navlink-icon"></i>
-            <span class="sidebar-navlink-text">Configuration</span>
-        </a>
+        <div class="sidebar-nav-item">
+            <a class="sidebar-navlink @(IsActive("/quest"))" href="quest" Match="NavLinkMatch.All">
+                <i class="bi bi-question-circle sidebar-navlink-icon"></i>
+                <span class="sidebar-navlink-text">Quest</span>
+            </a>
+        </div>
     </div>
+    <div class="sidebar-nav-bottom">
+        <div class="sidebar-nav-item">
+            <a class="sidebar-navlink @(IsActive("/"))" href="">
+                <i class="bi bi-gear sidebar-navlink-icon"></i>
+                <span class="sidebar-navlink-text">Configuration</span>
+            </a>
+        </div>
 
-    <div class="sidebar-nav-item">
-        <a class="sidebar-navlink @(IsActive("/item"))" href="item" Match="NavLinkMatch.All">
-            <i class="bi bi-plus-square sidebar-navlink-icon"></i>
-            <span class="sidebar-navlink-text">Item</span>
-        </a>
+        <div class="sidebar-nav-item">
+            <a class="sidebar-navlink" onclick="toggleNav()">
+                <i id="sidebar-toggle" class="bi bi-arrow-bar-left sidebar-navlink-icon"></i>
+                <span class="sidebar-navlink-text">Minimize</span>
+            </a>
+        </div>
     </div>
 </nav>
 
