@@ -1,1 +1,87 @@
-﻿<h3>QuestEditor : @(Template.QuestTemplate.Title)</h3>
+﻿@using vMake.Database.Types
+@using vMake.Extensions
+
+<div class="editor-root">
+    <div class="editor-panel-left">
+        <span class="alert-info">@Status</span>
+
+        <div style="display: flex; flex-direction: row; gap: 0.5rem">
+            @foreach (QuestEditorTab tab in Enum.GetValues(typeof(QuestEditorTab)))
+            {
+                <button @onclick="() => currentTab = tab" class="tab-button @(currentTab == tab ? "active" : "")">@tab.ToString()</button>
+            }
+        </div>
+
+        <div class="editor-tab-page">
+            @if(currentTab == QuestEditorTab.General)
+            {
+                <div class="editor-group">
+                    <div class="editor-group-title">
+                        Texts
+                    </div>
+                    <div class="editor-group-content">
+                        <label class="editor-group-item">
+                            <span>Title</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.Title" class="vmake-input" rows="8" cols="50" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Details</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.Details" class="vmake-input" rows="8" cols="50" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Objectives</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.Objectives" class="vmake-input" rows="8" cols="50" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Reward Text</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.OfferRewardText" class="vmake-input" rows="8" cols="50" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>Request Text</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.RequestItemsText" class="vmake-input" rows="8" cols="50" />
+                        </label>
+
+                        <label class="editor-group-item">
+                            <span>End Text</span>
+                            <InputTextArea @bind-Value="Template!.QuestTemplate.EndText" class="vmake-input" rows="8" cols="50" />
+                        </label>
+                    </div>
+                </div>
+            }
+            else if(currentTab == QuestEditorTab.Save)
+            {
+                <div class="editor-group">
+                    <div class="editor-group-title">
+                        Database
+                    </div>
+                    <div class="editor-group-content">
+                        <div class="editor-group-item">
+                            <button @onclick="UpdateQuestAsync" class="vmake-button-primary">Save to Database</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-group">
+                    <div class="editor-group-title">
+                        Export
+                    </div>
+                    <div class="editor-group-content">
+                        <div class="editor-group-item">
+                            <div style="flex: 1; display: flex; flex-direction: row; gap: 0.25rem">
+                                <button @onclick="ExportTemplate" class="vmake-button-primary">Generate</button>
+                                <InputText @bind-Value="Export" placeholder="Export string" class="vmake-input" style="flex: 1;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="editor-panel-right">
+        <QuestLog Template="Template"/>
+    </div>
+</div>

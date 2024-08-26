@@ -1,0 +1,50 @@
+﻿<div style="display: flex; flex-direction: column; gap: 1rem">
+    Details
+    <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                @Template.QuestTemplate.Title
+            </div>
+            <div>
+                @if (!string.IsNullOrWhiteSpace(Template.QuestTemplate.Details))
+                {
+                    @Template.QuestTemplate.Details.Replace("$B", Environment.NewLine)
+                }
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                Quest Objectives
+            </div>
+            <div>
+                @Template.QuestTemplate.Objectives
+            </div>
+        </div>
+    </div>
+
+
+    Reward
+    <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                @Template.QuestTemplate.Title
+            </div>
+            <div>
+                @Template.QuestTemplate.OfferRewardText
+            </div>
+        </div>
+    </div>
+
+    Progress
+    <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                @Template.QuestTemplate.Title
+            </div>
+            <div>
+                @Template.QuestTemplate.Objectives
+            </div>
+        </div>
+    </div>
+</div>

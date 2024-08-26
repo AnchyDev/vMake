@@ -148,3 +148,96 @@ h1:focus {
     color: white;
     background-color: #9d0000;
 }
+
+/* EDITOR */
+
+.tab-button {
+    color: rgb(128, 128, 128);
+    background-color: rgb(50, 50, 50);
+
+    border: 1px solid rgb(64, 64, 64);
+    border-bottom: 0px;
+
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    min-width: 4rem;
+    padding: 0.25rem;
+
+    transition: background-color 0.5s;
+}
+.tab-button:hover {
+    color: rgb(200, 200, 200);
+    background-color: rgb(60, 60, 60);
+}
+.tab-button.active {
+    color: white;
+    background-color: rgb(64, 64, 64);
+}
+
+.editor-tab-page {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+    background-color: rgb(40, 40, 40);
+
+    border: 1px solid rgb(64, 64, 64);
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+
+    padding: 0.5rem;
+}
+
+.editor-root {
+    display: flex;
+    flex-direction: row;
+
+    gap: 0.5rem;
+}
+.editor-panel-left {
+    flex: 7;
+}
+.editor-panel-right {
+    flex: 3;
+}
+
+.editor-group-title {
+    flex: 1;
+
+    color: white;
+    background-color: rgb(20, 20, 20);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    padding: 0.5rem;
+}
+
+.editor-group {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.editor-group-content {
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    padding: 0.5rem;
+
+    color: white;
+    background-color: rgb(25, 25, 25);
+}
+
+.editor-group-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.25rem;
+}
