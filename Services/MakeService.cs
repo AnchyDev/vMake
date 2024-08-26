@@ -93,4 +93,41 @@ public class MakeService
 
         return MakeResult<List<MangosItemSpell>>.Succeed(result: spells);
     }
+
+    public async Task<MakeResult<MangosQuestTemplate>> CreateQuestTemplateAsync(int entry, int patch)
+    {
+        var result = await GetQuestTemplateAsync(entry, patch);
+        if (result.Success)
+        {
+            return MakeResult<MangosQuestTemplate>.Fail("A quest with that entry and patch already exists.");
+        }
+
+        var questTemplate = new MangosQuestTemplate()
+        {
+            Entry = entry,
+            Patch = patch,
+            Title = "vMake Quest"
+        };
+
+        await dbContext.QuestTemplate.AddAsync(questTemplate);
+        var rows = await dbContext.SaveChangesAsync();
+
+        if (rows < 1)
+        {
+            return MakeResult<MangosQuestTemplate>.Fail("Quest template not saved, expected 1 rows changed but 0 were changed.");
+        }
+
+        return MakeResult<MangosQuestTemplate>.Succeed(result: questTemplate);
+    }
+
+    public async Task<MakeResult<MangosQuestTemplate>> GetQuestTemplateAsync(int entry, int patch)
+    {
+        var questTemplate = await dbContext.QuestTemplate.FirstOrDefaultAsync(i => i.Entry == entry && i.Patch == patch);
+        if (questTemplate is null)
+        {
+            return MakeResult<MangosQuestTemplate>.Fail("No quest with that entry and patch exists.");
+        }
+
+        return MakeResult<MangosQuestTemplate>.Succeed(result: questTemplate);
+    }
 }

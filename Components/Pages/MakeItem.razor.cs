@@ -109,7 +109,7 @@ public partial class MakeItem
         }
     }
 
-    private async Task HandleEditItemAsync()
+    private async Task HandleEditAsync()
     {
         if (Entry is null || Patch is null)
         {

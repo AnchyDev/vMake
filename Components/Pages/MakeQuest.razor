@@ -1,3 +1,58 @@
 ﻿@page "/quest"
 
-Quest Editor
+@using vMake.Components.QuestEditor
+
+@if (this.Cache.QuestTemplate is null)
+{
+    <div style="display: flex; flex-direction: column; gap: 0.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; flex-wrap: wrap">
+            <label style="display: flex; flex-direction: column">
+                <span>Entry</span>
+                <InputNumber @bind-Value="Entry" placeholder="Enter entry" class="vmake-input" />
+            </label>
+
+            <label style="display: flex; flex-direction: column">
+                <span>Patch</span>
+                <InputNumber @bind-Value="Patch" placeholder="Enter patch" class="vmake-input" />
+            </label>
+
+            <div style="display: flex; flex-direction: row; gap: 0.25rem;">
+                <button style="flex: 1;" @onclick="HandleCreateAsync" class="vmake-button-primary">Create</button>
+                <button style="flex: 1;" @onclick="HandleEditAsync" class="vmake-button-primary">Edit</button>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(createEditStatus))
+            {
+                <span class="@(createEditHasError ? "vmake-alert-error" : "vmake-alert-info")">@createEditStatus</span>
+            }
+        </div>
+
+        <span style="font-weight: bold; font-size: 1rem">or</span>
+
+        <div style="display:flex; flex-direction: column; gap: 0.5rem">
+            <label style="display: flex; flex-direction: column">
+                <span>Import Base64 String</span>
+                <InputText @bind-Value="Import" name="vmake-item-import" placeholder="Enter base64 string" class="vmake-input" />
+            </label>
+
+            <button @onclick="HandleImport" class="vmake-button-primary">Import</button>
+
+            @if (!string.IsNullOrWhiteSpace(importStatus))
+            {
+                <span class="@(importHasError ? "vmake-alert-error" : "vmake-alert-info")">@importStatus</span>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: row; align-items: center">
+            <span style="flex: 1; font-size: 1.25rem; font-weight: bold">Editing @Cache.QuestTemplate.QuestTemplate.Title (@Cache.QuestTemplate.QuestTemplate.Entry / @Cache.QuestTemplate.QuestTemplate.Patch)</span>
+            <button class="vmake-button-critical" @onclick="HandleCloseTemplate" style="align-self: end">
+                Close
+            </button>
+        </div>
+        <QuestEditor Template="Cache.QuestTemplate" />
+    </div>
+}

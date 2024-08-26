@@ -17,7 +17,7 @@
 
             <div style="display: flex; flex-direction: row; gap: 0.25rem;">
                 <button style="flex: 1;" @onclick="HandleCreateAsync" class="vmake-button-primary">Create</button>
-                <button style="flex: 1;" @onclick="HandleEditItemAsync" class="vmake-button-primary">Edit</button>
+                <button style="flex: 1;" @onclick="HandleEditAsync" class="vmake-button-primary">Edit</button>
             </div>
 
             @if (!string.IsNullOrWhiteSpace(createEditStatus))

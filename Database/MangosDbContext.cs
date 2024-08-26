@@ -9,6 +9,7 @@ public class MangosDbContext : DbContext
 {
     public DbSet<MangosItemTemplate> ItemTemplate { get; set; }
     public DbSet<MangosSpellTemplate> SpellTemplate { get; set; }
+    public DbSet<MangosQuestTemplate> QuestTemplate { get; set; }
 
     private readonly MakeConfig config;
     private readonly ILogger<MangosDbContext> logger;
