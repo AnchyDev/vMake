@@ -77,8 +77,7 @@ class Program
     static async Task ConfigureElectronAsync()
     {
         var windowOptions = new BrowserWindowOptions 
-        { 
-            Frame = false,
+        {
             WebPreferences = new WebPreferences()
             {
                 EnableRemoteModule = true,
