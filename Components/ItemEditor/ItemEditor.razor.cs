@@ -72,6 +72,6 @@ public partial class ItemEditor
 
     private void NotifySpellsChanged()
     {
-        Template.NotifyItemTemplateSpellsChanged();
+        Template.NotifyItemSpellsChanged();
     }
 }

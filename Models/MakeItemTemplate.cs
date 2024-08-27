@@ -5,12 +5,12 @@ namespace vMake.Models;
 
 public class MakeItemTemplate
 {
-    public event EventHandler<EventArgs>? ItemTemplateSpellsChanged;
-    public void NotifyItemTemplateSpellsChanged()
+    public event EventHandler<EventArgs>? ItemSpellsChanged;
+    public void NotifyItemSpellsChanged()
     {
-        if(ItemTemplateSpellsChanged is not null)
+        if(ItemSpellsChanged is not null)
         {
-            ItemTemplateSpellsChanged.Invoke(this, EventArgs.Empty);
+            ItemSpellsChanged.Invoke(this, EventArgs.Empty);
         }
     }
 

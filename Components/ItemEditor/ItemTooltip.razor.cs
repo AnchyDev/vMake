@@ -24,10 +24,10 @@ public partial class ItemTooltip
             return;
         }
 
-        Template.ItemTemplateSpellsChanged += Template_ItemTemplateSpellsChanged;
+        Template.ItemSpellsChanged += Template_ItemSpellsChanged;
     }
 
-    private async void Template_ItemTemplateSpellsChanged(object? sender, EventArgs e)
+    private async void Template_ItemSpellsChanged(object? sender, EventArgs e)
     {
         if(Template is null)
         {
