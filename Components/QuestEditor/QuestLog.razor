@@ -1,5 +1,6 @@
-﻿<div style="display: flex; flex-direction: column; gap: 1rem">
-    Details
+﻿@using System.Web
+<div style="display: flex; flex-direction: column; gap: 1rem">
+    Accept
     <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
         <div style="display: flex; flex-direction: column; gap: 0.25rem">
             <div style="font-size: 1.25rem; font-weight: bold">
@@ -8,7 +9,7 @@
             <div>
                 @if (!string.IsNullOrWhiteSpace(Template.QuestTemplate.Details))
                 {
-                    @Template.QuestTemplate.Details.Replace("$B", Environment.NewLine)
+                    @ParseTokens(Template.QuestTemplate.Details)
                 }
             </div>
         </div>
@@ -23,6 +24,30 @@
         </div>
     </div>
 
+    Log
+    <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                @Template.QuestTemplate.Title
+            </div>
+            <div>
+                @Template.QuestTemplate.Objectives
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+            <div style="font-size: 1.25rem; font-weight: bold">
+                Description
+            </div>
+            <div>
+                @if (!string.IsNullOrWhiteSpace(Template.QuestTemplate.Details))
+                {
+                    @ParseTokens(Template.QuestTemplate.Details)
+                }
+            </div>
+        </div>
+    </div>
+
 
     Reward
     <div style="display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgb(40, 40, 40); background-color: rgb(45, 45, 45); padding: 0.5rem">
@@ -31,7 +56,10 @@
                 @Template.QuestTemplate.Title
             </div>
             <div>
-                @Template.QuestTemplate.OfferRewardText
+                @if (!string.IsNullOrWhiteSpace(Template.QuestTemplate.OfferRewardText))
+                {
+                    @ParseTokens(Template.QuestTemplate.OfferRewardText)
+                }
             </div>
         </div>
     </div>
